@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cubicle Configuration, Upgrade & Repair | Move Solutions</title>
+    <style>
+        :root {
+            --red: #d61728;
+            --red-dark: #b01420;
+            --gray-dark: #333;
+            --gray-medium: #666;
+            --gray-light: #f5f5f5;
+            --white: #fff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--gray-dark);
+        }
+
+        /* HEADER */
+        .header {
+            background: var(--white);
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .phone-number {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--gray-dark);
+        }
+
+        .phone-sub {
+            font-size: 11px;
+            color: var(--gray-medium);
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 3px;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--gray-dark);
+            color: var(--gray-dark);
+        }
+
+        .btn-outline:hover {
+            background: var(--gray-dark);
+            color: var(--white);
+        }
+
+        .btn-primary {
+            background: var(--red);
+            color: var(--white);
+            border: 2px solid var(--red);
+        }
+
+        .btn-primary:hover {
+            background: var(--red-dark);
+            border-color: var(--red-dark);
+        }
+
+        /* NAV */
+        .nav {
+            background: var(--white);
+            border-bottom: 1px solid #eee;
+            padding: 12px 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: var(--gray-dark);
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav a:hover {
+            color: var(--red);
+        }
+
+        /* QUICK ACTIONS */
+        .quick-actions {
+            background: var(--gray-dark);
+            padding: 12px 0;
+        }
+
+        .quick-actions-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .quick-btn {
+            background: transparent;
+            color: var(--white);
+            border: 1px solid #666;
+            padding: 10px 25px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quick-btn:hover {
+            background: var(--white);
+            color: var(--gray-dark);
+        }
+
+        .quick-btn.red {
+            background: var(--red);
+            border-color: var(--red);
+        }
+
+        .quick-btn.red:hover {
+            background: #b51420;
+        }
+
+        /* HERO */
+        .hero {
+            position: relative;
+            background: linear-gradient(135deg, var(--gray-dark) 0%, #555 100%);
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .hero h1 {
+            font-family: Arial, sans-serif;
+            font-size: 52px;
+            font-weight: 700;
+            line-height: 1.1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            padding: 60px 20px;
+        }
+
+        /* INTRO SECTION */
+        .intro {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .intro h2 {
+            font-size: 32px;
+            margin-bottom: 25px;
+            color: var(--gray-dark);
+        }
+
+        .intro-lead {
+            font-size: 20px;
+            color: var(--gray-dark);
+            margin-bottom: 20px;
+        }
+
+        .intro p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        /* SERVICES GRID */
+        .services-section {
+            background: var(--gray-light);
+            padding: 60px 20px;
+        }
+
+        .services-section h2 {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 40px;
+        }
+
+        .services-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: 0;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .service-card-photo {
+            background: #c0c0c0;
+            padding: 80px 20px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .service-card-content {
+            padding: 25px;
+        }
+
+        .service-card h3 {
+            color: var(--red);
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .service-card p {
+            font-size: 15px;
+            color: #555;
+        }
+
+        /* FULL WIDTH PHOTO BREAK */
+        .photo-break {
+            background: #b0b0b0;
+            padding: 150px 20px;
+            text-align: center;
+            color: #666;
+            font-size: 16px;
+        }
+
+        /* TWO COLUMN SECTION */
+        .two-column {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .two-column.reverse {
+            direction: rtl;
+        }
+
+        .two-column.reverse > * {
+            direction: ltr;
+        }
+
+        .two-column-photo {
+            background: #c5c5c5;
+            min-height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .two-column-content h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--gray-dark);
+        }
+
+        .two-column-content p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .two-column-content h4 {
+            font-size: 18px;
+            color: var(--red);
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+
+        /* PROCESS SECTION */
+        .process-section {
+            background: var(--gray-dark);
+            color: var(--white);
+            padding: 60px 20px;
+        }
+
+        .process-section h2 {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 50px;
+        }
+
+        .process-steps {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .process-step {
+            text-align: center;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--red);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+
+        .process-step h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .process-step p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* WHY CHOOSE */
+        .why-section {
+            background: var(--gray-light);
+            padding: 60px 20px;
+        }
+
+        .why-section h2 {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 40px;
+        }
+
+        .why-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .why-item {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .why-item h4 {
+            color: var(--red);
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .why-item p {
+            font-size: 15px;
+            color: #555;
+        }
+
+        /* CTA SECTION */
+        .cta-section {
+            background: var(--red);
+            color: var(--white);
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            margin-bottom: 25px;
+            opacity: 0.95;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: var(--white);
+            color: var(--red);
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .cta-btn:hover {
+            background: var(--gray-dark);
+            color: var(--white);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+            .two-column.reverse {
+                direction: ltr;
+            }
+            .process-steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                [INSERT MOVE SOLUTIONS LOGO HERE]
+            </div>
+            <div class="header-right">
+                <div>
+                    <div class="phone-number">1.800.668.3752</div>
+                    <div class="phone-sub">Call us for a free quote</div>
+                </div>
+                <div class="header-buttons">
+                    <a href="#" class="btn btn-outline">Quick Quote</a>
+                    <a href="#" class="btn btn-primary">Set Appointment</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- NAV -->
+    <nav class="nav">
+        <div class="nav-container">
+            <ul>
+                <li><a href="#">Video: How to Use Move Solutions</a></li>
+                <li><a href="#">Get Started</a></li>
+                <li><a href="#">Services ▾</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Contact Us ▾</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <h1>Cubicle Configuration, Upgrade & Repair</h1>
+    </section>
+
+    <!-- QUICK ACTIONS -->
+    <div class="quick-actions">
+        <div class="quick-actions-container">
+            <button class="quick-btn red">Need a Quote?</button>
+            <button class="quick-btn">📋 Click to Pay Invoice(s)</button>
+            <button class="quick-btn">Need Liquidation/Decommission?</button>
+        </div>
+    </div>
+
+    <!-- INTRO -->
+    <section class="intro">
+        <h2>Optimize Your Workspace Layout</h2>
+        <p class="intro-lead">Your office layout needs to evolve with your business. For 40+ years, our furniture specialists have been reconfiguring, repairing, and upgrading cubicle systems for businesses across Dallas-Fort Worth, Austin and San Antonio.</p>
+        <p>Whether you need to add workstations for a growing team, reconfigure an entire floor for better collaboration, or repair damaged panels before a lease turnover, our technicians handle it all. We work with all major panel system manufacturers and maintain an extensive parts inventory.</p>
+    </section>
+
+    <!-- SERVICES GRID -->
+    <section class="services-section">
+        <h2>Cubicle Service Options</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-card-photo">[PHOTO PLACEHOLDER - RECONFIGURATION]</div>
+                <div class="service-card-content">
+                    <h3>Cubicle Reconfiguration</h3>
+                    <p>Reorganize your existing cubicle systems to accommodate new team structures, improve traffic flow, or maximize your floor space. We disassemble, relocate, and reassemble panels to match your new layout requirements.</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-card-photo">[PHOTO PLACEHOLDER - PANEL REPAIR]</div>
+                <div class="service-card-content">
+                    <h3>Panel Repair & Replacement</h3>
+                    <p>Damaged fabric, dented frames, broken connectors. Our technicians repair or replace individual panel components without disrupting your entire workstation system. We source parts from our extensive inventory.</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-card-photo">[PHOTO PLACEHOLDER - WORK SURFACE]</div>
+                <div class="service-card-content">
+                    <h3>Work Surface Modification</h3>
+                    <p>Resize, reshape, refinish, or replace work surfaces to meet your specific needs. Our technicians can cut surfaces to accommodate new equipment, refinish worn tops, or install entirely new work surfaces.</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-card-photo">[PHOTO PLACEHOLDER - PANEL CLEANING]</div>
+                <div class="service-card-content">
+                    <h3>Panel Cleaning</h3>
+                    <p>Remove years of accumulated dirt, dust, and stains from cubicle panel fabric. Our cleaning process refreshes your workspace appearance and extends the life of your panel systems. Service performed after hours.</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-card-photo">[PHOTO PLACEHOLDER - ELECTROSTATIC]</div>
+                <div class="service-card-content">
+                    <h3>Electrostatic Painting</h3>
+                    <p>Give metal panel frames and components a fresh, durable finish through electrostatic painting. This process provides a smooth, factory-quality coating at a fraction of replacement cost.</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-card-photo">[PHOTO PLACEHOLDER - LOCK KEY]</div>
+                <div class="service-card-content">
+                    <h3>Lock & Key Services</h3>
+                    <p>Add locks to existing storage pedestals, re-key cabinets for new employees, or upgrade lock systems for enhanced security. We offer keyed alike, keyed separately, or keyed by sequence options.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FULL WIDTH PHOTO -->
+    <div class="photo-break">[PHOTO PLACEHOLDER - WIDE SHOT OF CUBICLE INSTALLATION IN PROGRESS]</div>
+
+    <!-- TWO COLUMN: BRANDS -->
+    <div class="two-column">
+        <div class="two-column-photo">[PHOTO PLACEHOLDER - TECHNICIAN WORKING ON PANELS]</div>
+        <div class="two-column-content">
+            <h2>All Major Panel Systems</h2>
+            <p>Our technicians are trained on current and legacy product lines from all major manufacturers. We work with Herman Miller, Steelcase, Haworth, Knoll, Teknion, Allsteel, and many others.</p>
+            <p>Our technicians are experienced with both current and legacy panel systems that other companies won't touch. Our parts inventory includes hardware and components from discontinued product lines.</p>
+            <h4>Parts Sourcing</h4>
+            <p>If a part is no longer available from the manufacturer, we often have it in our inventory or can salvage it from decommissioned systems. This allows us to extend the life of your existing investment.</p>
+        </div>
+    </div>
+
+    <!-- TWO COLUMN: PROPERTY MANAGERS -->
+    <div class="two-column reverse">
+        <div class="two-column-photo">[PHOTO PLACEHOLDER - OFFICE SPACE WITH CUBICLES]</div>
+        <div class="two-column-content">
+            <h2>Property Managers & Lease Turnovers</h2>
+            <p>When tenants vacate, furniture often remains. We help property managers assess, repair, and reconfigure existing cubicle systems to make the space move-in ready for new tenants.</p>
+            <p>Our services include panel cleaning to remove years of wear, repairs to damaged components, and reconfiguration to match new tenant requirements. We provide detailed assessments and formal proposals before any work begins.</p>
+            <h4>Need New Furniture Instead?</h4>
+            <p>If repair or reconfiguration is not practical, we can connect you with our sister company Office Furniture Plus for new replacement options.</p>
+        </div>
+    </div>
+
+    <!-- PROCESS -->
+    <section class="process-section">
+        <h2>How It Works</h2>
+        <div class="process-steps">
+            <div class="process-step">
+                <div class="step-number">1</div>
+                <h4>Contact Us</h4>
+                <p>Describe your project and goals. We schedule an on-site assessment at your convenience.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">2</div>
+                <h4>Site Assessment</h4>
+                <p>Our technician evaluates your existing systems, documents conditions, and discusses options.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">3</div>
+                <h4>Formal Proposal</h4>
+                <p>You receive a detailed quote with scope, pricing, and timeline. No work begins until you approve.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">4</div>
+                <h4>Warranty Documentation</h4>
+                <p>We provide documentation of all repairs completed and parts installed for your records.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY SECTION -->
+    <section class="why-section">
+        <h2>Why Move Solutions for Cubicle Services?</h2>
+        <div class="why-grid">
+            <div class="why-item">
+                <h4>40+ Years Experience</h4>
+                <p>Our furniture technicians bring decades of hands-on experience with every major panel system manufacturer.</p>
+            </div>
+            <div class="why-item">
+                <h4>Extensive Parts Inventory</h4>
+                <p>Hardware and components accumulated over decades of service, including discontinued product lines.</p>
+            </div>
+            <div class="why-item">
+                <h4>All Major Brands</h4>
+                <p>Herman Miller, Steelcase, Haworth, Knoll, Teknion, Allsteel, and many others. Current and legacy systems.</p>
+            </div>
+            <div class="why-item">
+                <h4>Formal Proposals</h4>
+                <p>Detailed quotes with scope, pricing, and timeline. No surprises. No work begins until you approve.</p>
+            </div>
+            <div class="why-item">
+                <h4>After-Hours Available</h4>
+                <p>Evening and weekend service to minimize disruption to your daily operations.</p>
+            </div>
+            <div class="why-item">
+                <h4>Texas-Wide Service</h4>
+                <p>Serving businesses across Dallas-Fort Worth, Austin and San Antonio with on-site service.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <h2>Ready to Reconfigure, Upgrade or Repair Your Space?</h2>
+        <p>Contact us for a free assessment and proposal.</p>
+        <a href="#" class="cta-btn">Get a Quote</a>
+    </section>
+
+</body>
+</html>

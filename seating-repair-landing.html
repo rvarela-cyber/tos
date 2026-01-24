@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Office Seating Repair & Cleaning | Move Solutions</title>
+    <style>
+        :root {
+            --red-primary: #d61728;
+            --red-dark: #b01420;
+            --gray-dark: #333333;
+            --gray-medium: #666666;
+            --gray-light: #f5f5f5;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: var(--gray-dark);
+            line-height: 1.6;
+        }
+
+        /* HEADER */
+        .header {
+            background: var(--white);
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-main {
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--gray-dark);
+            letter-spacing: -0.5px;
+        }
+
+        .logo-tagline {
+            font-size: 10px;
+            color: var(--gray-medium);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .logo-badge {
+            background: var(--red-primary);
+            color: var(--white);
+            font-size: 8px;
+            padding: 3px 8px;
+            margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-block;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .phone-number {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--gray-dark);
+        }
+
+        .phone-sub {
+            font-size: 11px;
+            color: var(--gray-medium);
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 3px;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--gray-dark);
+            color: var(--gray-dark);
+        }
+
+        .btn-outline:hover {
+            background: var(--gray-dark);
+            color: var(--white);
+        }
+
+        .btn-primary {
+            background: var(--red-primary);
+            color: var(--white);
+            border: 2px solid var(--red-primary);
+        }
+
+        .btn-primary:hover {
+            background: var(--red-dark);
+            border-color: var(--red-dark);
+        }
+
+        /* NAV */
+        .nav {
+            background: var(--white);
+            border-bottom: 1px solid #eee;
+            padding: 12px 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: var(--gray-dark);
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav a:hover {
+            color: var(--red-primary);
+        }
+
+        /* HERO */
+        .hero {
+            position: relative;
+            background: linear-gradient(135deg, var(--gray-dark) 0%, #555 100%);
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .hero-content {
+            max-width: 900px;
+            padding: 60px 20px;
+        }
+
+        .hero h1 {
+            font-family: Arial, sans-serif;
+            font-size: 52px;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-sub {
+            font-size: 20px;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* QUICK ACTIONS */
+        .quick-actions {
+            background: rgba(0,0,0,0.7);
+            padding: 15px 0;
+        }
+
+        .quick-actions-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            padding: 0 20px;
+        }
+
+        .quick-btn {
+            background: transparent;
+            border: 1px solid var(--white);
+            color: var(--white);
+            padding: 10px 25px;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .quick-btn:hover {
+            background: var(--white);
+            color: var(--gray-dark);
+        }
+
+        .quick-btn.red {
+            background: var(--red-primary);
+            border-color: var(--red-primary);
+        }
+
+        .quick-btn.red:hover {
+            background: var(--red-dark);
+            border-color: var(--red-dark);
+            color: var(--white);
+        }
+
+        /* INTRO SECTION */
+        .intro {
+            padding: 60px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .intro h2 {
+            font-family: Arial, sans-serif;
+            font-size: 32px;
+            color: var(--red-primary);
+            margin-bottom: 25px;
+            line-height: 1.2;
+        }
+
+        .intro-lead {
+            font-size: 17px;
+            color: var(--gray-medium);
+            margin-bottom: 20px;
+        }
+
+        .intro p {
+            font-size: 15px;
+            color: var(--gray-medium);
+            margin-bottom: 15px;
+        }
+
+        .cost-callout {
+            background: var(--gray-light);
+            padding: 25px 30px;
+            margin: 30px auto;
+            max-width: 850px;
+            border-left: 4px solid var(--red-primary);
+        }
+
+        .cost-callout p {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--gray-dark);
+            margin: 0;
+        }
+
+        .cost-callout span {
+            color: var(--red-primary);
+        }
+
+        /* BENEFITS GRID */
+        .benefits {
+            background: var(--gray-light);
+            padding: 60px 20px;
+        }
+
+        .section-title {
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            text-align: center;
+            color: var(--gray-dark);
+            margin-bottom: 40px;
+        }
+
+        .benefits-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .benefit-card {
+            background: var(--white);
+            padding: 30px;
+            text-align: center;
+        }
+
+        .benefit-icon {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .benefit-icon svg {
+            width: 40px;
+            height: 40px;
+            fill: var(--red-primary);
+        }
+
+        .benefit-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--red-primary);
+            margin-bottom: 10px;
+        }
+
+        .benefit-card p {
+            font-size: 13px;
+            color: var(--gray-medium);
+            line-height: 1.5;
+        }
+
+        /* SERVICES SPLIT */
+        .services-split {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .services-split h2 {
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            text-align: center;
+            color: var(--gray-dark);
+            margin-bottom: 40px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .service-column {
+            background: var(--white);
+            border: 1px solid #e0e0e0;
+        }
+
+        .service-header {
+            background: var(--red-primary);
+            color: var(--white);
+            padding: 20px 25px;
+            text-align: center;
+        }
+
+        .service-header h3 {
+            font-family: Arial, sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .service-body {
+            padding: 30px;
+        }
+
+        .service-body h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--gray-dark);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .service-body ul {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .service-body li {
+            font-size: 14px;
+            color: var(--gray-medium);
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .service-body li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--red-primary);
+            font-weight: 700;
+        }
+
+        .service-body p {
+            font-size: 14px;
+            color: var(--gray-medium);
+            margin-bottom: 15px;
+        }
+
+        /* PROCESS */
+        .process {
+            background: var(--gray-dark);
+            color: var(--white);
+            padding: 60px 20px;
+        }
+
+        .process h2 {
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .process-steps {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .process-step {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--red-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .process-step h4 {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .process-step p {
+            font-size: 13px;
+            opacity: 0.8;
+            line-height: 1.4;
+        }
+
+        /* WHY CHOOSE */
+        .why-choose {
+            background: var(--red-primary);
+            color: var(--white);
+            padding: 50px 20px;
+        }
+
+        .why-choose h2 {
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .why-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px 40px;
+        }
+
+        .why-item {
+            text-align: center;
+        }
+
+        .why-item h4 {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .why-item p {
+            font-size: 13px;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        /* CTA FOOTER */
+        .cta-footer {
+            background: var(--gray-dark);
+            color: var(--white);
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .cta-footer h2 {
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .cta-footer p {
+            font-size: 16px;
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+
+        .cta-footer .phone-large {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .cta-footer .btn-primary {
+            font-size: 16px;
+            padding: 15px 40px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .benefits-grid,
+            .services-grid,
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .process-steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .header-right {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                [INSERT MOVE SOLUTIONS LOGO HERE]
+            </div>
+            <div class="header-right">
+                <div>
+                    <div class="phone-number">1.800.668.3752</div>
+                    <div class="phone-sub">Call us for a free quote</div>
+                </div>
+                <div class="header-buttons">
+                    <a href="#" class="btn btn-outline">Quick Quote</a>
+                    <a href="#" class="btn btn-primary">Set Appointment</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- NAV -->
+    <nav class="nav">
+        <div class="nav-container">
+            <ul>
+                <li><a href="#">Video: How to Use Move Solutions</a></li>
+                <li><a href="#">Get Started</a></li>
+                <li><a href="#">Services ▾</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Contact Us ▾</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Office Seating Repair & Cleaning</h1>
+        </div>
+    </section>
+
+    <!-- QUICK ACTIONS -->
+    <div class="quick-actions">
+        <div class="quick-actions-container">
+            <button class="quick-btn red">Need a Quote?</button>
+            <button class="quick-btn">📋 Click to Pay Invoice(s)</button>
+            <button class="quick-btn">Need Liquidation/Decommission?</button>
+        </div>
+    </div>
+
+    <!-- INTRO SECTION -->
+    <section class="intro">
+        <h2>Expert Chair Care for Your Office Environment</h2>
+        
+        <p class="intro-lead">For 40+ years, our furniture specialists have been repairing and restoring office seating for businesses across Dallas-Fort Worth, Austin and San Antonio. From broken cylinders and torn upholstery to coffee-stained fabric, our technicians have the expertise to get your office chairs working like new again. We service all major manufacturers and handle jobs of any size.</p>
+        
+        <p>Before we touch a single office chair, we inspect it. We photograph the manufacturer information, check the serial number, and verify warranty status. Many office chairs remain under warranty, and our team will confirm coverage before recommending repairs. If parts are available, we source them. If parts are no longer available, we recommend replacement and can connect you with our sister company Office Furniture Plus for new replacement options.</p>
+
+        <div class="cost-callout">
+            <p>From <span>a single executive office chair</span> to <span>an entire building</span>, no job is too small or too large.</p>
+        </div>
+
+    </section>
+
+    <!-- BENEFITS GRID -->
+    <section class="benefits">
+        <h2 class="section-title">Six Reasons Business Owners Call Us First</h2>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                </div>
+                <h3>Warranty Check First</h3>
+                <p>We inspect manufacturer info and serial numbers before quoting. If your office chairs remain under warranty, our team will confirm coverage, potentially saving you the repair cost entirely.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm1-9h-2v3H8v2h3v3h2v-3h3v-2h-3z"/></svg>
+                </div>
+                <h3>No Minimums on Repairs</h3>
+                <p>One executive office chair or an entire floor of seating. We provide service regardless of volume because your needs dictate the scope of work, not a minimum job size requirement.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                </div>
+                <h3>After-Hours Service</h3>
+                <p>Cleaning and repairs happen when people aren't at their desks, minimizing disruption to operations. We work around your schedule, including evenings and weekends.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                </div>
+                <h3>40+ Years Experience</h3>
+                <p>Our furniture technicians bring 18-20 years of hands-on experience each. They have encountered and repaired virtually every type of office chair failure.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                </div>
+                <h3>Formal Proposals</h3>
+                <p>No surprises. We inspect your office chairs, document everything with photographs, source parts pricing from manufacturers, and send you a detailed proposal before any work begins.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                </div>
+                <h3>On-Site or Drop-Off</h3>
+                <p>We provide on-site service throughout Dallas-Fort Worth, Austin and San Antonio. For locations outside our service area, office chairs can be delivered to our facility for repair.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES SPLIT -->
+    <section class="services-split">
+        <h2>What We Offer</h2>
+        <div class="services-grid">
+            <!-- REPAIR COLUMN -->
+            <div class="service-column">
+                <div class="service-header">
+                    <h3>Office Seating Repair</h3>
+                </div>
+                <div style="background: #e0e0e0; padding: 120px 20px; text-align: center; color: #666;">
+                    [PHOTO PLACEHOLDER - OFFICE SEATING REPAIR]
+                </div>
+                <div class="service-body">
+                    <h4>What We Fix</h4>
+                    <ul>
+                        <li>Pneumatic cylinder replacement (sinking office chairs)</li>
+                        <li>Mechanism repair (tilt, recline, height adjustment)</li>
+                        <li>Arm replacement and repair</li>
+                        <li>Seat pad replacement (when parts available)</li>
+                        <li>Upholstery repair and reupholstery</li>
+                        <li>Caster and base replacement</li>
+                    </ul>
+                    
+                    <h4>Service Options</h4>
+                    <p>Most repairs are completed on-site at your location during a scheduled visit. For complex repairs requiring specialized equipment, office chairs can be brought to our facility and returned within two business days.</p>
+                    
+                    <h4>Parts Inventory</h4>
+                    <p>Our on-site shop maintains an extensive inventory of salvaged hardware accumulated over decades of service, allowing us to source hard-to-find parts for older office chair models.</p>
+                    
+                    <h4>Brands We Service</h4>
+                    <p>We service all major office furniture manufacturers including Herman Miller, Steelcase, Haworth, Knoll, and HON. Our technicians are trained on current and legacy product lines.</p>
+                </div>
+            </div>
+
+            <!-- CLEANING COLUMN -->
+            <div class="service-column">
+                <div class="service-header">
+                    <h3>Office Seating Cleaning</h3>
+                </div>
+                <div style="background: #e0e0e0; padding: 120px 20px; text-align: center; color: #666;">
+                    [PHOTO PLACEHOLDER - OFFICE SEATING CLEANING]
+                </div>
+                <div class="service-body">
+                    <h4>Our Cleaning Process</h4>
+                    <ul>
+                        <li>Pre-treat for specific stain types (protein, oil, ink)</li>
+                        <li>Targeted scrubbing of affected areas</li>
+                        <li>Hot water extraction for deep cleaning</li>
+                        <li>Professional-grade stain removal</li>
+                        <li>Approximately 4 hours dry time</li>
+                        <li>After-hours scheduling available</li>
+                    </ul>
+                    
+                    <h4>Honest Expectations</h4>
+                    <p>Our process removes the majority of stains, including coffee, food, dirt, and shoe marks. Some stains are permanent, and our team will advise you upfront if we identify any that cannot be removed.</p>
+                    
+                    <h4>When Cleaning Matters</h4>
+                    <p>Preparing a space for new tenants or a company visit requires furniture that looks presentable. Our professional cleaning restores your seating to like-new condition, often overnight.</p>
+                    
+                    <h4>Pricing</h4>
+                    <p>Office chair cleaning is typically calculated per-chair with a minimum of 50 chairs for on-site service. For smaller jobs, we provide custom time-and-material estimates upon request.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="process">
+        <h2>How It Works</h2>
+        <div class="process-steps">
+            <div class="process-step">
+                <div class="step-number">1</div>
+                <h4>Contact Us</h4>
+                <p>Describe your office chairs and service needs. We will schedule an on-site assessment.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">2</div>
+                <h4>On-Site Inspection</h4>
+                <p>Our technician photographs all details, verifies warranties, and assesses service requirements.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">3</div>
+                <h4>Formal Proposal</h4>
+                <p>You receive a written quote with parts pricing. No work begins until you approve.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">4</div>
+                <h4>Warranty Documentation</h4>
+                <p>We provide documentation of all repairs completed and parts installed for your records.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PHOTO GALLERY -->
+    <section style="padding: 40px 20px; max-width: 1200px; margin: 0 auto;">
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+            <div style="background: #e0e0e0; padding: 120px 20px; text-align: center; color: #666;">
+                [PHOTO PLACEHOLDER 1]
+            </div>
+            <div style="background: #e0e0e0; padding: 120px 20px; text-align: center; color: #666;">
+                [PHOTO PLACEHOLDER 2]
+            </div>
+            <div style="background: #e0e0e0; padding: 120px 20px; text-align: center; color: #666;">
+                [PHOTO PLACEHOLDER 3]
+            </div>
+            <div style="background: #e0e0e0; padding: 120px 20px; text-align: center; color: #666;">
+                [PHOTO PLACEHOLDER 4]
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY CHOOSE -->
+    <section class="why-choose">
+        <h2>Why Move Solutions for Seating Services?</h2>
+        <div class="why-grid">
+            <div class="why-item">
+                <h4>Same Day If Possible</h4>
+                <p>Streamlined, efficient service designed to minimize disruption to your operations.</p>
+            </div>
+            <div class="why-item">
+                <h4>Commercial Focus</h4>
+                <p>We serve businesses exclusively. No residential services. Commercial furniture is our specialty.</p>
+            </div>
+            <div class="why-item">
+                <h4>Texas-Based Team</h4>
+                <p>Local technicians, local shop, fast response times across major Texas metros.</p>
+            </div>
+            <div class="why-item">
+                <h4>Green Materials</h4>
+                <p>We use environmentally responsible cleaning products that are safe for your workspace.</p>
+            </div>
+            <div class="why-item">
+                <h4>Insured & Professional</h4>
+                <p>Full liability coverage. Documentation on file with major property managers.</p>
+            </div>
+            <div class="why-item">
+                <h4>Part of Something Bigger</h4>
+                <p>Move Solutions is backed by the Total Office Solutions family of companies.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA FOOTER -->
+    <section class="cta-footer">
+        <h2>Ready to Get Your Office Chairs Back in Service?</h2>
+        <p>For immediate assistance with your seating repair or cleaning needs, call us or request a proposal online.</p>
+        <div class="phone-large">1.800.668.3752</div>
+        <a href="#" class="btn btn-primary">Request a Proposal</a>
+    </section>
+
+</body>
+</html>
