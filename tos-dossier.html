@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>THE TOS DOSSIER — Wireframe v1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #b8b8b8;
+  font-family: 'IBM Plex Sans', sans-serif;
+  padding: 32px 24px;
+}
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.pl {
+  font-size: 10px;
+  font-weight: 500;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 6px;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.page {
+  width: 100%;
+  aspect-ratio: 8.5 / 11;
+  background: #f5f2eb;
+  border: 0.5px solid #aaa;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.pi {
+  padding: 5% 6%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* ── CLASSIFICATION BAND ── */
+.class-band {
+  background: #1a1a1a;
+  color: #f5f2eb;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(9px, 1.3vw, 13px);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 10px 0;
+  flex-shrink: 0;
+  font-weight: 500;
+}
+
+/* ── COVER ── */
+.cv-meta {
+  flex-shrink: 0;
+  margin-bottom: 4%;
+  margin-top: 2%;
+}
+
+.cv-meta-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 3px 16px;
+  border: 0.5px solid #333;
+  padding: 10px 14px;
+  background: #eceae3;
+}
+
+.cv-meta-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(9px, 1.2vw, 11px);
+  color: #555;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.cv-meta-value {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(9px, 1.2vw, 11px);
+  color: #111;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.cv-title-block {
+  text-align: center;
+  flex-shrink: 0;
+  margin-bottom: 4%;
+  border-top: 2px solid #111;
+  border-bottom: 2px solid #111;
+  padding: 2.5% 0;
+}
+
+.cv-title-eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(7px, 1vw, 9px);
+  letter-spacing: 0.4em;
+  color: #777;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.cv-title-main {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(22px, 4.2vw, 36px);
+  font-weight: 700;
+  color: #111;
+  letter-spacing: 0.08em;
+  line-height: 1.1;
+}
+
+.cv-title-sub {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(7.5px, 1.1vw, 10px);
+  color: #888;
+  letter-spacing: 0.25em;
+  margin-top: 6px;
+  text-transform: uppercase;
+}
+
+.cv-brief {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: clamp(10px, 1.4vw, 13px);
+  color: #333;
+  line-height: 1.75;
+  font-style: italic;
+  border-left: 2px solid #555;
+  padding-left: 14px;
+  margin-bottom: 4%;
+  flex-shrink: 0;
+}
+
+.cv-classification {
+  flex-shrink: 0;
+  margin-bottom: 3%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.cv-class-item {
+  border: 0.5px solid #999;
+  padding: 6px 8px;
+  background: #eceae3;
+}
+
+.cv-class-item-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(7px, 0.95vw, 9px);
+  color: #888;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.cv-class-item-value {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(9px, 1.25vw, 11px);
+  color: #111;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+}
+
+.cv-spacer { flex: 1; }
+
+.cv-bottom {
+  flex-shrink: 0;
+  border-top: 1px solid #555;
+  padding-top: 2%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.cv-bottom-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(8px, 1.1vw, 10px);
+  color: #888;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.cv-logos-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  width: 60%;
+}
+
+.cv-logo-unit {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(8px, 1.1vw, 10px);
+  color: #444;
+  border: 0.5px solid #999;
+  padding: 8px 10px;
+  background: #eceae3;
+  letter-spacing: 0.08em;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: clamp(28px, 3.5vw, 38px);
+}
+
+/* ── INSIDE PAGES ── */
+.doc-header {
+  flex-shrink: 0;
+  margin-bottom: 2%;
+  padding-bottom: 1.2%;
+  border-bottom: 2px solid #111;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.doc-header-title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(13px, 2vw, 17px);
+  font-weight: 700;
+  color: #111;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.doc-header-meta {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(6px, 0.85vw, 8px);
+  color: #888;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 5%;
+  flex: 1;
+  min-height: 0;
+}
+
+.col { display: flex; flex-direction: column; }
+.col-div { padding-left: 5%; border-left: 0.5px solid #bbb; }
+
+/* FILE ITEM */
+.file-item {
+  margin-bottom: 2%;
+  padding-bottom: 2%;
+  border-bottom: 0.5px solid #ccc;
+}
+.file-item:last-child { border-bottom: none; margin-bottom: 0; }
+
+.file-header {
+  margin-bottom: 5px;
+}
+
+.file-classification {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(7.5px, 1vw, 9.5px);
+  color: #888;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 1px;
+}
+
+.file-subject {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(11px, 1.75vw, 15px);
+  font-weight: 700;
+  color: #111;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.file-unit {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: clamp(7.5px, 1vw, 9.5px);
+  color: #888;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.file-mission {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: clamp(10px, 1.35vw, 12.5px);
+  color: #333;
+  line-height: 1.65;
+  font-style: italic;
+  margin-bottom: 6px;
+  padding-left: 10px;
+  border-left: 1.5px solid #999;
+}
+
+.capabilities-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(7px, 0.95vw, 9px);
+  color: #888;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+
+.cap-list { display: flex; flex-direction: column; }
+
+.cap {
+  padding: 4px 0;
+  border-top: 0.5px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cap-header {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.cap-bullet {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(8px, 1.1vw, 10px);
+  color: #888;
+  flex-shrink: 0;
+}
+
+.cap-name {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(9px, 1.25vw, 12px);
+  font-weight: 700;
+  color: #111;
+  flex-shrink: 0;
+}
+
+.cap-desc {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: clamp(8.5px, 1.15vw, 11px);
+  color: #666;
+  line-height: 1.45;
+  padding-left: 16px;
+}
+
+/* ANALYST NOTES */
+.analyst-col {
+  padding-left: 5%;
+  border-left: 0.5px solid #bbb;
+  display: flex;
+  flex-direction: column;
+}
+
+.analyst-block {
+  padding-bottom: 5%;
+  margin-bottom: 5%;
+  border-bottom: 0.5px solid #ccc;
+}
+.analyst-block:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+.analyst-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(7.5px, 1vw, 9.5px);
+  color: #888;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+
+.analyst-title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(11px, 1.5vw, 14px);
+  font-weight: 700;
+  color: #111;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.analyst-body {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: clamp(10px, 1.3vw, 12.5px);
+  color: #444;
+  line-height: 1.75;
+}
+
+/* BACK PAGE */
+
+
+.back-header {
+  flex-shrink: 0;
+  margin-bottom: 1.5%;
+  padding-bottom: 1%;
+  border-bottom: 2px solid #111;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.back-header-title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(11px, 1.8vw, 15px);
+  font-weight: 700;
+  color: #111;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.back-header-meta {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(6px, 0.85vw, 8px);
+  color: #888;
+  letter-spacing: 0.15em;
+}
+
+.back-intro {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: clamp(10px, 1.3vw, 12.5px);
+  color: #444;
+  font-style: italic;
+  line-height: 1.85;
+  margin-bottom: 2.5%;
+  padding-left: 12px;
+  border-left: 2px solid #888;
+  flex-shrink: 0;
+}
+
+.back-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 5%;
+  margin-bottom: 2%;
+}
+
+.back-file {
+  padding-bottom: 2.5%;
+  margin-bottom: 2.5%;
+  border-bottom: 0.5px solid #ccc;
+}
+.back-file:last-child { border-bottom: none; margin-bottom: 0; }
+
+.back-file-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(7.5px, 0.95vw, 9.5px);
+  color: #888;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.back-file-name {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(11px, 1.5vw, 14px);
+  font-weight: 700;
+  color: #111;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.back-file-body {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: clamp(10px, 1.25vw, 12px);
+  color: #555;
+  line-height: 1.75;
+}
+
+/* LIAISON PROTOCOL */
+.liaison-block {
+  background: #1a1a1a;
+  padding: 1.8% 2.5%;
+  margin-bottom: 1.5%;
+  flex-shrink: 0;
+}
+
+.liaison-header {
+  border-bottom: 0.5px solid #444;
+  padding-bottom: 0.8%;
+  margin-bottom: 1%;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.liaison-title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(12px, 1.75vw, 15px);
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.liaison-sub {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(6px, 0.82vw, 8px);
+  color: #666;
+  letter-spacing: 0.15em;
+}
+
+.liaison-brief {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: clamp(10px, 1.25vw, 12px);
+  color: #bbb;
+  line-height: 1.65;
+  margin-bottom: 1%;
+}
+
+.liaison-brief strong { color: #fff; }
+
+.liaison-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 4%;
+}
+
+.liaison-cap {
+  border-top: 0.5px solid #333;
+  padding: 3px 0;
+}
+
+.liaison-cap-name {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(9px, 1.2vw, 11px);
+  font-weight: 700;
+  color: #ddd;
+  letter-spacing: 0.06em;
+  margin-bottom: 1px;
+}
+
+.liaison-cap-desc {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: clamp(8.5px, 1.05vw, 10.5px);
+  color: #888;
+  line-height: 1.4;
+}
+
+/* FOOTER */
+.back-footer {
+  border-top: 1px solid #555;
+  padding-top: 1.5%;
+  margin-top: auto;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.back-footer-logos {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.back-footer-logo {
+  width: 70px;
+  height: 22px;
+  background: #eceae3;
+  border: 0.5px solid #aaa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 6.5px;
+  color: #999;
+}
+
+.back-footer-contact {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(7.5px, 1vw, 9.5px);
+  font-weight: 700;
+  color: #111;
+  letter-spacing: 0.1em;
+}
+
+.back-footer-stamp {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(6px, 0.8vw, 7.5px);
+  color: #999;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- PAGE 1 — COVER -->
+<div>
+<div class="pl">Page 1 — Cover</div>
+<div class="page">
+  <div class="class-band">COMMERCIAL WORKSPACE OPERATIONS &nbsp;|&nbsp; AUTHORIZED DISTRIBUTION ONLY &nbsp;|&nbsp; TOS PARTNERS</div>
+  <div class="pi">
+
+    <div class="cv-meta">
+      <div class="cv-meta-grid">
+        <span class="cv-meta-label">Subject:</span><span class="cv-meta-value">Total Office Solutions &amp; Its Family of Companies</span>
+        <span class="cv-meta-label">Prepared By:</span><span class="cv-meta-value">TOS Partners — Office of Strategic Operations</span>
+        <span class="cv-meta-label">Classification:</span><span class="cv-meta-value">Commercial Workspace Operations</span>
+        <span class="cv-meta-label">Status:</span><span class="cv-meta-value">Active — All Units Operational</span>
+        <span class="cv-meta-label">Distribution:</span><span class="cv-meta-value">Authorized Personnel Only</span>
+      </div>
+    </div>
+
+    <div class="cv-title-block">
+      <div class="cv-title-eyebrow">Total Office Solutions</div>
+      <div class="cv-title-main">THE TOS &#x201C;ANYWHERE&#x201D; DOSSIER</div>
+      <div class="cv-title-sub">Commercial &nbsp;&#x2015;&nbsp; Comprehensive &nbsp;&#x2015;&nbsp; Confidential</div>
+    </div>
+
+    <div style="width:100%;flex-shrink:0;margin-bottom:0;background:#ddd;border:0.5px solid #bbb;display:flex;align-items:center;justify-content:center;min-height:clamp(140px,22vw,210px);">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:clamp(8px,1.1vw,10px);color:#aaa;letter-spacing:0.15em;text-transform:uppercase;">[ Cover Hero Image ]</span>
+    </div>
+    <div class="cv-brief" style="margin-top:3%;margin-bottom:3%;">
+      This document contains a full operational profile of Total Office Solutions and its affiliated companies. What follows is a complete operational profile: what we do, how we do it, and why the clients who trust us with their most critical transitions keep coming back. This is the full picture.
+    </div>
+    <div class="cv-classification">
+      <div class="cv-class-item">
+        <div class="cv-class-item-label">Ownership</div>
+        <div class="cv-class-item-value">51% Woman Owned<br>48% Veteran Owned<br>1% Divine Intervention</div>
+      </div>
+      <div class="cv-class-item">
+        <div class="cv-class-item-label">Operational Reach</div>
+        <div class="cv-class-item-value">Dallas-Fort Worth HQ<br>National via OMA Network<br>The &#x201C;Anywhere&#x201D; Footprint</div>
+      </div>
+      <div class="cv-class-item">
+        <div class="cv-class-item-label">Active Since</div>
+        <div class="cv-class-item-value">40 Years in Field<br>8 Specialized Units<br>1 Unified Command</div>
+      </div>
+    </div>
+
+    <div class="cv-spacer"></div>
+
+    <div class="cv-bottom">
+      <div class="cv-bottom-label">Affiliated Operating Units</div>
+      <div class="cv-logos-row">
+        <span class="cv-logo-unit">Move Solutions</span>
+        <span class="cv-logo-unit">TechTeam Solutions</span>
+        <span class="cv-logo-unit">Office Furniture Plus</span>
+        <span class="cv-logo-unit">Corporate Source</span>
+        <span class="cv-logo-unit">Paint &amp; Carpet</span>
+        <span class="cv-logo-unit">Office Boy</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- PAGE 2 — ACTIVE FILES -->
+<div>
+<div class="pl">Page 2 — Active Files</div>
+<div class="page">
+  <div class="class-band">ACTIVE FILES &nbsp;|&nbsp; TOS DOSSIER &nbsp;|&nbsp; PAGE 2 OF 4</div>
+  <div class="pi">
+    <div class="doc-header">
+      <span class="doc-header-title">Active Files</span>
+      <span class="doc-header-meta">Units 01 — 04 &nbsp;|&nbsp; Operational</span>
+    </div>
+    <div class="two-col">
+
+      <div class="col">
+
+        <div class="file-item">
+          <div class="file-header">
+            <div class="file-classification">Unit 01 &nbsp;/&nbsp; Command Brief</div>
+            <div class="file-subject">Total Office Solutions <span class="file-unit">Parent Command</span></div>
+          </div>
+          <div class="file-mission">Eight specialized units. Four decades of field experience. TOS exists to make your next workspace transition feel less like a project and more like a completed mission.</div>
+          <div class="capabilities-label">Standing Orders</div>
+          <div class="cap-list">
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">51% Woman Owned</span></div><div class="cap-desc">WBENC Certified. Women-Led at every level of command.</div></div>
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">48% Veteran Owned</span></div><div class="cap-desc">Discipline, accountability, and mission-first culture.</div></div>
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">The &#x201C;Anywhere&#x201D; Footprint</span></div><div class="cap-desc">Local presence. National capability. Zero excuses.</div></div>
+          </div>
+        </div>
+
+        <div class="file-item">
+          <div class="file-header">
+            <div class="file-classification">Unit 02 &nbsp;/&nbsp; Field Operations</div>
+            <div class="file-subject">Move Solutions <span class="file-unit">MSL</span></div>
+          </div>
+          <div class="file-mission">Primary field unit. Handles all commercial relocation operations from first briefing to final delivery.</div>
+          <div class="capabilities-label">Capabilities</div>
+          <div class="cap-list">
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">Schedule</span></div><div class="cap-desc">Timelines, crews, and logistics locked before anything moves.</div></div>
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">Office Moving</span></div><div class="cap-desc">Commercial relocation at scale. Precision, protection, accountability.</div></div>
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">MAC</span></div><div class="cap-desc">Moves, Adds, and Changes on an ongoing basis. We shift when you shift.</div></div>
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">Storage</span></div><div class="cap-desc">Assets stored and tracked in real time via the OMA network.</div></div>
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">Decommission</span></div><div class="cap-desc">Lease-compliant space return from start to finish. Every item removed, every surface restored.</div></div>
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">Liquidation</span></div><div class="cap-desc">Surplus assets assessed, inventoried, and quoted. Walk away clean and compensated.</div></div>
+          </div>
+        </div>
+
+        <div class="file-item" style="border-bottom:none;margin-bottom:0;">
+          <div class="file-header">
+            <div class="file-classification">Unit 03 &nbsp;/&nbsp; Technical Division</div>
+            <div class="file-subject">TechTeam Solutions <span class="file-unit">TTS</span></div>
+          </div>
+          <div class="file-mission">Handles all technology infrastructure during transition. Invisible when successful. Nobody notices when it&#x2019;s done right.</div>
+          <div class="capabilities-label">Capabilities</div>
+          <div class="cap-list">
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">Disconnect / Reconnect</span></div><div class="cap-desc">Every workstation back online Monday morning.</div></div>
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">IT Moving Services</span></div><div class="cap-desc">Supplements your IT team. Equipment protected, systems online fast.</div></div>
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">Server Migration</span></div><div class="cap-desc">Critical servers relocated without interruption to operations.</div></div>
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">Low Voltage Cabling</span></div><div class="cap-desc">Clean, documented, code compliant.</div></div>
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">Plenum Clearance</span></div><div class="cap-desc">Above-ceiling cabling removed to building standards. No abandoned infrastructure left behind.</div></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col col-div">
+
+        <div class="file-item">
+          <div class="file-header">
+            <div class="file-classification">Unit 04 &nbsp;/&nbsp; Asset Procurement</div>
+            <div class="file-subject">Office Furniture Plus <span class="file-unit">OFP</span></div>
+          </div>
+          <div class="file-mission">Primary asset sourcing unit. Over 200 manufacturer relationships. New and commercial-grade pre-owned inventory. Quality at every budget level.</div>
+          <div class="capabilities-label">Capabilities</div>
+          <div class="cap-list">
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">New Furniture</span></div><div class="cap-desc">200+ manufacturers, every category, every price point.</div></div>
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">Pre-Owned</span></div><div class="cap-desc">ANSI/BIFMA-compliant. Performs like new at a fraction of cost.</div></div>
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">Blend</span></div><div class="cap-desc">Mix what you already own with what you need. Existing assets assessed and integrated with new pieces to maximize budget.</div></div>
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">Space Planning</span></div><div class="cap-desc">How your people work and collaborate — mapped with precision.</div></div>
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">Installation</span></div><div class="cap-desc">Delivered, assembled, placed, and verified complete.</div></div>
+          </div>
+        </div>
+
+        <div class="file-item">
+          <div class="file-header">
+            <div class="file-classification">Unit 05 &nbsp;/&nbsp; Contract Division</div>
+            <div class="file-subject">Corporate Source <span class="file-unit">CSL</span></div>
+          </div>
+          <div class="file-mission">Specification-grade procurement unit. Operates at the intersection of design intent and contract execution. For clients who know the environment they create says everything about who they are.</div>
+          <div class="capabilities-label">Capabilities</div>
+          <div class="cap-list">
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">Contract Spec</span></div><div class="cap-desc">Right product, right manufacturer, right price — navigated for you.</div></div>
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">Design Coordination</span></div><div class="cap-desc">Works directly with your architect. What is specified gets built.</div></div>
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">Project Furnishing</span></div><div class="cap-desc">Large-scale, phased projects from first spec to final walkthrough.</div></div>
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">Volume Pricing</span></div><div class="cap-desc">Purchasing power that translates directly into client savings.</div></div>
+          </div>
+        </div>
+
+        <div class="file-item" style="border-bottom:none;margin-bottom:0;">
+          <div class="file-header">
+            <div class="file-classification">Unit 06 &nbsp;/&nbsp; Logistics Command</div>
+            <div class="file-subject">FF&amp;E / OS&amp;E <span class="file-unit">Large-Scale Operations</span></div>
+          </div>
+          <div class="file-mission">Large-scale logistics unit. Deployed for hospitality, healthcare, and multi-site projects requiring full FF&amp;E and OS&amp;E coordination without missing a single delivery window.</div>
+          <div class="capabilities-label">Capabilities</div>
+          <div class="cap-list">
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">FF&amp;E</span></div><div class="cap-desc">Full programs for hospitality, healthcare, and multi-site accounts.</div></div>
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">OS&amp;E</span></div><div class="cap-desc">Operating Supplies sourced alongside FF&amp;E from one partner.</div></div>
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">BrassTacks Tech-Enabled Moving</span></div><div class="cap-desc">Real-time tracking at every stage of the delivery chain.</div></div>
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">National Reach</span></div><div class="cap-desc">Anywhere in the country via OMA with local accountability.</div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- PAGE 3 — ACTIVE FILES CONTINUED -->
+<div>
+<div class="pl">Page 3 — Active Files, Continued</div>
+<div class="page">
+  <div class="class-band">ACTIVE FILES &nbsp;|&nbsp; TOS DOSSIER &nbsp;|&nbsp; PAGE 3 OF 4</div>
+  <div class="pi">
+    <div class="doc-header">
+      <span class="doc-header-title">Active Files — Continued</span>
+      <span class="doc-header-meta">Units 07 — 08 &nbsp;+&nbsp; Analyst Notes</span>
+    </div>
+    <div class="two-col">
+
+      <div class="col">
+
+        <div class="file-item">
+          <div class="file-header">
+            <div class="file-classification">Unit 07 &nbsp;/&nbsp; Finishing Operations</div>
+            <div class="file-subject">Paint &amp; Carpet <span class="file-unit">P&amp;C</span></div>
+          </div>
+          <div class="file-mission">Final-phase finishing unit. The last thing done is the first thing felt. When we hand over the space, it doesn&#x2019;t just work — it looks like it was always meant to be exactly this way.</div>
+          <div class="capabilities-label">Capabilities</div>
+          <div class="cap-list">
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">Interior Paint</span></div><div class="cap-desc">Color consultation included. Applied to commercial standard.</div></div>
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">Carpet</span></div><div class="cap-desc">Removal, precise installation, post-project cleaning scheduled.</div></div>
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">Relamping / LED Upgrades</span></div><div class="cap-desc">Energy-efficient LEDs in. Reduces costs, improves the space.</div></div>
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">After-Hours Operations</span></div><div class="cap-desc">Full calendar and clock availability. Work performed outside business hours, nights and weekends if required.</div></div>
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">Environmental Controls</span></div><div class="cap-desc">Airflow management, floor-to-ceiling sheeting, and odor mitigation applied throughout every project.</div></div>
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">Sustainability Commitment</span></div><div class="cap-desc">Green materials throughout. Used carpet recycled and diverted from landfill through established trade contacts.</div></div>
+          </div>
+        </div>
+
+        <div class="file-item" style="border-bottom:none;margin-bottom:0;">
+          <div class="file-header">
+            <div class="file-classification">Unit 08 &nbsp;/&nbsp; Rapid Response</div>
+            <div class="file-subject">Office Boy <span class="file-unit">OFB</span></div>
+          </div>
+          <div class="file-mission">On-call unit. No minimum order. No notice required. Deployed today if possible. The unit that handles everything outside every other scope. Always available. Always ready.</div>
+          <div class="capabilities-label">Capabilities</div>
+          <div class="cap-list">
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">Small Moves</span></div><div class="cap-desc">One desk or one floor. No job too small, no timeline too tight.</div></div>
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">Quick Tasks</span></div><div class="cap-desc">Outside every other scope. We take the call and get it done.</div></div>
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">Same-Day Service</span></div><div class="cap-desc">When it needs to happen today, we make it happen today.</div></div>
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">Delivery</span></div><div class="cap-desc">Single pieces delivered and placed. No minimum requirements.</div></div>
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">Wall Hangings &amp; Art Installation</span></div><div class="cap-desc">Artwork, whiteboards, and monitors hung precisely where needed. Same day if possible.</div></div>
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">Furniture Removal</span></div><div class="cap-desc">Items removed cleanly and efficiently. No minimums, no scheduling complications.</div></div>
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">Ergonomic Adjustments</span></div><div class="cap-desc">Workstations configured for proper ergonomic setup. Deployed same day when required.</div></div>
+            <div class="cap"><div class="cap-header"><span class="cap-bullet">&#x2192;</span><span class="cap-name">Shelving Assembly</span></div><div class="cap-desc">Shelving units assembled, secured, and placed. No advance notice required.</div></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col" analyst-col">
+
+        <div class="analyst-block">
+          <div class="analyst-tag">OBSERVATIONS &nbsp;/&nbsp; Field Coverage</div>
+          <div class="analyst-title">Operational Scope</div>
+          <div class="analyst-body">Your time is too valuable to manage a dozen moving parts. TOS brings every service under one roof so your team can focus on the mission while we handle the transition.</div>
+        </div>
+
+        <div class="analyst-block">
+          <div class="analyst-tag">OBSERVATIONS &nbsp;/&nbsp; Command Profile</div>
+          <div class="analyst-title">Woman Owned. Women-Led. Veteran Owned.</div>
+          <div class="analyst-body">The values that come with both are the same ones that built this company and the same ones that show up on every job site, every day.</div>
+        </div>
+
+        <div class="analyst-block">
+          <div class="analyst-tag">OBSERVATIONS &nbsp;/&nbsp; Allied Network</div>
+          <div class="analyst-title">The OMA Network</div>
+          <div class="analyst-body">As founding members of the Office Moving Alliance, Move Solutions deploys anywhere in the country with the same standards and accountability you get locally.</div>
+        </div>
+
+        <div class="analyst-block">
+          <div class="analyst-tag">OBSERVATIONS &nbsp;/&nbsp; Standards and Compliance</div>
+          <div class="analyst-title">The Standard Is Non-Negotiable</div>
+          <div class="analyst-body">Every crew is insured to Class A carrier standards. Every move is documented. Every job has a named account manager who answers when you call. Accountability isn&#x2019;t a department at TOS. It&#x2019;s the operating system.</div>
+        </div>
+
+        <div class="analyst-block">
+          <div class="analyst-tag">OBSERVATIONS &nbsp;/&nbsp; Verified Standing</div>
+          <div class="analyst-title">The Credentials on File</div>
+          <div class="analyst-body">GSA Schedule Holder. WBENC Certified Women&#x2019;s Business Enterprise. CBRE Fusion 2.0 Preferred Supplier. BOMA International Affiliate Member of the Year. IREM Industry Partner of the Year. These are not marketing claims. They are independently verified designations earned through consistent performance.</div>
+        </div>
+
+        <div class="analyst-block" style="border-bottom:none;margin-bottom:0;padding-bottom:0;">
+          <div class="analyst-tag">OBSERVATIONS &nbsp;/&nbsp; Initiate Contact</div>
+          <div class="analyst-title">Request a Briefing</div>
+          <div class="analyst-body">The best way to understand what TOS can do is to sit down with us. No hard sell. No pitch deck. Just a direct conversation about where you are, where you&#x2019;re going, and how we deploy to get you there.</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- PAGE 4 — CLOSEOUT OPERATIONS -->
+<div>
+<div class="pl">Page 4 — Closeout Operations</div>
+<div class="page">
+  <div class="class-band">CLOSEOUT OPERATIONS &nbsp;|&nbsp; TOS DOSSIER &nbsp;|&nbsp; PAGE 4 OF 4</div>
+  <div class="pi">
+
+    <div class="back-header">
+      <span class="back-header-title">Closeout Operations</span>
+      <span class="back-header-meta">Post-Transition Protocols &nbsp;/&nbsp; Active</span>
+    </div>
+
+    <div class="back-intro">
+      Every operation has a closeout phase. What happens after the transition determines whether a space is truly finished — or just vacated. TOS handles the part most vendors don&#x2019;t talk about: the work that makes it right before you hand back the keys.
+    </div>
+
+    <!-- COMPANY PROFILES — 3x2 grid matching Anywhere Menu -->
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5% 2.5%;margin-bottom:2%;flex-shrink:0;">
+
+      <div style="border:0.5px solid #e0e0e0;padding:8px 10px;">
+        <div style="width:100%;height:56px;background:#efefef;border:0.5px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:7px;color:#bbb;font-family:Arial,sans-serif;letter-spacing:0.06em;margin-bottom:7px;">[ Move Solutions Logo ]</div>
+        <div style="font-family:Arial,sans-serif;font-size:clamp(8.5px,1.1vw,11px);color:#aaa;letter-spacing:0.06em;margin-bottom:4px;">movesolutions.com</div>
+        <div style="font-family:Georgia,serif;font-size:clamp(10px,1.4vw,13px);font-weight:700;color:#111;margin-bottom:5px;">The Field Operations Unit</div>
+        <div style="font-family:Arial,sans-serif;font-size:clamp(9px,1.2vw,11.5px);color:#555;line-height:1.65;">For forty years, the most trusted name in commercial office relocation. A founding member of the Office Moving Alliance and one of the five largest office moving companies in the United States.</div>
+      </div>
+
+      <div style="border:0.5px solid #e0e0e0;padding:8px 10px;">
+        <div style="width:100%;height:56px;background:#efefef;border:0.5px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:7px;color:#bbb;font-family:Arial,sans-serif;letter-spacing:0.06em;margin-bottom:7px;">[ Office Furniture Plus Logo ]</div>
+        <div style="font-family:Arial,sans-serif;font-size:clamp(8.5px,1.1vw,11px);color:#aaa;letter-spacing:0.06em;margin-bottom:4px;">officefurnitureplus.com</div>
+        <div style="font-family:Georgia,serif;font-size:clamp(10px,1.4vw,13px);font-weight:700;color:#111;margin-bottom:5px;">The Furniture Authority</div>
+        <div style="font-family:Arial,sans-serif;font-size:clamp(9px,1.2vw,11.5px);color:#555;line-height:1.65;">The leader in new and pre-owned commercial office furniture. Over 220 manufacturer relationships, a Blend program that maximizes existing assets, and lifetime maintenance support.</div>
+      </div>
+
+      <div style="border:0.5px solid #e0e0e0;padding:8px 10px;">
+        <div style="width:100%;height:56px;background:#efefef;border:0.5px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:7px;color:#bbb;font-family:Arial,sans-serif;letter-spacing:0.06em;margin-bottom:7px;">[ TechTeam Solutions Logo ]</div>
+        <div style="font-family:Arial,sans-serif;font-size:clamp(8.5px,1.1vw,11px);color:#aaa;letter-spacing:0.06em;margin-bottom:4px;">techteamsol.com</div>
+        <div style="font-family:Georgia,serif;font-size:clamp(10px,1.4vw,13px);font-weight:700;color:#111;margin-bottom:5px;">The Technology Division</div>
+        <div style="font-family:Arial,sans-serif;font-size:clamp(9px,1.2vw,11.5px);color:#555;line-height:1.65;">When you move, your technology moves with you. One-stop resource for IT relocation, cabling, server migration, and technology infrastructure. Your team is back online Monday morning.</div>
+      </div>
+
+      <div style="border:0.5px solid #e0e0e0;padding:8px 10px;">
+        <div style="width:100%;height:56px;background:#efefef;border:0.5px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:7px;color:#bbb;font-family:Arial,sans-serif;letter-spacing:0.06em;margin-bottom:7px;">[ Corporate Source Logo ]</div>
+        <div style="font-family:Arial,sans-serif;font-size:clamp(8.5px,1.1vw,11px);color:#aaa;letter-spacing:0.06em;margin-bottom:4px;">corporatesource.com</div>
+        <div style="font-family:Georgia,serif;font-size:clamp(10px,1.4vw,13px);font-weight:700;color:#111;margin-bottom:5px;">The Contract Division</div>
+        <div style="font-family:Arial,sans-serif;font-size:clamp(9px,1.2vw,11.5px);color:#555;line-height:1.65;">Office environments that inspire and assure. Contract-grade furnishings with end-to-end design support from consultation through commissioning.</div>
+      </div>
+
+      <div style="border:0.5px solid #e0e0e0;padding:8px 10px;">
+        <div style="width:100%;height:56px;background:#efefef;border:0.5px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:7px;color:#bbb;font-family:Arial,sans-serif;letter-spacing:0.06em;margin-bottom:7px;">[ Paint &amp; Carpet Logo ]</div>
+        <div style="font-family:Arial,sans-serif;font-size:clamp(8.5px,1.1vw,11px);color:#aaa;letter-spacing:0.06em;margin-bottom:4px;">paintandcarpet.com</div>
+        <div style="font-family:Georgia,serif;font-size:clamp(10px,1.4vw,13px);font-weight:700;color:#111;margin-bottom:5px;">The Finishing Specialists</div>
+        <div style="font-family:Arial,sans-serif;font-size:clamp(9px,1.2vw,11.5px);color:#555;line-height:1.65;">Interior paint, carpet, LED relamping, and tile installation — all scheduled after hours. Backed by Class A insurance, a green materials commitment, and a local DFW team with national reach.</div>
+      </div>
+
+      <div style="border:0.5px solid #e0e0e0;padding:8px 10px;">
+        <div style="width:100%;height:56px;background:#efefef;border:0.5px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:7px;color:#bbb;font-family:Arial,sans-serif;letter-spacing:0.06em;margin-bottom:7px;">[ Office Boy Logo ]</div>
+        <div style="font-family:Arial,sans-serif;font-size:clamp(8.5px,1.1vw,11px);color:#aaa;letter-spacing:0.06em;margin-bottom:4px;">officeboy.com</div>
+        <div style="font-family:Georgia,serif;font-size:clamp(10px,1.4vw,13px);font-weight:700;color:#111;margin-bottom:5px;">The On-Call Unit</div>
+        <div style="font-family:Arial,sans-serif;font-size:clamp(9px,1.2vw,11.5px);color:#555;line-height:1.65;">No minimums. No notice. Today if possible. The on-demand resource for every task that falls outside every other scope. When something needs to happen today and nobody else can make it work.</div>
+      </div>
+
+    </div>
+
+        <div class="liaison-block">
+      <div class="liaison-header">
+        <span class="liaison-title">Building Liaison Protocol</span>
+        <span class="liaison-sub">Property Management Operations &nbsp;/&nbsp; Active</span>
+      </div>
+      <div class="liaison-brief">
+        When your tenants&#x2019; leases expire, the real work begins. <strong>Improperly managed moves damage common areas, overload freight elevators, and create liability that falls back on you.</strong> Move Solutions has forty years of experience working directly with property management teams to ensure smooth transitions that protect you, your building, and your reputation.
+      </div>
+      <div class="liaison-2col">
+        <div class="liaison-cap"><div class="liaison-cap-name">Building Protection</div><div class="liaison-cap-desc">Common areas protected throughout every move.</div></div>
+        <div class="liaison-cap"><div class="liaison-cap-name">Verified Insurance</div><div class="liaison-cap-desc">$5M liability on file. Covered from arrival.</div></div>
+        <div class="liaison-cap"><div class="liaison-cap-name">Inspection Documentation</div><div class="liaison-cap-desc">Pre- and post-move digital records. No disputes.</div></div>
+        <div class="liaison-cap"><div class="liaison-cap-name">After-Hours Operations</div><div class="liaison-cap-desc">Minimal disruption to remaining tenants.</div></div>
+        <div class="liaison-cap"><div class="liaison-cap-name">Single Point of Contact</div><div class="liaison-cap-desc">One dedicated PM liaison. One call, resolved.</div></div>
+        <div class="liaison-cap"><div class="liaison-cap-name">Low Voltage Removal</div><div class="liaison-cap-desc">No abandoned cables. No code violations.</div></div>
+        <div class="liaison-cap"><div class="liaison-cap-name">Security Coordination</div><div class="liaison-cap-desc">Building security managed during all after-hours access.</div></div>
+        <div class="liaison-cap"><div class="liaison-cap-name">Emergency Response</div><div class="liaison-cap-desc">Floods, evictions, damage. We deploy today.</div></div>
+        <div class="liaison-cap"><div class="liaison-cap-name">Clear-Out Services</div><div class="liaison-cap-desc">Tenant left-behinds removed cleanly and fast.</div></div>
+        <div class="liaison-cap"><div class="liaison-cap-name">Furniture Repair</div><div class="liaison-cap-desc">Touch-ups and repairs for spaces and common areas.</div></div>
+      </div>
+    </div>
+
+    <div class="back-footer">
+      <div style="text-align:center;font-family:'IBM Plex Mono',monospace;font-size:clamp(11px,1.5vw,14px);font-weight:600;color:#555;letter-spacing:0.1em;margin-bottom:6px;">[ TOS Logo ]</div>
+      <div class="back-footer-contact">totalofficesolutions.com &nbsp;&nbsp; 1.800.668.3752</div>
+      <div class="back-footer-stamp">End of File &nbsp;/&nbsp; TOS Dossier &nbsp;/&nbsp; All Units Active</div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+</div>
+</body>
+</html>

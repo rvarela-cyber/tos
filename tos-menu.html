@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The "Anywhere" Menu — TOS Wireframe v8</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #c0c0c0; font-family: Georgia, "Times New Roman", serif; padding: 32px 24px; }
+.wrap { display: flex; flex-direction: column; gap: 48px; max-width: 900px; margin: 0 auto; }
+.pl { font-size: 11px; font-weight: 700; color: #666; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; font-family: Arial, sans-serif; }
+.page { width: 100%; aspect-ratio: 8.5 / 11; background: #faf8f4; border: 0.5px solid #bbb; overflow: hidden; display: flex; flex-direction: column; }
+.pi { padding: 5% 6%; display: flex; flex-direction: column; height: 100%; }
+
+/* COVER */
+.cv-top { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 4%; }
+.cv-eyebrow { text-align: center; font-size: clamp(8px, 1.1vw, 10px); letter-spacing: 0.3em; color: #aaa; text-transform: uppercase; margin-bottom: 1.5%; font-family: Arial, sans-serif; }
+.cv-title { text-align: center; border-bottom: 1px solid #222; padding-bottom: 2%; margin-bottom: 2%; }
+.cv-title h1 { font-size: clamp(22px, 4vw, 36px); font-weight: 400; letter-spacing: 0.12em; color: #111; line-height: 1.15; font-style: italic; }
+.cv-title h1 em { font-style: normal; font-weight: 700; letter-spacing: 0.2em; }
+.cv-quote { font-size: clamp(9px, 1.3vw, 12px); color: #444; line-height: 1.85; text-align: center; margin-bottom: 2%; padding: 0 6%; font-style: italic; }
+.cv-rule { border: none; border-top: 1px solid #ccc; margin: 0 0 2% 0; }
+.cv-tag { text-align: center; font-size: clamp(8px, 1.05vw, 10px); color: #888; letter-spacing: 0.12em; font-family: Arial, sans-serif; }
+.cv-tag strong { display: block; font-size: clamp(10px, 1.5vw, 13px); color: #111; font-weight: 400; font-style: italic; margin-bottom: 4px; font-family: Georgia, serif; }
+.cv-bottom { flex-shrink: 0; border-top: 1px solid #333; padding-top: 2.5%; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.logo-tos { font-size: clamp(9px, 1.3vw, 12px); color: #333; letter-spacing: 0.2em; text-transform: uppercase; font-family: Arial, sans-serif; }
+.logo-row { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
+.logo-u { font-size: clamp(7px, 0.9vw, 9px); color: #888; letter-spacing: 0.08em; font-family: Arial, sans-serif; }
+.logo-u:not(:last-child)::after { content: " |"; color: #ccc; }
+
+/* INSIDE PAGES */
+.menu-header { text-align: center; border-bottom: 2px solid #222; padding-bottom: 1.2%; margin-bottom: 2%; flex-shrink: 0; }
+.menu-header h2 { font-size: clamp(15px, 2.2vw, 19px); font-weight: 400; letter-spacing: 0.25em; color: #111; text-transform: uppercase; font-style: italic; }
+.menu-header p { font-size: clamp(8px, 1.1vw, 10px); color: #aaa; letter-spacing: 0.1em; margin-top: 3px; font-family: Arial, sans-serif; text-transform: uppercase; }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 0 5%; flex: 1; min-height: 0; }
+.col { display: flex; flex-direction: column; }
+.col-div { padding-left: 5%; border-left: 0.5px solid #ddd; }
+
+.menu-item { margin-bottom: 2%; padding-bottom: 2%; border-bottom: 0.5px solid #ddd; }
+.menu-item:last-child { border-bottom: none; margin-bottom: 0; }
+
+.item-header { display: flex; align-items: baseline; gap: 6px; margin-bottom: 4px; }
+.item-name { font-size: clamp(12px, 1.8vw, 16px); font-weight: 700; color: #111; font-family: Arial, sans-serif; white-space: nowrap; }
+.item-divider { flex: 1; border-bottom: 0.5px dotted #bbb; position: relative; top: -3px; min-width: 12px; }
+.item-unit { font-size: clamp(9px, 1.2vw, 11px); color: #aaa; font-style: italic; font-family: Georgia, serif; white-space: nowrap; }
+.item-intro { font-size: clamp(10px, 1.4vw, 12px); color: #444; line-height: 1.65; font-style: italic; margin-bottom: 6px; }
+
+.svc-list { display: flex; flex-direction: column; }
+.svc { padding: 3px 0; border-top: 0.5px solid #eeebe5; }
+.svc-name { font-size: clamp(10px, 1.4vw, 13px); font-weight: 700; color: #222; font-family: Arial, sans-serif; line-height: 1.3; }
+.svc-desc { font-size: clamp(9px, 1.25vw, 11.5px); color: #888; line-height: 1.45; font-family: Arial, sans-serif; }
+
+/* PM BLOCK */
+.pm-block { background: #1a1a1a; padding: 2% 2.5%; flex-shrink: 0; margin-bottom: 2%; }
+.pm-title-row { border-bottom: 0.5px solid #444; padding-bottom: 0.8%; margin-bottom: 1%; }
+.pm-title { font-size: clamp(11px, 1.75vw, 15px); font-weight: 400; color: #fff; letter-spacing: 0.18em; text-transform: uppercase; font-style: italic; }
+.pm-sub { font-size: clamp(7.5px, 1vw, 9px); color: #666; font-style: italic; margin-left: 8px; }
+.pm-body { font-size: clamp(10px, 1.3vw, 12px); color: #bbb; line-height: 1.65; margin-bottom: 1.2%; }
+.pm-body strong { color: #fff; font-weight: 700; }
+.pm-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 0 4%; }
+.pm-svc { border-top: 0.5px solid #333; padding: 3px 0; }
+.pm-svc-name { font-size: clamp(9.5px, 1.3vw, 12px); font-weight: 700; color: #ddd; font-family: Arial, sans-serif; line-height: 1.3; margin-bottom: 1px; }
+.pm-svc-desc { font-size: clamp(8.5px, 1.1vw, 10.5px); color: #888; line-height: 1.4; font-family: Arial, sans-serif; }
+
+/* BACK */
+.back-header { text-align: center; border-bottom: 2px solid #222; padding-bottom: 1.2%; margin-bottom: 1.6%; flex-shrink: 0; }
+.back-header h2 { font-size: clamp(13px, 2vw, 17px); font-weight: 400; letter-spacing: 0.25em; color: #111; text-transform: uppercase; font-style: italic; }
+.back-header p { font-size: clamp(8px, 1.05vw, 10px); color: #aaa; letter-spacing: 0.1em; margin-top: 3px; font-family: Arial, sans-serif; }
+.back-intro { font-size: clamp(10px, 1.35vw, 13px); color: #555; line-height: 1.7; font-style: italic; text-align: center; margin-bottom: 1.8%; padding: 0 5%; flex-shrink: 0; }
+.back-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 0 5%; margin-bottom: 1.8%; }
+.back-item { padding-bottom: 1.5%; margin-bottom: 1.5%; border-bottom: 0.5px solid #ddd; }
+.back-item:last-child { border-bottom: none; margin-bottom: 0; }
+.back-item-name { font-size: clamp(12px, 1.7vw, 15px); font-weight: 700; color: #111; font-family: Arial, sans-serif; margin-bottom: 2px; }
+.back-item-sub { font-size: clamp(7.5px, 1vw, 9.5px); color: #888; font-style: italic; margin-bottom: 4px; }
+.back-item-body { font-size: clamp(10px, 1.3vw, 12px); color: #555; line-height: 1.55; }
+.back-footer { border-top: 1px solid #333; padding-top: 1.6%; margin-top: auto; text-align: center; flex-shrink: 0; }
+.back-footer-name { font-size: clamp(9px, 1.3vw, 12px); color: #222; letter-spacing: 0.2em; text-transform: uppercase; font-family: Arial, sans-serif; margin-bottom: 4px; }
+.back-footer-units { font-size: clamp(7px, 0.9vw, 9px); color: #888; letter-spacing: 0.06em; margin-bottom: 4px; line-height: 1.8; font-family: Arial, sans-serif; }
+.back-footer-contact { font-size: clamp(8.5px, 1.15vw, 11px); font-weight: 700; color: #222; font-family: Arial, sans-serif; }
+.back-closer { font-size: clamp(7.5px, 1vw, 9.5px); color: #aaa; font-style: italic; margin-top: 4px; }
+
+.editorial { padding-left: 5%; border-left: 0.5px solid #ddd; display: flex; flex-direction: column; }
+.ed-block { padding-bottom: 4%; margin-bottom: 4%; border-bottom: 0.5px solid #eee; }
+.ed-block:last-child { border-bottom: none; margin-bottom: 0; }
+.ed-title { font-size: clamp(12px, 1.7vw, 15px); font-weight: 400; color: #111; font-style: italic; margin-bottom: 6px; }
+.ed-body { font-size: clamp(10px, 1.35vw, 13px); color: #555; line-height: 1.8; font-style: italic; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- PAGE 1 COVER — centered vertically -->
+<div>
+<div class="pl">Page 1 — Cover</div>
+<div class="page"><div class="pi">
+  <div class="cv-top">
+    <div class="cv-eyebrow">Total Office Solutions &mdash; A Complete Services Guide</div>
+    <div class="cv-title"><h1>The <em>&#x201C;Anywhere&#x201D;</em> Menu</h1></div>
+    <div class="cv-quote">Every great establishment has a house rule. Ours is simple: we don&#x2019;t serve anything we aren&#x2019;t proud of. Total Office Solutions and its family of companies have been setting the commercial workspace table for forty years, moving offices, furnishing floors, running cable, finishing spaces, and showing up the next day.</div>
+    <hr class="cv-rule">
+    <div class="cv-tag">
+      <strong>Your office is ready. We&#x2019;ve been expecting you.</strong>
+      We Are 51% Woman Owned, 48% Veteran Owned, 1% Divine Intervention Owned.
+    </div>
+  </div>
+  <div style="flex:1;"></div>
+  <div class="cv-bottom">
+    <div class="logo-tos">Total Office Solutions &amp; Its Family of Companies</div>
+    <div class="logo-row">
+      <span class="logo-u">Move Solutions</span>
+      <span class="logo-u">TechTeam Solutions</span>
+      <span class="logo-u">Office Furniture Plus</span>
+      <span class="logo-u">Corporate Source</span>
+      <span class="logo-u">Paint &amp; Carpet</span>
+      <span class="logo-u">Office Boy</span>
+    </div>
+  </div>
+</div></div>
+</div>
+
+<!-- PAGE 2 INSIDE LEFT -->
+<div>
+<div class="pl">Page 2 — Inside Left</div>
+<div class="page"><div class="pi">
+  <div class="menu-header">
+    <h2>The Full Table</h2>
+    
+  </div>
+  <div class="two-col">
+    <div class="col">
+      <div class="menu-item">
+        <div class="item-header"><span class="item-name">A Word From The Host</span><span class="item-divider"></span><span class="item-unit">Total Office Solutions</span></div>
+        <div class="item-intro">We don&#x2019;t believe in one-size-fits-all. We believe in the right solution, at the right time, by the right team. Across eight specialized companies and one national network, TOS exists to make your next workspace transition feel less like a project and more like a privilege.</div>
+        <div style="font-size:clamp(7.5px,1vw,9px);color:#aaa;font-style:italic;font-family:Arial,sans-serif;">51% Woman Owned &bull; 48% Veteran Owned &bull; The &#x201C;Anywhere&#x201D; Footprint</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-header"><span class="item-name">The Opening</span><span class="item-divider"></span><span class="item-unit">Move Solutions (MSL)</span></div>
+        <div class="item-intro">Every great evening begins with arrival. Move Solutions gets your business from where it is to where it&#x2019;s going, on schedule and on budget. We&#x2019;ve moved everything from a single suite to an entire campus. The room will be ready when you get there.</div>
+        <div class="svc-list">
+          <div class="svc"><div class="svc-name">Schedule</div><div class="svc-desc">Timelines, crews, and logistics locked before anything moves.</div></div>
+          <div class="svc"><div class="svc-name">Office Moving</div><div class="svc-desc">Commercial relocation at scale. Precision, protection, accountability.</div></div>
+          <div class="svc"><div class="svc-name">MAC</div><div class="svc-desc">Moves, Adds, and Changes handled on an ongoing basis. We shift when your business shifts.</div></div>
+          <div class="svc"><div class="svc-name">Storage</div><div class="svc-desc">Assets stored and tracked in real time through our national OMA network.</div></div>
+          <div class="svc"><div class="svc-name">Decommission</div><div class="svc-desc">Lease-compliant space return from start to finish. Every item removed, every surface restored.</div></div>
+          <div class="svc"><div class="svc-name">Liquidation</div><div class="svc-desc">Surplus assets assessed, inventoried, photographed, and quoted. Walk away clean and compensated.</div></div>
+        </div>
+      </div>
+      <div class="menu-item" style="border-bottom:none;margin-bottom:0;">
+        <div class="item-header"><span class="item-name">Wired for the Evening</span><span class="item-divider"></span><span class="item-unit">TechTeam Solutions (TTS)</span></div>
+        <div class="item-intro">A great room runs on invisible infrastructure. TechTeam handles everything from the first cable pulled to the last device confirmed online. Nobody notices when it&#x2019;s done right. And with TechTeam, it&#x2019;s always done right.</div>
+        <div class="svc-list">
+          <div class="svc"><div class="svc-name">Disconnect / Reconnect</div><div class="svc-desc">Every workstation disconnected, relocated, and back online Monday morning.</div></div>
+          <div class="svc"><div class="svc-name">IT Moving Services</div><div class="svc-desc">We supplement your IT team. Equipment protected, systems back online fast.</div></div>
+          <div class="svc"><div class="svc-name">Server Migration</div><div class="svc-desc">Critical servers relocated safely and without interruption to operations.</div></div>
+          <div class="svc"><div class="svc-name">Low Voltage Cabling</div><div class="svc-desc">Installation and removal. Clean, documented, code compliant.</div></div>
+          <div class="svc"><div class="svc-name">IT Rack Setup</div><div class="svc-desc">Server racks assembled, organized, and configured before you arrive.</div></div>
+          <div class="svc"><div class="svc-name">IT Inventory</div><div class="svc-desc">All IT assets tagged, tracked, and documented through every stage of the move.</div></div>
+          <div class="svc"><div class="svc-name">Cable Organizing</div><div class="svc-desc">Workstation cables organized, labeled, and managed for clean installation.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="col col-div">
+      <div class="menu-item">
+        <div class="item-header"><span class="item-name">Furnished &amp; Seated</span><span class="item-divider"></span><span class="item-unit">Office Furniture Plus (OFP)</span></div>
+        <div class="item-intro">The right chair at the right table changes everything. OFP brings over 200 manufacturers to the conversation with new and commercial-grade pre-owned options that make quality accessible at every budget.</div>
+        <div class="svc-list">
+          <div class="svc"><div class="svc-name">New Furniture</div><div class="svc-desc">Over 200 manufacturers, every category, every price point, specified to your space.</div></div>
+          <div class="svc"><div class="svc-name">Pre-Owned</div><div class="svc-desc">ANSI/BIFMA-compliant. Performs like new at a fraction of the cost.</div></div>
+          <div class="svc"><div class="svc-name">Blend</div><div class="svc-desc">Mix what you already own with what you need. We assess your existing assets and integrate new pieces to maximize your budget without starting from scratch.</div></div>
+          <div class="svc"><div class="svc-name">Space Planning</div><div class="svc-desc">How your people work and collaborate, planned with intention.</div></div>
+          <div class="svc"><div class="svc-name">Installation</div><div class="svc-desc">Delivered, assembled, placed, and perfect every time.</div></div>
+          <div class="svc"><div class="svc-name">Furniture Services Now</div><div class="svc-desc">Cleaning, repair, touch-up, and reupholstery. Keep existing assets performing and looking their best.</div></div>
+          <div class="svc"><div class="svc-name">Liquidation &amp; Decommission</div><div class="svc-desc">Start-to-finish surplus asset removal. Inventory, valuation, and lease-compliant space return.</div></div>
+          <div class="svc"><div class="svc-name">National Delivery &amp; Installation</div><div class="svc-desc">We ship, receive, and install nationally. Your project managed from DFW to wherever you need us.</div></div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="item-header"><span class="item-name">The Curator&#x2019;s Selection</span><span class="item-divider"></span><span class="item-unit">Corporate Source (CSL)</span></div>
+        <div class="item-intro">Some clients require more than furniture &mdash; they require specification. Corporate Source works at the intersection of design intent and contract-grade execution for clients who know their environment says everything about who they are.</div>
+        <div class="svc-list">
+          <div class="svc"><div class="svc-name">Contract Spec</div><div class="svc-desc">Right product, right manufacturer, right contract price &mdash; navigated for you.</div></div>
+          <div class="svc"><div class="svc-name">Design Coordination</div><div class="svc-desc">We work with your architect so what gets specified is what gets built.</div></div>
+          <div class="svc"><div class="svc-name">Project Furnishing</div><div class="svc-desc">Large-scale and phased projects managed from first spec to final walkthrough.</div></div>
+          <div class="svc"><div class="svc-name">Budget Development</div><div class="svc-desc">Detailed budget substantiation aligned to your project scope, timeline, and priorities.</div></div>
+          <div class="svc"><div class="svc-name">Furniture Specs &amp; Finishes</div><div class="svc-desc">Full specification support — materials, finishes, fabrics, and hardware selected with precision.</div></div>
+          <div class="svc"><div class="svc-name">Commissioning &amp; Financing</div><div class="svc-desc">Project commissioning plus flexible financing options to align delivery with your cash flow.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</div>
+
+<!-- PAGE 3 — Inside Right -->
+<div>
+<div class="pl">Page 3 — Inside Right</div>
+<div class="page"><div class="pi">
+  <div class="menu-header">
+    <h2>The Full Selection</h2>
+  </div>
+  <div class="two-col" style="flex:1;min-height:0;">
+
+    <div class="col">
+      <div class="menu-item">
+        <div class="item-header"><span class="item-name">The Grand Provision</span><span class="item-divider"></span><span class="item-unit">FF&amp;E / OS&amp;E</span></div>
+        <div class="item-intro">When the scale demands full logistics across an entire hospitality property or healthcare facility without missing a single delivery window, this is where TOS earns its reputation.</div>
+        <div class="svc-list">
+          <div class="svc"><div class="svc-name">FF&amp;E</div><div class="svc-desc">Full programs for hospitality, healthcare, and multi-site corporate accounts.</div></div>
+          <div class="svc"><div class="svc-name">OS&amp;E</div><div class="svc-desc">Operating Supplies and Equipment sourced alongside FF&amp;E from one partner.</div></div>
+          <div class="svc"><div class="svc-name">BrassTacks Tech-Enabled Moving</div><div class="svc-desc">Real-time tracking and inventory visibility at every stage of the delivery chain.</div></div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="item-header"><span class="item-name">Coat &amp; Carpet</span><span class="item-divider"></span><span class="item-unit">Paint &amp; Carpet</span></div>
+        <div class="item-intro">The last thing done is the first thing felt. Paint and carpet are what your people walk on, look at, and touch every day. When we hand over the space it doesn&#x2019;t just work &mdash; it looks like it was always meant to be exactly this way.</div>
+        <div class="svc-list">
+          <div class="svc"><div class="svc-name">Interior Paint</div><div class="svc-desc">Color consultation included. Surfaces prepped and applied to commercial standard.</div></div>
+          <div class="svc"><div class="svc-name">Carpet</div><div class="svc-desc">Old carpeting removed, precisely installed, post-project cleaning scheduled.</div></div>
+          <div class="svc"><div class="svc-name">Relamping / LED Upgrades</div><div class="svc-desc">Energy-efficient LEDs in. Reduces costs and improves the space immediately.</div></div>
+        </div>
+      </div>
+      <div class="menu-item" style="border-bottom:none;margin-bottom:0;">
+        <div class="item-header"><span class="item-name">Walk-Ins Welcome</span><span class="item-divider"></span><span class="item-unit">Office Boy</span></div>
+        <div class="item-intro">No reservation required. No minimum order. No notice needed &mdash; today if possible. Whatever you need, whenever you need it. The table is always open.</div>
+        <div class="svc-list">
+          <div class="svc"><div class="svc-name">Small Moves</div><div class="svc-desc">One desk or one floor. No job too small and no timeline too tight.</div></div>
+          <div class="svc"><div class="svc-name">Quick Tasks</div><div class="svc-desc">Outside every other scope. We take the call and get it done.</div></div>
+          <div class="svc"><div class="svc-name">Same-Day Service</div><div class="svc-desc">When it needs to happen today, we make it happen today. No excuses.</div></div>
+          <div class="svc"><div class="svc-name">Delivery</div><div class="svc-desc">Single pieces delivered and placed with no minimum order requirements.</div></div>
+          <div class="svc"><div class="svc-name">Wall Hangings &amp; Art Installation</div><div class="svc-desc">Artwork, whiteboards, monitors, and shelving hung professionally and exactly where you need them.</div></div>
+          <div class="svc"><div class="svc-name">Furniture Removal</div><div class="svc-desc">Items removed cleanly and efficiently. No minimums, no scheduling headaches.</div></div>
+          <div class="svc"><div class="svc-name">Ergonomic Adjustments</div><div class="svc-desc">Workstations adjusted and configured for proper ergonomic setup. Same day if possible.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col editorial">
+      <div class="ed-block">
+        <div class="ed-title">The &#x201C;Anywhere&#x201D; Promise</div>
+        <div class="ed-body">Every company in the TOS family operates under the same principle: show up, do the work, do it right, and make the client&#x2019;s next chapter better than the last. That&#x2019;s not a tagline. It&#x2019;s forty years of how we operate.</div>
+      </div>
+      <div class="ed-block">
+        <div class="ed-title">Woman Owned. Women-Led. Veteran Owned.</div>
+        <div class="ed-body">The values that come with both are the same ones that built this company and the same ones that show up on every job site, every day.</div>
+      </div>
+      <div class="ed-block">
+        <div class="ed-title">The OMA Network</div>
+        <div class="ed-body">As founding members of the Office Moving Alliance, Move Solutions delivers anywhere in the country and around the world with the same standards and accountability you get locally.</div>
+      </div>
+      <div class="ed-block">
+        <div class="ed-title">One Roof. Every Service.</div>
+        <div class="ed-body">Your time is too valuable to manage a dozen moving parts. TOS brings every service under one roof so your team can focus on the business while we handle the transition.</div>
+      </div>
+      <div class="ed-block">
+        <div class="ed-title">The Standard Is Non-Negotiable</div>
+        <div class="ed-body">Every crew is insured to Class A carrier standards. Every move is documented. Every job has a named account manager who answers when you call. Accountability isn&#x2019;t a department at TOS. It&#x2019;s the operating system.</div>
+      </div>
+      <div class="ed-block">
+        <div class="ed-title">Just Invest in a Meeting</div>
+        <div class="ed-body">The best way to understand what TOS can do is to sit down with us. No hard sell. No pitch deck. Just a conversation about where you are, where you&#x2019;re going, and how we can help you get there.</div>
+      </div>
+      <div class="ed-block" style="border-bottom:none;margin-bottom:0;">
+        <div class="ed-title">The Credentials That Count</div>
+        <div class="ed-body">GSA Schedule Holder. WBENC Certified Women&#x2019;s Business Enterprise. CBRE Fusion 2.0 Preferred Supplier. BOMA International Affiliate Member of the Year. IREM Industry Partner of the Year. These are the organizations that represent the clients who trust us most — and their endorsement only comes from delivering, consistently.</div>
+      </div>
+    </div>
+
+  </div>
+</div></div>
+</div>
+
+<!-- PAGE 4 BACK — After Hours + PM Table -->
+<div>
+<div class="pl">Page 4 — Back Cover</div>
+<div class="page"><div class="pi">
+
+  <!-- PM BLOCK at top -->
+  <div class="pm-block" style="margin-bottom:2%;">
+    <div class="pm-title-row">
+      <span class="pm-title">The Property Manager&#x2019;s Table</span><span class="pm-sub">Reserved. Every evening. Without exception.</span>
+    </div>
+    <div class="pm-body">When your tenants&#x2019; leases expire, the real work begins. <strong>Improperly managed moves damage common areas, overload freight elevators, and create liability that falls back on you.</strong> Move Solutions has forty years of experience working directly with property management teams to ensure smooth transitions that protect you, your building, and your reputation.</div>
+    <div class="pm-2col">
+      <div class="pm-svc"><div class="pm-svc-name">Building Protection</div><div class="pm-svc-desc">Common areas protected throughout every move.</div></div>
+      <div class="pm-svc"><div class="pm-svc-name">Verified Insurance</div><div class="pm-svc-desc">$5M liability on file. Covered from arrival.</div></div>
+      <div class="pm-svc"><div class="pm-svc-name">Inspection Documentation</div><div class="pm-svc-desc">Pre- and post-move digital records. No disputes.</div></div>
+      <div class="pm-svc"><div class="pm-svc-name">After-Hours Moving</div><div class="pm-svc-desc">Minimal disruption to remaining tenants.</div></div>
+      <div class="pm-svc"><div class="pm-svc-name">Single Point of Contact</div><div class="pm-svc-desc">One dedicated PM liaison. One call, done.</div></div>
+      <div class="pm-svc"><div class="pm-svc-name">Low Voltage Removal</div><div class="pm-svc-desc">No abandoned cables, no code violations.</div></div>
+      <div class="pm-svc"><div class="pm-svc-name">Security Coordination</div><div class="pm-svc-desc">Building security managed during all access.</div></div>
+      <div class="pm-svc"><div class="pm-svc-name">Emergency Response</div><div class="pm-svc-desc">Floods, evictions, damage. We respond today.</div></div>
+      <div class="pm-svc"><div class="pm-svc-name">Clear-Out Services</div><div class="pm-svc-desc">Tenant left-behinds removed cleanly and fast.</div></div>
+      <div class="pm-svc"><div class="pm-svc-name">Furniture Repair</div><div class="pm-svc-desc">Touch-ups and repairs for spaces and common areas.</div></div>
+    </div>
+  </div>
+
+  <!-- COMPANY PROFILES — 3 col grid -->
+  <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2% 3%;margin-bottom:1.8%;flex-shrink:0;">
+
+    <div style="border:0.5px solid #e0e0e0;padding:8px 10px;">
+      <div style="width:100%;height:56px;background:#efefef;border:0.5px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:7px;color:#bbb;font-family:Arial,sans-serif;letter-spacing:0.06em;margin-bottom:7px;">[ Move Solutions Logo ]</div>
+      <div style="font-family:Arial,sans-serif;font-size:clamp(8.5px,1.1vw,11px);color:#aaa;letter-spacing:0.06em;margin-bottom:4px;">movesolutions.com</div>
+      <div style="font-family:Georgia,serif;font-size:clamp(10px,1.4vw,13px);font-weight:700;color:#111;margin-bottom:5px;">The Field Operations Unit</div>
+      <div style="font-family:Arial,sans-serif;font-size:clamp(9px,1.2vw,11.5px);color:#555;line-height:1.65;">For forty years, Move Solutions has been the most trusted name in commercial office relocation. A founding member of the Office Moving Alliance, one of the five largest office moving companies in the United States.</div>
+    </div>
+
+    <div style="border:0.5px solid #e0e0e0;padding:8px 10px;">
+      <div style="width:100%;height:56px;background:#efefef;border:0.5px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:7px;color:#bbb;font-family:Arial,sans-serif;letter-spacing:0.06em;margin-bottom:7px;">[ Office Furniture Plus Logo ]</div>
+      <div style="font-family:Arial,sans-serif;font-size:clamp(8.5px,1.1vw,11px);color:#aaa;letter-spacing:0.06em;margin-bottom:4px;">officefurnitureplus.com</div>
+      <div style="font-family:Georgia,serif;font-size:clamp(10px,1.4vw,13px);font-weight:700;color:#111;margin-bottom:5px;">The Furniture Authority</div>
+      <div style="font-family:Arial,sans-serif;font-size:clamp(9px,1.2vw,11.5px);color:#555;line-height:1.65;">The leader in new and pre-owned commercial office furniture. Over 220 manufacturer relationships, a Blend program that maximizes your existing assets, and lifetime maintenance support.</div>
+    </div>
+
+    <div style="border:0.5px solid #e0e0e0;padding:8px 10px;">
+      <div style="width:100%;height:56px;background:#efefef;border:0.5px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:7px;color:#bbb;font-family:Arial,sans-serif;letter-spacing:0.06em;margin-bottom:7px;">[ TechTeam Solutions Logo ]</div>
+      <div style="font-family:Arial,sans-serif;font-size:clamp(8.5px,1.1vw,11px);color:#aaa;letter-spacing:0.06em;margin-bottom:4px;">techteamsol.com</div>
+      <div style="font-family:Georgia,serif;font-size:clamp(10px,1.4vw,13px);font-weight:700;color:#111;margin-bottom:5px;">The Technology Division</div>
+      <div style="font-family:Arial,sans-serif;font-size:clamp(9px,1.2vw,11.5px);color:#555;line-height:1.65;">When you move, your technology moves with you. TechTeam is the one-stop resource for IT relocation, cabling, server migration, and technology infrastructure. Your team is back online Monday morning.</div>
+    </div>
+
+    <div style="border:0.5px solid #e0e0e0;padding:8px 10px;">
+      <div style="width:100%;height:56px;background:#efefef;border:0.5px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:7px;color:#bbb;font-family:Arial,sans-serif;letter-spacing:0.06em;margin-bottom:7px;">[ Corporate Source Logo ]</div>
+      <div style="font-family:Arial,sans-serif;font-size:clamp(8.5px,1.1vw,11px);color:#aaa;letter-spacing:0.06em;margin-bottom:4px;">corporatesource.com</div>
+      <div style="font-family:Georgia,serif;font-size:clamp(10px,1.4vw,13px);font-weight:700;color:#111;margin-bottom:5px;">The Contract Division</div>
+      <div style="font-family:Arial,sans-serif;font-size:clamp(9px,1.2vw,11.5px);color:#555;line-height:1.65;">Office environments that inspire and assure. Corporate Source delivers contract-grade furnishings with end-to-end design support — from consultation and specification through installation and commissioning.</div>
+    </div>
+
+    <div style="border:0.5px solid #e0e0e0;padding:8px 10px;">
+      <div style="width:100%;height:56px;background:#efefef;border:0.5px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:7px;color:#bbb;font-family:Arial,sans-serif;letter-spacing:0.06em;margin-bottom:7px;">[ Paint &amp; Carpet Logo ]</div>
+      <div style="font-family:Arial,sans-serif;font-size:clamp(8.5px,1.1vw,11px);color:#aaa;letter-spacing:0.06em;margin-bottom:4px;">paintandcarpet.com</div>
+      <div style="font-family:Georgia,serif;font-size:clamp(10px,1.4vw,13px);font-weight:700;color:#111;margin-bottom:5px;">The Finishing Specialists</div>
+      <div style="font-family:Arial,sans-serif;font-size:clamp(9px,1.2vw,11.5px);color:#555;line-height:1.65;">Interior paint, carpet, LED relamping, and tile installation — all scheduled after hours to eliminate disruption. Backed by Class A insurance, a green materials commitment, and a local DFW team with national reach.</div>
+    </div>
+
+    <div style="border:0.5px solid #e0e0e0;padding:8px 10px;">
+      <div style="width:100%;height:56px;background:#efefef;border:0.5px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:7px;color:#bbb;font-family:Arial,sans-serif;letter-spacing:0.06em;margin-bottom:7px;">[ Office Boy Logo ]</div>
+      <div style="font-family:Arial,sans-serif;font-size:clamp(8.5px,1.1vw,11px);color:#aaa;letter-spacing:0.06em;margin-bottom:4px;">officeboy.com</div>
+      <div style="font-family:Georgia,serif;font-size:clamp(10px,1.4vw,13px);font-weight:700;color:#111;margin-bottom:5px;">The On-Call Unit</div>
+      <div style="font-family:Arial,sans-serif;font-size:clamp(9px,1.2vw,11.5px);color:#555;line-height:1.65;">No minimums. No notice. Today if possible. Office Boy is the on-demand resource for every task that falls outside every other scope. When something needs to happen today and nobody else can make it work.</div>
+    </div>
+
+  </div>
+
+  <div class="bf" style="margin-top:6%;">
+    <div class="bfl" style="text-align:center;display:flex;justify-content:center;font-size:clamp(11px,1.5vw,14px);font-weight:600;color:#555;letter-spacing:0.1em;">[ TOS Logo ]</div>
+    <div class="bfc" style="text-align:center;font-size:clamp(9px,1.2vw,12px);">totalofficesolutions.com &nbsp;&nbsp; 1.800.668.3752</div>
+    <div class="bcl" style="text-align:center;font-size:clamp(9px,1.2vw,12px);">Reservations always accepted.</div>
+  </div>
+
+</div></div>
+</div>
+
+</div>
+</body>
+</html>
