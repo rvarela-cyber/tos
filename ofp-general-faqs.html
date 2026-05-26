@@ -28,11 +28,14 @@ body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink
 .util-btns{display:flex;gap:10px;align-items:center}
 .btn-quote{background:var(--grn);color:#fff;font-size:14px;font-weight:600;letter-spacing:.06em;padding:13px 26px;border-radius:3px;text-decoration:none;text-transform:uppercase}
 .btn-meet{background:#fff;color:var(--grn);border:2px solid var(--grn);font-size:14px;font-weight:700;letter-spacing:.06em;padding:11px 24px;border-radius:3px;text-decoration:none;text-transform:uppercase}
-.nav{display:flex;align-items:center;justify-content:space-between;padding:0 30px;border-bottom:3px solid var(--ink)}
-.nav-links{display:flex;gap:6px}
-.nav-links a{font-size:14px;font-weight:600;color:#333;text-decoration:none;padding:15px 16px;border-bottom:3px solid transparent;margin-bottom:-3px}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:0 22px;border-bottom:3px solid var(--ink);flex-wrap:nowrap;gap:14px}
+.nav-links{display:flex;gap:2px;flex-wrap:nowrap}
+.nav-links a{font-size:13px;font-weight:600;color:#333;text-decoration:none;padding:15px 10px;letter-spacing:.01em;border-bottom:3px solid transparent;margin-bottom:-3px;transition:color .15s,border-color .15s;white-space:nowrap}
 .nav-links a:hover,.nav-links a.active{color:var(--grn);border-bottom-color:var(--grn)}
-.nav-cart svg{width:22px;height:22px;stroke:var(--ink);fill:none;stroke-width:1.8}
+.nav-actions{display:flex;align-items:center;gap:18px;flex-shrink:0}
+.nav-action,.nav-cart{display:flex;align-items:center;gap:6px;color:var(--ink);text-decoration:none;font-size:13px;font-weight:600;cursor:pointer;background:none;border:none;padding:0;font-family:inherit;transition:color .15s;white-space:nowrap}
+.nav-action:hover,.nav-cart:hover{color:var(--grn)}
+.nav-action svg,.nav-cart svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8}
 .crumb{padding:14px 30px;font-size:12px;color:var(--soft);background:#fafaf6;border-bottom:1px solid var(--line)}
 .crumb a{color:var(--mid);text-decoration:none;margin-right:6px}
 .crumb a:hover{color:var(--grn)}
@@ -141,8 +144,15 @@ details.faq-item .faq-body li{margin-bottom:5px}
       <a href="#">About Us</a>
       <a href="#">Contact Us</a>
     </div>
-    <div class="nav-cart">
-      <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+    <div class="nav-actions">
+      <a href="#" class="nav-action" aria-label="Sign In">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Sign In</span>
+      </a>
+      <a href="#" class="nav-cart" aria-label="Cart">
+        <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+        <span>Cart</span>
+      </a>
     </div>
   </nav>
 
