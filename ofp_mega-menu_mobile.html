@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Office Furniture Plus &mdash; Mobile Menu</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --green:#078145;
+  --green-dark:#055d31;
+  --green-light:#eaf5ee;
+  --dark:#1c1c1c;
+  --mid:#555;
+  --light:#9a9a9a;
+  --border:#e2e6df;
+  --bg-gray:#f5f5f3;
+  --white:#fff;
+}
+html,body{height:100%}
+body{font-family:'Source Sans 3',sans-serif;background:#2a2a2a;color:var(--dark);font-size:16px;line-height:1.4;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+
+/* PHONE FRAME */
+.phone{
+  width:390px;height:844px;
+  max-width:100%;max-height:calc(100vh - 40px);
+  background:var(--white);
+  border-radius:48px;
+  border:10px solid #111;
+  box-shadow:0 30px 80px rgba(0,0,0,.5), 0 0 0 2px #333;
+  overflow:hidden;
+  position:relative;
+  display:flex;flex-direction:column;
+}
+.phone::before{
+  content:'';
+  position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:100px;height:18px;
+  background:#111;
+  border-radius:0 0 18px 18px;
+  z-index:200;
+}
+.phone-inner{
+  flex:1;
+  overflow:hidden;
+  position:relative;
+}
+
+/* TOP NAV BAR */
+.topbar{
+  position:absolute;top:0;left:0;right:0;z-index:100;
+  background:var(--white);
+  display:flex;align-items:flex-end;justify-content:space-between;
+  padding:22px 16px 10px;
+  border-bottom:3px solid var(--green);
+  box-shadow:0 1px 4px rgba(0,0,0,.04);
+  height:84px;
+}
+.logo img{height:42px;display:block}
+.topbar-right{display:flex;align-items:center;gap:4px}
+.cart-btn{
+  width:42px;height:42px;
+  display:flex;align-items:center;justify-content:center;
+  text-decoration:none;color:var(--dark);
+  position:relative;
+}
+.cart-btn svg{width:22px;height:22px}
+.hamburger{
+  width:44px;height:44px;
+  background:transparent;border:none;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;
+  cursor:pointer;padding:0;
+}
+.hamburger span{display:block;width:22px;height:2px;background:var(--dark);transition:all .25s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* MENU PANEL */
+.menu{
+  position:absolute;top:84px;left:0;right:0;bottom:0;
+  background:var(--white);
+  overflow-y:auto;
+  z-index:99;
+  transform:translateX(100%);
+  transition:transform .3s ease;
+  -webkit-overflow-scrolling:touch;
+}
+.menu.open{transform:translateX(0)}
+
+/* MAIN LEVEL — visible by default */
+.menu-main{padding:0}
+.menu-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px 20px;
+  border-bottom:1px solid var(--border);
+  font-size:17px;font-weight:600;color:var(--dark);
+  cursor:pointer;
+  background:var(--white);
+}
+.menu-row:active{background:var(--bg-gray)}
+.menu-row .chev{
+  width:11px;height:11px;
+  border-right:2px solid var(--mid);
+  border-top:2px solid var(--mid);
+  transform:rotate(45deg);
+  flex-shrink:0;
+}
+.menu-row.no-chev .chev{display:none}
+
+/* UTILITY ROW */
+.menu-utility{
+  display:flex;gap:10px;padding:18px 16px;
+  background:var(--bg-gray);
+  border-bottom:1px solid var(--border);
+}
+.menu-utility a{
+  flex:1;text-align:center;
+  padding:13px 8px;
+  font-family:Arial, sans-serif;font-size:12px;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;
+  text-decoration:none;border-radius:4px;
+  display:flex;align-items:center;justify-content:center;
+}
+.btn-quote{background:var(--green);color:var(--white)}
+.btn-quote:active{background:var(--green-dark)}
+.btn-book{background:var(--white);color:var(--green);border:2px solid var(--green)}
+.btn-book:active{background:var(--green-light)}
+
+/* PHONE */
+.menu-phone{
+  display:flex;align-items:center;gap:8px;
+  padding:18px 14px;
+  border-bottom:1px solid var(--border);
+}
+.menu-phone svg{width:20px;height:20px;color:var(--dark);flex-shrink:0}
+.menu-phone a{
+  color:var(--dark);text-decoration:none;
+  display:flex;align-items:baseline;gap:5px;
+  white-space:nowrap;
+}
+.menu-phone .ph-q{font-size:16px;font-weight:500}
+.menu-phone .ph-num{font-size:16px;font-weight:800;letter-spacing:.01em}
+
+/* SUB-PANEL */
+.subpanel{
+  position:absolute;top:84px;left:0;right:0;bottom:0;
+  background:var(--white);
+  overflow-y:auto;
+  z-index:101;
+  transform:translateX(100%);
+  transition:transform .3s ease;
+  -webkit-overflow-scrolling:touch;
+}
+.subpanel.open{transform:translateX(0)}
+.sub-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 20px;
+  background:var(--bg-gray);
+  border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:5;
+}
+.sub-back{
+  display:flex;align-items:center;gap:6px;
+  color:var(--green);font-weight:600;font-size:15px;
+  cursor:pointer;
+}
+.sub-back svg{width:14px;height:14px}
+.sub-title{
+  color:var(--dark);font-weight:700;font-size:15px;
+}
+
+/* SECTION HEADER (inside sub-panel) */
+.sec-head{
+  padding:20px 0 10px;
+  display:flex;align-items:center;gap:12px;
+  border-bottom:2px solid var(--green);
+  margin:0 16px;
+  position:relative;
+}
+.sec-icon{
+  width:36px;height:36px;
+  background:var(--green-light);border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.sec-icon svg{width:20px;height:20px;color:var(--green)}
+.sec-title{
+  font-family:Arial, sans-serif;font-weight:700;
+  font-size:17px;line-height:1.15;text-transform:uppercase;
+  color:var(--dark);letter-spacing:.02em;
+  flex:1;
+}
+
+/* LINK LIST */
+.sec-links{padding:0}
+.sec-links a{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 20px;
+  font-size:16px;color:var(--dark);
+  text-decoration:none;
+  font-weight:500;
+  border-bottom:1px solid var(--border);
+}
+.sec-links a::after{
+  content:'';
+  width:9px;height:9px;
+  border-right:2px solid var(--mid);
+  border-top:2px solid var(--mid);
+  transform:rotate(45deg);
+  flex-shrink:0;
+  margin-left:8px;
+}
+.sec-links a:active{color:var(--green);background:var(--bg-gray)}
+
+/* SECTION DIVIDER */
+.sec-divider{display:none}
+
+/* INTRO BLURB */
+.sec-blurb{
+  padding:14px 20px 4px;
+  font-size:14px;color:var(--mid);line-height:1.5;font-style:italic;
+}
+
+/* CTA BUTTONS (mirror desktop dd-cta) */
+.shop-all{
+  display:block;
+  margin:14px 16px 0;
+  padding:14px 14px;
+  background:var(--green);color:var(--white);
+  border-radius:4px;text-decoration:none;
+  text-align:center;
+}
+.shop-all + .shop-all{margin-top:8px}
+.shop-all:last-child{margin-bottom:20px}
+.shop-all .ddc-text{min-width:0}
+.shop-all .ddc-title{
+  font-family:Arial, sans-serif;font-weight:700;
+  font-size:14px;line-height:1.15;text-transform:uppercase;letter-spacing:.04em;
+  margin-bottom:3px;color:inherit;
+}
+.shop-all .ddc-sub{
+  font-size:12px;line-height:1.3;
+  color:rgba(255,255,255,.92);
+}
+.shop-all .ddc-arrow{display:none}
+.shop-all.outline{
+  background:var(--white);color:var(--green);
+  border:2px solid var(--green);
+}
+.shop-all.outline .ddc-sub{color:var(--mid)}
+.shop-all.deals{
+  background:var(--white);color:var(--green);
+  border:2px solid var(--green);
+}
+.shop-all.deals .ddc-sub{color:var(--mid)}
+
+/* BRAND GRID (Family of Websites) */
+.brand-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:0;padding:0 20px 20px;
+}
+.brand-cell{
+  padding:16px 8px 14px 0;
+  border-bottom:1px solid var(--border);
+}
+.brand-cell:nth-child(odd){padding-right:16px;border-right:1px solid var(--border);padding-left:0}
+.brand-cell:nth-child(even){padding-left:16px}
+.brand-name{font-weight:700;font-size:14px;color:var(--dark);line-height:1.2;margin-bottom:2px}
+.brand-url{font-size:12px;color:var(--light);line-height:1.2}
+
+/* DEMO NOTE */
+.demo{
+  padding:20px;font-size:13px;color:var(--mid);text-align:center;
+  background:var(--bg-gray);margin:0;
+}
+.demo strong{display:block;color:var(--dark);font-size:14px;margin-bottom:6px}
+
+/* SAFE AREA FOR LONG PANELS */
+.panel-foot{height:40px}
+
+/* ===== CART PANEL ===== */
+.cart-panel{
+  position:absolute;top:84px;left:0;right:0;bottom:0;
+  background:var(--white);
+  overflow-y:auto;
+  z-index:102;
+  transform:translateX(100%);
+  transition:transform .3s ease;
+}
+.cart-panel.open{transform:translateX(0)}
+.cart-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 20px;
+  background:var(--bg-gray);
+  border-bottom:1px solid var(--border);
+}
+.cart-back{
+  display:flex;align-items:center;gap:6px;
+  color:var(--green);font-weight:600;font-size:15px;
+  cursor:pointer;
+  background:none;border:none;padding:0;
+  font-family:inherit;
+}
+.cart-back svg{width:14px;height:14px}
+.cart-page-title{
+  color:var(--dark);font-weight:700;font-size:15px;
+}
+.page-head{padding:18px 20px 12px;border-bottom:1px solid var(--border)}
+.page-title{
+  font-family:Arial,sans-serif;font-weight:700;
+  font-size:22px;text-transform:uppercase;letter-spacing:.02em;
+  color:var(--dark);
+}
+.page-meta{font-size:14px;color:var(--mid);margin-top:4px}
+.cart-list{padding:0}
+.cart-item{
+  display:flex;gap:12px;padding:16px 20px;
+  border-bottom:1px solid var(--border);
+}
+.item-img{
+  width:80px;height:80px;
+  background:var(--green-light);border-radius:4px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;color:var(--green);
+}
+.item-img svg{width:36px;height:36px}
+.item-body{flex:1;min-width:0}
+.item-brand{
+  font-size:11px;font-weight:700;color:var(--green);
+  text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px;
+}
+.item-name{font-size:14px;font-weight:600;color:var(--dark);line-height:1.3;margin-bottom:4px}
+.item-spec{font-size:12px;color:var(--light);line-height:1.3;margin-bottom:6px}
+.item-row{display:flex;align-items:center;justify-content:space-between;margin-top:6px}
+.qty{display:flex;align-items:center;border:1px solid var(--border);border-radius:4px;overflow:hidden}
+.qty button{
+  width:26px;height:26px;background:var(--white);border:none;
+  font-size:14px;color:var(--dark);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+}
+.qty button:active{background:var(--bg-gray)}
+.qty .qval{font-size:13px;font-weight:600;min-width:24px;text-align:center;border-left:1px solid var(--border);border-right:1px solid var(--border);padding:0 4px;line-height:26px}
+.item-price{font-family:Arial,sans-serif;font-size:16px;font-weight:700;color:var(--dark)}
+.item-remove{background:none;border:none;color:var(--light);font-size:12px;cursor:pointer;padding:4px 0;margin-top:6px;text-decoration:underline}
+.summary{padding:16px 20px;background:var(--bg-gray);border-bottom:1px solid var(--border)}
+.sum-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;font-size:14px;color:var(--mid)}
+.sum-row.total{font-size:17px;font-weight:700;color:var(--dark);padding-top:12px;margin-top:6px;border-top:1px solid var(--border)}
+.sum-row.total .val{font-family:Arial,sans-serif}
+.checkout-prompt{padding:20px;background:var(--white)}
+.prompt-head{font-family:Arial,sans-serif;font-weight:700;font-size:16px;text-transform:uppercase;letter-spacing:.04em;color:var(--dark);text-align:center;margin-bottom:6px}
+.prompt-sub{font-size:13px;color:var(--mid);text-align:center;margin-bottom:16px;line-height:1.4}
+.btn{
+  display:block;width:100%;padding:14px;
+  font-family:Arial,sans-serif;font-weight:700;
+  font-size:14px;text-transform:uppercase;letter-spacing:.04em;
+  text-decoration:none;text-align:center;
+  border-radius:4px;border:none;cursor:pointer;margin-bottom:10px;
+}
+.btn-primary{background:var(--green);color:var(--white)}
+.btn-outline{background:var(--white);color:var(--green);border:2px solid var(--green);padding:12px}
+.divider{display:flex;align-items:center;gap:12px;margin:14px 0}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border)}
+.divider span{font-size:11px;color:var(--light);text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+.guest-note{font-size:11px;color:var(--light);text-align:center;margin-top:8px;line-height:1.4}
+
+/* ===== ACCOUNT PANEL ===== */
+.account-panel{
+  position:absolute;top:84px;left:0;right:0;bottom:0;
+  background:var(--white);
+  overflow-y:auto;
+  z-index:102;
+  transform:translateX(100%);
+  transition:transform .3s ease;
+}
+.account-panel.open{transform:translateX(0)}
+
+/* Sign-in view */
+.signin-view{padding:24px 20px}
+.signin-view.hidden{display:none}
+.signin-title{
+  font-family:Arial,sans-serif;font-weight:700;
+  font-size:22px;text-transform:uppercase;letter-spacing:.02em;
+  color:var(--dark);text-align:center;margin-bottom:6px;
+}
+.signin-sub{
+  font-size:13px;color:var(--mid);text-align:center;
+  margin-bottom:18px;line-height:1.4;
+}
+.tease{
+  background:var(--green-light);
+  border-radius:6px;
+  padding:14px 14px 12px;
+  margin-bottom:22px;
+}
+.tease-label{
+  font-family:Arial,sans-serif;
+  font-size:11px;font-weight:700;color:var(--green-dark);
+  text-transform:uppercase;letter-spacing:.08em;
+  text-align:center;margin-bottom:10px;
+}
+.tease-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:8px 12px;
+}
+.tease-item{
+  display:flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:600;color:var(--dark);
+}
+.tease-item svg{width:18px;height:18px;color:var(--green);flex-shrink:0}
+.field{margin-bottom:14px}
+.field label{
+  display:block;font-size:12px;font-weight:600;
+  text-transform:uppercase;letter-spacing:.04em;
+  color:var(--mid);margin-bottom:6px;
+}
+.field input{
+  width:100%;padding:12px 14px;
+  border:1px solid var(--border);border-radius:4px;
+  font-size:15px;font-family:inherit;color:var(--dark);
+  background:var(--white);
+}
+.field input:focus{outline:none;border-color:var(--green)}
+.signin-row{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:18px;font-size:13px;
+}
+.signin-row a{color:var(--green);font-weight:600;text-decoration:none}
+.signin-row label{color:var(--mid);display:flex;align-items:center;gap:6px;cursor:pointer}
+
+/* Logged-in view */
+.account-view{padding:0}
+.account-view.hidden{display:none}
+.acct-section-label{
+  padding:18px 20px 8px;
+  font-size:11px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.08em;
+  color:var(--light);
+}
+.acct-link{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 20px;
+  color:var(--dark);text-decoration:none;
+  font-size:16px;font-weight:600;
+  border-left:3px solid transparent;
+}
+.acct-link svg{width:22px;height:22px;flex-shrink:0;color:var(--dark);stroke:currentColor}
+.acct-link.active{
+  background:var(--green-light);
+  border-left-color:var(--green);
+  color:var(--green);
+}
+.acct-link.active svg{color:var(--green)}
+.acct-link.signout{color:#d4302a}
+.acct-link.signout svg{color:#d4302a}
+.acct-divider{height:1px;background:var(--border);margin:8px 20px}
+</style>
+</head>
+<body>
+
+<div class="phone">
+<div class="phone-inner">
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <a href="#" class="logo"><img src="https://www.officefurnitureplus.com/wp-content/uploads/logo-ofp-25.svg" alt="Office Furniture Plus"></a>
+  <div class="topbar-right">
+    <a href="#" class="cart-btn" id="userBtn" aria-label="Account">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </a>
+    <a href="#" class="cart-btn" id="cartBtn" aria-label="Cart">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+    </a>
+    <button class="hamburger open" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</div>
+
+<!-- MAIN MENU PANEL -->
+<div class="menu open" id="menu">
+  <div class="menu-utility">
+    <a href="#" class="btn-quote">Get a Quote</a>
+    <a href="#" class="btn-book">Book a Meeting</a>
+  </div>
+
+  <div class="menu-phone">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.58l2.2-2.21c.28-.27.36-.66.25-1.01C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg>
+    <a href="tel:18006683752"><span class="ph-q">Questions? Call Us Today!</span><span class="ph-num">1.800.668.3752</span></a>
+  </div>
+
+  <div class="menu-main">
+    <div class="menu-row" data-sub="new"><span>New Furniture</span><span class="chev"></span></div>
+    <div class="menu-row" data-sub="preowned"><span>Pre-Owned Furniture</span><span class="chev"></span></div>
+    <div class="menu-row no-chev" data-link="#"><span>Blend Solutions</span><span class="chev"></span></div>
+    <div class="menu-row" data-sub="services"><span>Services</span><span class="chev"></span></div>
+    <div class="menu-row" data-sub="resources"><span>Resources</span><span class="chev"></span></div>
+    <div class="menu-row" data-sub="about"><span>About Us</span><span class="chev"></span></div>
+    <div class="menu-row" data-sub="contact"><span>Contact Us</span><span class="chev"></span></div>
+  </div>
+</div>
+
+<!-- ===== SUB-PANEL: NEW FURNITURE ===== -->
+<div class="subpanel" id="sub-new">
+  <div class="sub-header"><div class="sub-back" data-close><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>Back</div><div class="sub-title">New Furniture</div></div>
+
+  <a href="https://rvarela-cyber.github.io/tos/ofp-shop-new-office-furniture.html" class="shop-all">
+    <div class="ddc-text">
+      <div class="ddc-title">Shop All New Office Furniture</div>
+      <div class="ddc-sub">Browse the full new inventory by category, brand, or price</div>
+    </div>
+    <div class="ddc-arrow">&rarr;</div>
+  </a>
+  <a href="https://rvarela-cyber.github.io/tos/ofp-office-furniture-wayfinder-widget.html" class="shop-all outline">
+    <div class="ddc-text">
+      <div class="ddc-title">Not Sure Where to Look?</div>
+      <div class="ddc-sub">Try our Office Furniture Wayfinder for guidance</div>
+    </div>
+    <div class="ddc-arrow">&rarr;</div>
+  </a>
+
+  <div class="sec-head">
+    <div class="sec-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 7h-3V5.5C16 4.12 14.88 3 13.5 3h-3C9.12 3 8 4.12 8 5.5V7H5c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm-9-1.5c0-.28.22-.5.5-.5h3c.28 0 .5.22.5.5V7h-4V5.5z"/></svg></div>
+    <div class="sec-title">Shop New by Category</div>
+  </div>
+  <div class="sec-links">
+    <a href="https://rvarela-cyber.github.io/tos/ofp-shop-new-office-furniture.html">Workstations &amp; Cubicles</a>
+    <a href="https://rvarela-cyber.github.io/tos/ofp-shop-new-office-furniture.html">Office Chairs</a>
+    <a href="https://rvarela-cyber.github.io/tos/ofp-shop-new-office-furniture.html">Desks &amp; Sit-Stand</a>
+    <a href="https://rvarela-cyber.github.io/tos/ofp-shop-new-office-furniture.html">Conference &amp; Tables</a>
+    <a href="https://rvarela-cyber.github.io/tos/ofp-shop-new-office-furniture.html">Reception &amp; Lounge</a>
+    <a href="https://rvarela-cyber.github.io/tos/ofp-shop-new-office-furniture.html">Filing &amp; Storage</a>
+  </div>
+  <div class="sec-divider"></div>
+
+  <div class="sec-head">
+    <div class="sec-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+    <div class="sec-title">Shop New by Brand</div>
+  </div>
+  <div class="sec-links">
+    <a href="https://rvarela-cyber.github.io/tos/ofp-manufacturer-ais.html">AIS</a>
+    <a href="https://rvarela-cyber.github.io/tos/ofp-manufacturer-clear-design.html">Clear Design</a>
+    <a href="https://rvarela-cyber.github.io/tos/ofp-manufacturer-global-furniture-group.html">Global</a>
+    <a href="https://rvarela-cyber.github.io/tos/ofp-manufacturer-great-openings.html">Great Openings</a>
+    <a href="https://rvarela-cyber.github.io/tos/ofp-manufacturer-hon.html">HON</a>
+    <a href="https://rvarela-cyber.github.io/tos/ofp-manufacturer-jsi.html">JSI</a>
+    <a href="https://rvarela-cyber.github.io/tos/ofp-manufacturer-kimball.html">Kimball</a>
+    <a href="https://rvarela-cyber.github.io/tos/ofp-manufacturer-life-work-etc.html">Life Work Etc</a>
+    <a href="https://rvarela-cyber.github.io/tos/ofp-manufacturer-national.html">National</a>
+    <a href="https://rvarela-cyber.github.io/tos/ofp-manufacturer-ofd.html">OFD</a>
+    <a href="https://rvarela-cyber.github.io/tos/ofp-manufacturer-otg.html">OTG</a>
+    <a href="https://rvarela-cyber.github.io/tos/ofp-manufacturer-sit-on-it.html">SitOnIt</a>
+    <a href="https://rvarela-cyber.github.io/tos/ofp-manufacturer-tranquil.html">Tranquil</a>
+    <a href="https://rvarela-cyber.github.io/tos/ofp-manufacturer-via.html">Via</a>
+  </div>
+  <a href="https://rvarela-cyber.github.io/tos/ofp-brands.html" class="shop-all outline">
+    <div class="ddc-text">
+      <div class="ddc-title">View All 200+ Brands</div>
+      <div class="ddc-sub">The full manufacturer list, A to Z</div>
+    </div>
+    <div class="ddc-arrow">&rarr;</div>
+  </a>
+  <div class="panel-foot"></div>
+</div>
+
+<!-- ===== SUB-PANEL: PRE-OWNED ===== -->
+<div class="subpanel" id="sub-preowned">
+  <div class="sub-header"><div class="sub-back" data-close><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>Back</div><div class="sub-title">Pre-Owned Furniture</div></div>
+
+  <a href="https://rvarela-cyber.github.io/tos/ofp-shop-pre-owned-office-furniture.html" class="shop-all">
+    <div class="ddc-text">
+      <div class="ddc-title">Shop All Pre-Owned Office Furniture</div>
+      <div class="ddc-sub">Available NOW with immediate delivery, daily inventory updates</div>
+    </div>
+    <div class="ddc-arrow">&rarr;</div>
+  </a>
+  <a href="https://rvarela-cyber.github.io/tos/ofp-shop-pre-owned-office-furniture.html#top-deals" class="shop-all outline">
+    <div class="ddc-text">
+      <div class="ddc-title">Shop Top Deals</div>
+      <div class="ddc-sub">Biggest discounts, priced to move, ready today</div>
+    </div>
+    <div class="ddc-arrow">&rarr;</div>
+  </a>
+
+  <div class="sec-head">
+    <div class="sec-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5h3V8h4v4h3l-5 5z"/></svg></div>
+    <div class="sec-title">Shop Pre-Owned by Category</div>
+  </div>
+  <div class="sec-links">
+    <a href="https://www.officefurnitureplus.com/product-category/used-office-furniture/special-sale-items/">Priced to Move!</a>
+    <a href="https://www.officefurnitureplus.com/product-category/used-office-furniture/used-office-desks/">Office Desks</a>
+    <a href="https://www.officefurnitureplus.com/product-category/used-office-furniture/used-sit-stand-desks/">Sit-Stand Desks</a>
+    <a href="https://www.officefurnitureplus.com/product-category/used-office-furniture/used-office-chairs/">Office Chairs</a>
+    <a href="https://www.officefurnitureplus.com/product-category/used-office-furniture/used-reception-desks/">Reception Desks</a>
+    <a href="https://www.officefurnitureplus.com/product-category/used-office-furniture/used-cubicles-workstations/">Cubicles &amp; Workstations</a>
+    <a href="https://www.officefurnitureplus.com/product-category/used-office-furniture/used-office-tables/">Office Tables</a>
+    <a href="https://www.officefurnitureplus.com/product-category/used-office-furniture/used-filing-cabinets/">Filing Cabinets</a>
+    <a href="https://www.officefurnitureplus.com/product-category/used-office-furniture/used-bookcases/">Bookcases</a>
+    <a href="https://www.officefurnitureplus.com/product-category/used-office-furniture/used-office-decor-lighting/">Decor &amp; Lighting</a>
+    <a href="https://www.officefurnitureplus.com/product-category/used-office-furniture/used-kitchen-appliances/">Kitchen Appliances</a>
+    <a href="https://www.officefurnitureplus.com/product-category/used-office-furniture/used-marker-boards/">Marker Boards</a>
+    <a href="https://www.officefurnitureplus.com/product-category/used-office-furniture/used-miscellaneous/">Miscellaneous</a>
+    <a href="https://www.officefurnitureplus.com/product-category/used-office-furniture/refurb-cubicles-workstations/">Refurb Cubicles &amp; Workstations</a>
+  </div>
+  <div class="panel-foot"></div>
+</div>
+
+<!-- ===== SUB-PANEL: SERVICES ===== -->
+<div class="subpanel" id="sub-services">
+  <div class="sub-header"><div class="sub-back" data-close><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>Back</div><div class="sub-title">Services</div></div>
+
+  <a href="https://rvarela-cyber.github.io/tos/ofp-quote-launcher.html" class="shop-all">
+    <div class="ddc-text">
+      <div class="ddc-title">Need help with a project?</div>
+      <div class="ddc-sub">Start a quote and our team will scope the right service mix for you</div>
+    </div>
+    <div class="ddc-arrow">&rarr;</div>
+  </a>
+
+  <div class="sec-head">
+    <div class="sec-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg></div>
+    <div class="sec-title">Our Services</div>
+  </div>
+  <div class="sec-links">
+    <a href="https://rvarela-cyber.github.io/tos/ofp-service-space-planning.html">Space Planning</a>
+    <a href="https://rvarela-cyber.github.io/tos/ofp-service-furniture-installation.html">Installation</a>
+    <a href="https://rvarela-cyber.github.io/tos/ofp-service-furniture-moving.html">Office Furniture Moving</a>
+    <a href="https://rvarela-cyber.github.io/tos/ofp-service-furniture-repair.html">Furniture Repair</a>
+    <a href="https://rvarela-cyber.github.io/tos/ofp-service-service-cubicle-reconfiguration.html">Cubicle Reconfiguration</a>
+    <a href="https://rvarela-cyber.github.io/tos/ofp-service-commercial-storage.html">Commercial Storage</a>
+    <a href="https://rvarela-cyber.github.io/tos/ofp-service-liquidation-decommission.html">Liquidation &amp; Decommission</a>
+    <a href="https://rvarela-cyber.github.io/tos/ofp-service-government-contracts.html">Government Contracts</a>
+  </div>
+  <div class="panel-foot"></div>
+</div>
+
+<!-- ===== SUB-PANEL: RESOURCES ===== -->
+<div class="subpanel" id="sub-resources">
+  <div class="sub-header"><div class="sub-back" data-close><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>Back</div><div class="sub-title">Resources</div></div>
+
+  <a href="https://rvarela-cyber.github.io/tos/ofp-office-furniture-wayfinder-widget.html" class="shop-all">
+    <div class="ddc-text">
+      <div class="ddc-title">Office Furniture Wayfinder</div>
+      <div class="ddc-sub">Not sure where to start? We&rsquo;ll guide you</div>
+    </div>
+    <div class="ddc-arrow">&rarr;</div>
+  </a>
+  <a href="https://www.officefurnitureplus.com/online-payments/" class="shop-all outline">
+    <div class="ddc-text">
+      <div class="ddc-title">Pay Invoice</div>
+      <div class="ddc-sub">Click to pay invoices online</div>
+    </div>
+    <div class="ddc-arrow">&rarr;</div>
+  </a>
+  <a href="https://rvarela-cyber.github.io/tos/ofp-furniture-leasing.html" class="shop-all outline">
+    <div class="ddc-text">
+      <div class="ddc-title">Furniture Leasing</div>
+      <div class="ddc-sub">Flexible terms for growing teams and short-term projects</div>
+    </div>
+    <div class="ddc-arrow">&rarr;</div>
+  </a>
+
+  <div class="sec-head">
+    <div class="sec-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 18H6V4h7v5h5v11z"/></svg></div>
+    <div class="sec-title">Documents</div>
+  </div>
+  <div class="sec-links">
+    <a href="https://www.officefurnitureplus.com/sample-coi/">Sample COI</a>
+    <a href="https://www.officefurnitureplus.com/wp-content/uploads/FSN-W9-0122025.pdf">OFP / FSN W9</a>
+  </div>
+  <div class="sec-divider"></div>
+
+  <div class="sec-head">
+    <div class="sec-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6z"/></svg></div>
+    <div class="sec-title">Portal Access</div>
+  </div>
+  <div class="sec-links">
+    <a href="https://www.tospartners.com/employee-portal-login/">Team Resources Portal</a>
+    <a href="https://www.officefurnitureplus.com/my-account/">Furniture Portal</a>
+  </div>
+  <div class="sec-divider"></div>
+
+  <div class="sec-head">
+    <div class="sec-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg></div>
+    <div class="sec-title">Knowledge Center</div>
+  </div>
+  <div class="sec-links">
+    <a href="https://rvarela-cyber.github.io/tos/ofp-resources.html#brochures">Brochures</a>
+    <a href="https://rvarela-cyber.github.io/tos/ofp-resources.html#blogs">Blogs</a>
+    <a href="https://rvarela-cyber.github.io/tos/ofp-resources.html#helpful-tools">Helpful Tools</a>
+    <a href="https://rvarela-cyber.github.io/tos/ofp-resources.html#videos">Videos</a>
+  </div>
+  <div class="sec-divider"></div>
+
+  <div class="sec-head">
+    <div class="sec-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg></div>
+    <div class="sec-title">Support</div>
+  </div>
+  <div class="sec-links">
+    <a href="https://www.tospartners.com/tos-help-desk/">TOS Employee Help Desk</a>
+    <a href="https://rvarela-cyber.github.io/tos/ofp-contact.html">Contact Us</a>
+  </div>
+  <div class="panel-foot"></div>
+</div>
+
+<!-- ===== SUB-PANEL: ABOUT ===== -->
+<div class="subpanel" id="sub-about">
+  <div class="sub-header"><div class="sub-back" data-close><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>Back</div><div class="sub-title">About Us</div></div>
+
+  <div class="sec-head">
+    <div class="sec-icon"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="9" cy="8" r="4"/><circle cx="17" cy="8" r="3"/><path d="M9 14c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.95v2h6v-2c0-2.66-5.33-4-7-4z"/></svg></div>
+    <div class="sec-title">About</div>
+  </div>
+  <div class="sec-links">
+    <a href="https://rvarela-cyber.github.io/tos/ofp-about.html">Leadership</a>
+    <a href="https://rvarela-cyber.github.io/tos/ofp-general-faqs.html">FAQs</a>
+    <a href="https://www.officefurnitureplus.com/non-profit/">Giving Back</a>
+    <a href="https://www.officefurnitureplus.com/founders-statement/">Founders Statement</a>
+    <a href="https://rvarela-cyber.github.io/tos/ofp-sustainability.html">Sustainability</a>
+    <a href="https://www.officefurnitureplus.com/tos-our-parent-company/" style="font-weight:800">TOS: Our Parent Company</a>
+  </div>
+  <div class="sec-divider"></div>
+
+  <div class="sec-head">
+    <div class="sec-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg></div>
+    <div class="sec-title">TOS Family of Websites</div>
+  </div>
+  <div class="brand-grid">
+    <div class="brand-cell"><a href="https://www.tospartners.com" target="_blank" style="text-decoration:none;color:inherit"><div class="brand-name">TOS Partners</div><div class="brand-url">tospartners.com</div></a></div>
+    <div class="brand-cell"><a href="https://www.movesolutions.com" target="_blank" style="text-decoration:none;color:inherit"><div class="brand-name">Move Solutions</div><div class="brand-url">movesolutions.com</div></a></div>
+    <div class="brand-cell"><a href="https://www.techteamsol.com" target="_blank" style="text-decoration:none;color:inherit"><div class="brand-name">TechTeam Solutions</div><div class="brand-url">techteamsol.com</div></a></div>
+    <div class="brand-cell"><a href="https://www.officefurnitureplus.com" target="_blank" style="text-decoration:none;color:inherit"><div class="brand-name">Office Furniture Plus</div><div class="brand-url">officefurnitureplus.com</div></a></div>
+    <div class="brand-cell"><a href="https://www.corporatesource.com" target="_blank" style="text-decoration:none;color:inherit"><div class="brand-name">Corporate Source</div><div class="brand-url">corporatesource.com</div></a></div>
+    <div class="brand-cell"><a href="https://www.officeboy.com" target="_blank" style="text-decoration:none;color:inherit"><div class="brand-name">Office Boy</div><div class="brand-url">officeboy.com</div></a></div>
+    <div class="brand-cell"><a href="https://www.paintandcarpet.com" target="_blank" style="text-decoration:none;color:inherit"><div class="brand-name">Paint and Carpet</div><div class="brand-url">paintandcarpet.com</div></a></div>
+    <div class="brand-cell"><a href="https://www.msl-ffe.com" target="_blank" style="text-decoration:none;color:inherit"><div class="brand-name">MSL FF&amp;E</div><div class="brand-url">msl-ffe.com</div></a></div>
+  </div>
+  <div class="panel-foot"></div>
+</div>
+
+<!-- ===== SUB-PANEL: CONTACT ===== -->
+<div class="subpanel" id="sub-contact">
+  <div class="sub-header"><div class="sub-back" data-close><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>Back</div><div class="sub-title">Contact Us</div></div>
+
+  <a href="https://rvarela-cyber.github.io/tos/ofp-contact.html" class="shop-all">
+    <div class="ddc-text">
+      <div class="ddc-title">Questions? Send a Note</div>
+      <div class="ddc-sub">Fill out a form or reach us directly. We&rsquo;ll respond within 2 hours.</div>
+    </div>
+    <div class="ddc-arrow">&rarr;</div>
+  </a>
+  <a href="https://www.tospartners.com/thank-you-for-your-engagement/" class="shop-all outline" target="_blank">
+    <div class="ddc-text">
+      <div class="ddc-title">Leave Us a Google Review</div>
+      <div class="ddc-sub">Share your experience and help others find OFP</div>
+    </div>
+    <div class="ddc-arrow">&rarr;</div>
+  </a>
+
+  <div class="sec-head">
+    <div class="sec-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg></div>
+    <div class="sec-title">Showrooms</div>
+  </div>
+  <div class="sec-links">
+    <a href="https://rvarela-cyber.github.io/tos/ofp-contact.html#loc-dallas">Dallas</a>
+    <a href="https://rvarela-cyber.github.io/tos/ofp-contact.html#loc-fort-worth">Fort Worth</a>
+    <a href="https://rvarela-cyber.github.io/tos/ofp-contact.html#loc-austin">Austin</a>
+    <a href="https://rvarela-cyber.github.io/tos/ofp-contact.html#loc-san-antonio">San Antonio</a>
+  </div>
+  <div class="sec-divider"></div>
+
+  <div class="sec-head">
+    <div class="sec-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/></svg></div>
+    <div class="sec-title">Job Openings</div>
+  </div>
+  <div class="sec-blurb">Join the OFP team. View current openings across Texas locations.</div>
+  <div class="sec-links">
+    <a href="https://www.officefurnitureplus.com/careers/">See Current Postings</a>
+  </div>
+  <div class="panel-foot"></div>
+</div>
+
+<!-- ===== CART PANEL ===== -->
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-head">
+    <button class="cart-back" id="cartBack">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+      Continue Shopping
+    </button>
+    <div class="cart-page-title">Your Cart</div>
+  </div>
+
+  <div class="page-head">
+    <div class="page-title">Your Cart</div>
+    <div class="page-meta">1 item &middot; Ships from Dallas, TX</div>
+  </div>
+
+  <div class="cart-list">
+    <div class="cart-item">
+      <div class="item-img">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 8h-3V4H3v13h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM8 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm12-9l1.96 2.5H17V9.5h3zm-2 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+      </div>
+      <div class="item-body">
+        <div class="item-brand">HON</div>
+        <div class="item-name">Ignition 2.0 Mesh Task Chair</div>
+        <div class="item-spec">Black mesh back &middot; Adjustable arms</div>
+        <div class="item-row">
+          <div class="qty">
+            <button>&minus;</button>
+            <span class="qval">2</span>
+            <button>+</button>
+          </div>
+          <div class="item-price">$498.00</div>
+        </div>
+        <button class="item-remove">Remove</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="summary">
+    <div class="sum-row"><span>Subtotal</span><span class="val">$498.00</span></div>
+    <div class="sum-row"><span>Estimated shipping</span><span class="val">Calculated at checkout</span></div>
+    <div class="sum-row"><span>Estimated tax</span><span class="val">Calculated at checkout</span></div>
+    <div class="sum-row total"><span>Estimated Total</span><span class="val">$498.00</span></div>
+  </div>
+
+  <div class="checkout-prompt">
+    <div class="prompt-head">Ready to Check Out?</div>
+    <div class="prompt-sub">Sign in or create an account to save your cart, track orders, and access more features.</div>
+    <a href="#" class="btn btn-primary">Sign In</a>
+    <a href="#" class="btn btn-outline">Create an Account</a>
+    <div class="divider"><span>Or</span></div>
+    <a href="#" class="btn btn-outline">Check Out as Guest</a>
+    <div class="guest-note">No account required. You can create one after checkout.</div>
+  </div>
+
+  <div class="panel-foot"></div>
+</div>
+
+<!-- ===== ACCOUNT PANEL ===== -->
+<div class="account-panel" id="accountPanel">
+  <div class="cart-head">
+    <button class="cart-back" id="accountBack">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+      Back
+    </button>
+    <div class="cart-page-title" id="accountHeadTitle">Sign In</div>
+  </div>
+
+  <!-- SIGN-IN VIEW -->
+  <div class="signin-view" id="signinView">
+    <div class="signin-title">Sign In</div>
+    <div class="signin-sub">Get more when you sign in.</div>
+
+    <div class="tease">
+      <div class="tease-label">What you&rsquo;ll unlock</div>
+      <div class="tease-grid">
+        <div class="tease-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <span>My Favorites</span>
+        </div>
+        <div class="tease-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <span>My Quotes</span>
+        </div>
+        <div class="tease-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+          <span>Order History</span>
+        </div>
+        <div class="tease-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+          <span>Saved Carts</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="signinEmail">Email</label>
+      <input type="email" id="signinEmail" placeholder="you@company.com">
+    </div>
+    <div class="field">
+      <label for="signinPass">Password</label>
+      <input type="password" id="signinPass" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;">
+    </div>
+
+    <div class="signin-row">
+      <label><input type="checkbox"> Remember me</label>
+      <a href="#">Forgot password?</a>
+    </div>
+
+    <button class="btn btn-primary" id="signinSubmit">Sign In</button>
+    <a href="#" class="btn btn-outline">Create an Account</a>
+
+    <div class="divider"><span>Or</span></div>
+
+    <a href="#" class="btn btn-outline">Continue as Guest</a>
+    <div class="guest-note">Save your cart and access full features by creating an account.</div>
+  </div>
+
+  <!-- LOGGED-IN VIEW -->
+  <div class="account-view hidden" id="accountView">
+    <div class="acct-section-label">Account</div>
+    <a href="#" class="acct-link active">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      My Favorites
+    </a>
+    <a href="#" class="acct-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      My Quotes
+    </a>
+    <a href="#" class="acct-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+      Order History
+    </a>
+    <a href="#" class="acct-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+      Saved Carts
+    </a>
+    <a href="#" class="acct-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      Account Settings
+    </a>
+
+    <div class="acct-divider"></div>
+
+    <div class="acct-section-label">Support</div>
+    <a href="#" class="acct-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      Help &amp; FAQ
+    </a>
+    <a href="#" class="acct-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Contact Sales
+    </a>
+    <a href="#" class="acct-link signout" id="signoutLink">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      Sign Out
+    </a>
+    <div class="panel-foot"></div>
+  </div>
+</div>
+
+</div><!-- /phone-inner -->
+</div><!-- /phone -->
+
+<script>
+const hamburger = document.getElementById('hamburger');
+const menu = document.getElementById('menu');
+const subpanels = document.querySelectorAll('.subpanel');
+
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  menu.classList.toggle('open');
+  // close any open subpanels
+  if (!menu.classList.contains('open')) {
+    subpanels.forEach(p => p.classList.remove('open'));
+  }
+});
+
+document.querySelectorAll('.menu-row[data-sub]').forEach(row => {
+  row.addEventListener('click', () => {
+    const id = 'sub-' + row.getAttribute('data-sub');
+    const panel = document.getElementById(id);
+    if (panel) {
+      panel.classList.add('open');
+      panel.scrollTop = 0;
+    }
+  });
+});
+
+document.querySelectorAll('[data-close]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.closest('.subpanel').classList.remove('open');
+  });
+});
+
+const cartBtn = document.getElementById('cartBtn');
+const cartPanel = document.getElementById('cartPanel');
+const cartBack = document.getElementById('cartBack');
+if (cartBtn) {
+  cartBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    cartPanel.classList.add('open');
+    cartPanel.scrollTop = 0;
+  });
+}
+if (cartBack) {
+  cartBack.addEventListener('click', () => {
+    cartPanel.classList.remove('open');
+  });
+}
+
+const userBtn = document.getElementById('userBtn');
+const accountPanel = document.getElementById('accountPanel');
+const accountBack = document.getElementById('accountBack');
+const signinView = document.getElementById('signinView');
+const accountView = document.getElementById('accountView');
+const accountHeadTitle = document.getElementById('accountHeadTitle');
+const signinSubmit = document.getElementById('signinSubmit');
+const signoutLink = document.getElementById('signoutLink');
+
+if (userBtn) {
+  userBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    accountPanel.classList.add('open');
+    accountPanel.scrollTop = 0;
+  });
+}
+if (accountBack) {
+  accountBack.addEventListener('click', () => {
+    accountPanel.classList.remove('open');
+  });
+}
+if (signinSubmit) {
+  signinSubmit.addEventListener('click', (e) => {
+    e.preventDefault();
+    signinView.classList.add('hidden');
+    accountView.classList.remove('hidden');
+    accountHeadTitle.textContent = 'My Account';
+    accountPanel.scrollTop = 0;
+  });
+}
+if (signoutLink) {
+  signoutLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    accountView.classList.add('hidden');
+    signinView.classList.remove('hidden');
+    accountHeadTitle.textContent = 'Sign In';
+    accountPanel.scrollTop = 0;
+  });
+}
+</script>
+
+</body>
+</html>
