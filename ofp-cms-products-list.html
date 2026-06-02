@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OFP CMS — Products List (Consignment Taxonomy)</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f0f0f1;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;color:#1d2327;font-size:13px;line-height:1.4}
+
+/* WP Admin top bar */
+.wp-toolbar{background:#1d2327;color:#a7aaad;height:32px;display:flex;align-items:center;padding:0 14px;font-size:13px;gap:18px;position:sticky;top:0;z-index:20}
+.wp-toolbar .tb-item{display:flex;align-items:center;gap:6px;color:#a7aaad;text-decoration:none}
+.wp-toolbar .tb-item:hover{color:#72aee6}
+.wp-toolbar .tb-home::before{content:"⌂";font-size:18px;line-height:1}
+.wp-toolbar .live-badge{background:#00a32a;color:#fff;font-size:10px;font-weight:600;padding:2px 6px;border-radius:2px;letter-spacing:.04em}
+.wp-toolbar .tb-right{margin-left:auto;display:flex;gap:18px;align-items:center}
+
+/* Layout */
+.wp-shell{display:flex;min-height:calc(100vh - 32px)}
+
+/* WP Admin left sidebar */
+.wp-side{width:160px;background:#1d2327;color:#c3c4c7;flex-shrink:0;padding-top:8px}
+.wp-side .ws-item{display:flex;align-items:center;gap:8px;padding:8px 12px;font-size:13px;color:#c3c4c7;cursor:default;border-left:4px solid transparent}
+.wp-side .ws-item:hover{background:#2c3338;color:#72aee6}
+.wp-side .ws-item.active{background:#2271b1;color:#fff;border-left-color:#fff}
+.wp-side .ws-ico{width:14px;height:14px;flex-shrink:0;stroke:currentColor;fill:none;stroke-width:2}
+.wp-side .ws-divider{height:1px;background:#2c3338;margin:8px 0}
+
+/* Main content */
+.wp-main{flex:1;padding:20px 24px 40px;overflow-x:auto;min-width:0}
+
+.wrap-title{font-size:23px;font-weight:400;color:#1d2327;margin:0 0 4px;padding:9px 0 4px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.wrap-title .add-btn{background:#fff;border:1px solid #2271b1;color:#2271b1;font-size:13px;padding:3px 10px;border-radius:3px;text-decoration:none;font-weight:400}
+.wrap-title .add-btn:hover{background:#f6f7f7}
+
+.subsubsub{font-size:13px;color:#646970;margin:8px 0 14px;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:0}
+.subsubsub li{padding-right:6px}
+.subsubsub li::after{content:"|";color:#dcdcde;margin-left:4px}
+.subsubsub li:last-child::after{content:""}
+.subsubsub a{color:#2271b1;text-decoration:none}
+.subsubsub a.current{color:#1d2327;font-weight:600}
+.subsubsub .count{color:#646970}
+
+/* Search box top right */
+.search-box{float:right;display:flex;gap:6px;margin-top:-30px}
+.search-box input{height:30px;border:1px solid #8c8f94;background:#fff;padding:0 8px;font-size:13px;border-radius:3px;min-width:200px}
+.search-box .btn-search{background:#f6f7f7;border:1px solid #2271b1;color:#2271b1;height:30px;padding:0 12px;font-size:13px;border-radius:3px;cursor:pointer}
+.search-box .btn-search:hover{background:#f0f0f1}
+
+/* Filter rows */
+.tablenav{background:#fff;border:1px solid #c3c4c7;border-bottom:none;padding:8px;display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.tablenav.bottom{border:1px solid #c3c4c7;border-top:none;justify-content:space-between}
+.tablenav select,.tablenav input[type="text"]{height:30px;border:1px solid #8c8f94;background:#fff;padding:0 24px 0 8px;font-size:13px;border-radius:3px;color:#2c3338;min-width:160px}
+.tablenav select:focus{outline:none;border-color:#2271b1;box-shadow:0 0 0 1px #2271b1}
+.tablenav .btn{background:#f6f7f7;border:1px solid #2271b1;color:#2271b1;height:30px;padding:0 12px;font-size:13px;border-radius:3px;cursor:pointer}
+.tablenav .btn:hover{background:#f0f0f1}
+.tablenav .btn-primary{background:#2271b1;color:#fff;border-color:#2271b1}
+.tablenav .btn-primary:hover{background:#135e96;border-color:#135e96}
+
+/* NEW filter highlight */
+.filter-new{position:relative}
+.filter-new::before{content:"NEW";position:absolute;top:-8px;right:-4px;background:#d63638;color:#fff;font-size:9px;font-weight:700;padding:2px 5px;border-radius:2px;letter-spacing:.04em;z-index:1}
+.filter-new select{border-color:#d63638;font-weight:600}
+
+.row-2{display:flex;flex-wrap:wrap;gap:8px;width:100%;align-items:center}
+.row-2 .toggle{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#1d2327}
+.row-2 .toggle .sw{width:30px;height:18px;background:#dcdcde;border-radius:10px;position:relative;cursor:pointer}
+.row-2 .toggle .sw::after{content:"";position:absolute;width:14px;height:14px;background:#fff;border-radius:50%;top:2px;left:2px;transition:left .15s}
+.row-2 .item-count{margin-left:auto;font-size:13px;color:#646970}
+.row-2 .pager{display:flex;gap:2px;align-items:center}
+.row-2 .pager button{background:#fff;border:1px solid #8c8f94;color:#2c3338;width:30px;height:30px;border-radius:3px;cursor:pointer;font-size:14px}
+.row-2 .pager button:hover{background:#f0f0f1}
+.row-2 .pager input{width:40px;text-align:center;height:30px;border:1px solid #8c8f94;border-radius:3px;font-size:13px}
+
+/* TABLE */
+.wp-list{width:100%;border-collapse:collapse;background:#fff;border:1px solid #c3c4c7;border-top:none;font-size:13px}
+.wp-list thead th{background:#fff;border-bottom:1px solid #c3c4c7;text-align:left;padding:10px 8px;font-size:13px;font-weight:400;color:#2271b1;white-space:nowrap;vertical-align:middle}
+.wp-list thead th .sort::after{content:" ↕";color:#8c8f94;font-size:10px}
+.wp-list thead th.col-thumb{width:40px;padding:0 8px}
+.wp-list thead th.col-thumb::before{content:"";display:block;width:14px;height:14px;background:#1d2327;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2'%3E%3Crect x='3' y='3' width='18' height='18' rx='2'/%3E%3Ccircle cx='8.5' cy='8.5' r='1.5'/%3E%3Cpath d='M21 15l-5-5L5 21'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2'%3E%3Crect x='3' y='3' width='18' height='18' rx='2'/%3E%3Ccircle cx='8.5' cy='8.5' r='1.5'/%3E%3Cpath d='M21 15l-5-5L5 21'/%3E%3C/svg%3E") center/contain no-repeat}
+.wp-list thead th.col-check{width:30px;padding-left:10px}
+.wp-list tbody td{border-bottom:1px solid #f0f0f1;padding:11px 8px;vertical-align:middle;color:#2c3338}
+.wp-list tbody tr:hover{background:#f6f7f7}
+.wp-list tbody tr:last-child td{border-bottom:none}
+
+.thumb-cell{width:40px;height:40px;background:#f0f0f1;border:1px solid #dcdcde;border-radius:2px;display:flex;align-items:center;justify-content:center}
+.thumb-cell svg{width:24px;height:24px;color:#a7aaad;stroke:currentColor;fill:none;stroke-width:1.5}
+
+.prod-name{color:#2271b1;font-weight:600;text-decoration:none}
+.prod-name:hover{color:#135e96;text-decoration:underline}
+.prod-name code{color:#646970;font-size:11px;background:#f0f0f1;padding:0 4px;border-radius:2px;font-family:Consolas,Monaco,monospace}
+
+.stock-in{color:#007017;font-weight:600}
+.stock-out{color:#d63638;font-weight:600}
+
+.cat-link{color:#2271b1;text-decoration:none;font-size:12px}
+.cat-link:hover{text-decoration:underline}
+
+/* THE BADGE — color-coded type */
+.type-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 9px;border-radius:3px;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;border:1px solid transparent}
+.type-badge::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor;flex-shrink:0}
+.type-new{background:#e7f5ec;color:#007017;border-color:#b8e0c5}
+.type-preowned{background:#fef4d6;color:#8a6700;border-color:#f5d57a}
+.type-consign{background:#f0e6f5;color:#6a3d8a;border-color:#d4b8e0}
+
+/* Type legend */
+.type-legend{background:#fff;border:1px solid #c3c4c7;border-top:none;padding:10px 12px;display:flex;flex-wrap:wrap;align-items:center;gap:18px;font-size:12px;color:#646970}
+.type-legend .lg-title{font-weight:700;color:#1d2327;text-transform:uppercase;letter-spacing:.04em;font-size:11px}
+
+/* Notice banner — explains the new feature */
+.notice{background:#fff;border:1px solid #c3c4c7;border-left:4px solid #2271b1;padding:12px 14px;margin:0 0 14px;font-size:13px;color:#2c3338;line-height:1.5}
+.notice strong{color:#1d2327}
+
+/* Annotation callouts */
+.callout-pin{position:relative;display:inline-block}
+.callout-pin::after{content:attr(data-pin);position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:#d63638;color:#fff;font-size:10px;font-weight:700;padding:2px 6px;border-radius:10px;letter-spacing:.04em;white-space:nowrap;z-index:5}
+
+@media(max-width:900px){
+  .wp-side{width:48px}
+  .wp-side .ws-item span{display:none}
+  .wp-main{padding:16px}
+}
+</style>
+</head>
+<body>
+
+<!-- WP TOOLBAR -->
+<div class="wp-toolbar">
+  <a class="tb-item tb-home" href="#">Office Furniture Plus | Texas Furniture...</a>
+  <span class="live-badge">Live</span>
+  <a class="tb-item" href="#">+ New</a>
+  <a class="tb-item" href="#">WP Engine Quick Links</a>
+  <a class="tb-item" href="#">Edit Columns</a>
+  <a class="tb-item" href="#">UpdraftPlus</a>
+  <div class="tb-right">
+    <a class="tb-item" href="#">OFP Admin</a>
+  </div>
+</div>
+
+<div class="wp-shell">
+
+  <!-- LEFT WP SIDEBAR -->
+  <nav class="wp-side">
+    <div class="ws-item"><svg class="ws-ico" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg><span>Dashboard</span></div>
+    <div class="ws-item"><svg class="ws-ico" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg><span>Site Kit</span></div>
+    <div class="ws-item"><svg class="ws-ico" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/></svg><span>Elementor</span></div>
+    <div class="ws-item"><svg class="ws-ico" viewBox="0 0 24 24"><path d="M3 5h18M3 12h18M3 19h18"/></svg><span>Posts</span></div>
+    <div class="ws-item active"><svg class="ws-ico" viewBox="0 0 24 24"><path d="M20 7h-7L9 3H4a2 2 0 00-2 2v14a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/></svg><span>Products</span></div>
+    <div class="ws-item"><svg class="ws-ico" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg><span>Media</span></div>
+    <div class="ws-divider"></div>
+    <div class="ws-item"><svg class="ws-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09a1.65 1.65 0 001.51-1 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33 1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82 1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg><span>Settings</span></div>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="wp-main">
+
+    <!-- Notice banner explaining what's new -->
+    <div class="notice">
+      <strong>What's new on this screen.</strong> Every product now carries a Furniture Type taxonomy (New, Pre-Owned, or Consignment) set on the product edit page. The new <strong>Type</strong> column shows it at a glance, color-coded. The new <strong>Filter by Furniture Type</strong> dropdown (to the right of Filter by brand) lets the product manager flip between the three views.
+    </div>
+
+    <h1 class="wrap-title">
+      Products <a href="#" class="add-btn">Add new product</a> <a href="#" class="add-btn">Import</a> <a href="#" class="add-btn">Export</a>
+    </h1>
+
+    <div class="search-box">
+      <input type="text" placeholder="">
+      <button class="btn-search">Search products</button>
+    </div>
+
+    <ul class="subsubsub">
+      <li><a href="#" class="current">All <span class="count">(1,561)</span></a></li>
+      <li><a href="#">Published <span class="count">(522)</span></a></li>
+      <li><a href="#">Drafts <span class="count">(9)</span></a></li>
+      <li><a href="#">Private <span class="count">(1,030)</span></a></li>
+      <li><a href="#">Trash <span class="count">(7)</span></a></li>
+      <li><a href="#">Cornerstone content <span class="count">(0)</span></a></li>
+      <li><a href="#">Sorting</a></li>
+    </ul>
+
+    <!-- FILTER ROW 1 -->
+    <div class="tablenav">
+      <button class="btn">+ Add Filter ▾</button>
+      <select><option>All Brands</option></select>
+      <select><option>All SEO Scores</option></select>
+      <select><option>All Readability Scores</option></select>
+      <select><option>Select a category</option></select>
+      <select><option>Filter by product type</option></select>
+      <select><option>Filter by stock status</option></select>
+      <select><option>Filter by brand</option></select>
+
+      <!-- NEW FILTER -->
+      <div class="filter-new callout-pin" data-pin="NEW">
+        <select>
+          <option>Filter by Furniture Type</option>
+          <option>● New Furniture</option>
+          <option>● Pre-Owned Furniture</option>
+          <option>● Consignment</option>
+        </select>
+      </div>
+
+      <button class="btn">Filter</button>
+    </div>
+
+    <!-- FILTER ROW 2 -->
+    <div class="tablenav">
+      <div class="row-2">
+        <select style="min-width:140px"><option>Bulk actions</option></select>
+        <button class="btn">Apply</button>
+        <button class="btn">Edit columns</button>
+        <button class="btn">Reset Sorting</button>
+        <button class="btn">Export</button>
+        <span>Inline Edit</span>
+        <div class="toggle"><div class="sw"></div></div>
+        <span class="item-count">1,561 items</span>
+        <div class="pager">
+          <button>«</button><button>‹</button>
+          <input type="text" value="1"><span style="font-size:12px;color:#646970">of 79</span>
+          <button>›</button><button>»</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- THE TABLE -->
+    <table class="wp-list">
+      <thead>
+        <tr>
+          <th class="col-check"><input type="checkbox"></th>
+          <th class="col-thumb"></th>
+          <th><span class="sort">Name</span></th>
+          <th><span class="sort">SKU</span></th>
+          <th><span class="sort">Stock</span></th>
+          <th><span class="sort">Price</span></th>
+          <th><span class="sort">Categories</span></th>
+          <!-- NEW COLUMN -->
+          <th class="callout-pin" data-pin="NEW COLUMN" style="color:#d63638"><span class="sort">Type</span></th>
+          <th><span class="sort">Brands</span></th>
+          <th><span class="sort">Product Age</span></th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr>
+          <td><input type="checkbox"></td>
+          <td><div class="thumb-cell"><svg viewBox="0 0 24 24"><path d="M6 9c0-3 3-4 6-4s6 1 6 4v3H6z"/><path d="M7 12v6M17 12v6M6 18h12"/></svg></div></td>
+          <td><a class="prod-name" href="#">Kimball<code>&lt;span&gt;®&lt;/span&gt;</code> Joya, Office Chair</a></td>
+          <td>1dbb3f965420</td>
+          <td><span class="stock-in">In stock</span></td>
+          <td>$0.00</td>
+          <td><a href="#" class="cat-link">Kimball®, New &amp; Used Office Furniture Shop by Brand, New Office Furniture, Office Chairs</a></td>
+          <td><span class="type-badge type-new">New Furniture</span></td>
+          <td>—</td>
+          <td>2075</td>
+        </tr>
+
+        <tr>
+          <td><input type="checkbox"></td>
+          <td><div class="thumb-cell"><svg viewBox="0 0 24 24"><path d="M5 12h14M5 12l2-6h10l2 6M5 12v7h14v-7"/></svg></div></td>
+          <td><a class="prod-name" href="#">Kimball Pairings</a></td>
+          <td>2215529a5d51</td>
+          <td><span class="stock-in">In stock</span></td>
+          <td>$0.00</td>
+          <td><a href="#" class="cat-link">Kimball®, New &amp; Used Office Furniture Shop by Brand, New Office Furniture, Office Chairs</a></td>
+          <td><span class="type-badge type-new">New Furniture</span></td>
+          <td>—</td>
+          <td>2075</td>
+        </tr>
+
+        <tr>
+          <td><input type="checkbox"></td>
+          <td><div class="thumb-cell"><svg viewBox="0 0 24 24"><path d="M7 8c0-2 2-3 5-3s5 1 5 3v4H7z"/><path d="M8 12v6M16 12v6"/></svg></div></td>
+          <td><a class="prod-name" href="#">Kimball Theo</a></td>
+          <td>6898b149752e</td>
+          <td><span class="stock-in">In stock</span></td>
+          <td>$0.00</td>
+          <td><a href="#" class="cat-link">Kimball®, New &amp; Used Office Furniture Shop by Brand, New Office Furniture, Office Chairs</a></td>
+          <td><span class="type-badge type-new">New Furniture</span></td>
+          <td>—</td>
+          <td>2075</td>
+        </tr>
+
+        <tr>
+          <td><input type="checkbox"></td>
+          <td><div class="thumb-cell"><svg viewBox="0 0 24 24"><path d="M6 10c0-3 3-4 6-4s6 1 6 4v3H6z"/><path d="M7 13v5M17 13v5"/></svg></div></td>
+          <td><a class="prod-name" href="#">Kimball Splendor <code>&lt;span&gt;®&lt;/span&gt;</code>, Office Guest Chair</a></td>
+          <td>44bee024f588</td>
+          <td><span class="stock-in">In stock</span></td>
+          <td>$0.00</td>
+          <td><a href="#" class="cat-link">Office Chairs, New &amp; Used Office Furniture...</a></td>
+          <td><span class="type-badge type-new">New Furniture</span></td>
+          <td>—</td>
+          <td>2075</td>
+        </tr>
+
+        <tr>
+          <td><input type="checkbox"></td>
+          <td><div class="thumb-cell"><svg viewBox="0 0 24 24"><path d="M4 18h16M4 18V8h16v10M8 8V5h8v3"/></svg></div></td>
+          <td><a class="prod-name" href="#">Steelcase Leap V2 Task Chair, Refurbished</a></td>
+          <td>9a47c12b8801</td>
+          <td><span class="stock-in">In stock</span></td>
+          <td>$389.00</td>
+          <td><a href="#" class="cat-link">Pre-Owned Office Furniture, Office Chairs, Steelcase</a></td>
+          <td><span class="type-badge type-preowned">Pre-Owned</span></td>
+          <td>Steelcase</td>
+          <td>2018</td>
+        </tr>
+
+        <tr>
+          <td><input type="checkbox"></td>
+          <td><div class="thumb-cell"><svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="11"/><path d="M4 11h16"/></svg></div></td>
+          <td><a class="prod-name" href="#">HON Brigade 4-Drawer Lateral File, Putty</a></td>
+          <td>3f12d8e009c2</td>
+          <td><span class="stock-in">In stock</span></td>
+          <td>$165.00</td>
+          <td><a href="#" class="cat-link">Pre-Owned Office Furniture, Filing, HON</a></td>
+          <td><span class="type-badge type-preowned">Pre-Owned</span></td>
+          <td>HON</td>
+          <td>2019</td>
+        </tr>
+
+        <tr>
+          <td><input type="checkbox"></td>
+          <td><div class="thumb-cell"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="11" rx="8" ry="3"/><path d="M9 14v5M15 14v5M6 19h12"/></svg></div></td>
+          <td><a class="prod-name" href="#">Knoll Reff Profiles Conference Table, 8' Oval Maple</a></td>
+          <td>7c2f4a6b1d09</td>
+          <td><span class="stock-in">In stock</span></td>
+          <td>$1,250.00</td>
+          <td><a href="#" class="cat-link">Consignment, Conference Tables, Knoll</a></td>
+          <td><span class="type-badge type-consign">Consignment</span></td>
+          <td>Knoll</td>
+          <td>2016</td>
+        </tr>
+
+        <tr>
+          <td><input type="checkbox"></td>
+          <td><div class="thumb-cell"><svg viewBox="0 0 24 24"><path d="M4 9l8-5 8 5v9a2 2 0 01-2 2H6a2 2 0 01-2-2z"/></svg></div></td>
+          <td><a class="prod-name" href="#">Herman Miller Aeron Task Chair, Size B</a></td>
+          <td>e019b3c47a52</td>
+          <td><span class="stock-in">In stock</span></td>
+          <td>$425.00</td>
+          <td><a href="#" class="cat-link">Consignment, Office Chairs, Herman Miller</a></td>
+          <td><span class="type-badge type-consign">Consignment</span></td>
+          <td>Herman Miller</td>
+          <td>2017</td>
+        </tr>
+
+        <tr>
+          <td><input type="checkbox"></td>
+          <td><div class="thumb-cell"><svg viewBox="0 0 24 24"><path d="M3 18h18M5 18V8h14v10"/><path d="M9 12h6"/></svg></div></td>
+          <td><a class="prod-name" href="#">Global Zira Reception Desk, L-Shape Espresso</a></td>
+          <td>b14728f9a063</td>
+          <td><span class="stock-in">In stock</span></td>
+          <td>$725.00</td>
+          <td><a href="#" class="cat-link">Consignment, Reception, Global</a></td>
+          <td><span class="type-badge type-consign">Consignment</span></td>
+          <td>Global</td>
+          <td>2020</td>
+        </tr>
+
+        <tr>
+          <td><input type="checkbox"></td>
+          <td><div class="thumb-cell"><svg viewBox="0 0 24 24"><path d="M5 10c0-3 3-4 7-4s7 1 7 4v4H5z"/><path d="M7 14v5M17 14v5"/></svg></div></td>
+          <td><a class="prod-name" href="#">AIS Calibrate Mid-Back Task Chair, Black Mesh</a></td>
+          <td>5d8f02e91b47</td>
+          <td><span class="stock-in">In stock</span></td>
+          <td>$0.00</td>
+          <td><a href="#" class="cat-link">New Office Furniture, Office Chairs, AIS</a></td>
+          <td><span class="type-badge type-new">New Furniture</span></td>
+          <td>AIS</td>
+          <td>2025</td>
+        </tr>
+
+      </tbody>
+    </table>
+
+    <!-- LEGEND -->
+    <div class="type-legend">
+      <span class="lg-title">Furniture Type Legend:</span>
+      <span class="type-badge type-new">New Furniture</span>
+      <span class="type-badge type-preowned">Pre-Owned</span>
+      <span class="type-badge type-consign">Consignment</span>
+      <span style="margin-left:auto;font-style:italic">Type is set on the product edit page under Product Data › Product Type.</span>
+    </div>
+
+    <!-- BOTTOM TABLENAV -->
+    <div class="tablenav bottom">
+      <div style="display:flex;gap:6px;align-items:center">
+        <select style="min-width:140px"><option>Bulk actions</option></select>
+        <button class="btn">Apply</button>
+      </div>
+      <div class="pager">
+        <span style="font-size:12px;color:#646970;margin-right:8px">1,561 items</span>
+        <button>«</button><button>‹</button>
+        <input type="text" value="1"><span style="font-size:12px;color:#646970">of 79</span>
+        <button>›</button><button>»</button>
+      </div>
+    </div>
+
+  </main>
+
+</div>
+
+</body>
+</html>
