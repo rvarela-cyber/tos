@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OFP CMS — Add New Product (Consignment)</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f0f0f1;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;color:#1d2327;font-size:13px;line-height:1.4}
+
+/* WP toolbar */
+.wp-toolbar{background:#1d2327;color:#a7aaad;height:32px;display:flex;align-items:center;padding:0 14px;font-size:13px;gap:18px;position:sticky;top:0;z-index:30}
+.wp-toolbar .tb-item{display:flex;align-items:center;gap:6px;color:#a7aaad;text-decoration:none}
+.wp-toolbar .tb-item:hover{color:#72aee6}
+.wp-toolbar .tb-home::before{content:"⌂";font-size:18px;line-height:1}
+.wp-toolbar .live-badge{background:#00a32a;color:#fff;font-size:10px;font-weight:600;padding:2px 6px;border-radius:2px;letter-spacing:.04em}
+.wp-toolbar .tb-right{margin-left:auto;display:flex;gap:18px;align-items:center}
+
+.wp-shell{display:flex;min-height:calc(100vh - 32px)}
+.wp-side{width:160px;background:#1d2327;color:#c3c4c7;flex-shrink:0;padding-top:8px}
+.wp-side .ws-item{display:flex;align-items:center;gap:8px;padding:8px 12px;font-size:13px;color:#c3c4c7;cursor:default;border-left:4px solid transparent}
+.wp-side .ws-item:hover{background:#2c3338;color:#72aee6}
+.wp-side .ws-item.active{background:#2271b1;color:#fff;border-left-color:#fff}
+.wp-side .ws-ico{width:14px;height:14px;flex-shrink:0;stroke:currentColor;fill:none;stroke-width:2}
+.wp-side .ws-divider{height:1px;background:#2c3338;margin:8px 0}
+
+.wp-main{flex:1;padding:14px 18px 40px;min-width:0;overflow-x:auto}
+
+/* Page title row */
+.page-title{font-size:23px;font-weight:400;color:#1d2327;margin:0 0 4px;padding:6px 0}
+.page-sub{font-size:14px;color:#646970;margin:0 0 14px}
+
+/* Consignor banner */
+.consignor-banner{background:#f0e6f5;border:1px solid #d4b8e0;border-left:4px solid #7B5EA7;border-radius:3px;padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;gap:10px;font-size:13px;color:#2c3338}
+.consignor-banner .cb-dot{width:10px;height:10px;border-radius:50%;background:#7B5EA7;flex-shrink:0}
+.consignor-banner strong{color:#1d2327}
+.consignor-banner a{margin-left:auto;color:#6a3d8a;text-decoration:none;font-weight:600;font-size:12px}
+.consignor-banner a:hover{text-decoration:underline}
+
+/* Two-column layout */
+.product-layout{display:grid;grid-template-columns:1fr 280px;gap:18px}
+@media(max-width:1100px){.product-layout{grid-template-columns:1fr}}
+
+/* WP postbox common */
+.postbox{background:#fff;border:1px solid #c3c4c7;border-radius:3px;margin-bottom:18px;overflow:hidden}
+.postbox-head{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-bottom:1px solid #dcdcde}
+.postbox-head h2{font-size:14px;font-weight:600;color:#1d2327;margin:0}
+.postbox-head .head-arrows{color:#646970;font-size:12px;letter-spacing:.2em}
+.postbox-body{padding:14px}
+
+/* Product name (top input) */
+.title-input{width:100%;font-size:18px;padding:10px 12px;border:1px solid #c3c4c7;border-radius:3px;background:#fff;color:#1d2327;font-family:inherit;outline:none}
+.title-input:focus{border-color:#2271b1;box-shadow:0 0 0 1px #2271b1}
+.title-wrap{margin-bottom:18px}
+
+/* Mini editor mock */
+.mock-toolbar{display:flex;gap:6px;flex-wrap:wrap;padding:6px 8px;background:#f6f7f7;border-bottom:1px solid #dcdcde}
+.mock-tb-btn{background:#fff;border:1px solid #c3c4c7;padding:4px 10px;font-size:12px;color:#2c3338;border-radius:2px;cursor:default}
+.mock-tb-btn.active{background:#f0f0f1;font-weight:600}
+.mock-tabs{margin-left:auto;display:flex;gap:0}
+.mock-tab{background:#f0f0f1;border:1px solid #c3c4c7;padding:4px 12px;font-size:12px;color:#2c3338;cursor:default;border-bottom:none}
+.mock-tab.active{background:#fff;font-weight:600}
+.mock-format-bar{display:flex;gap:4px;flex-wrap:wrap;padding:5px 8px;background:#fff;border-bottom:1px solid #dcdcde}
+.mock-fmt{width:24px;height:24px;background:#fff;border:1px solid transparent;display:flex;align-items:center;justify-content:center;font-size:13px;color:#2c3338;border-radius:2px;cursor:default}
+.mock-fmt:hover{background:#f0f0f1}
+.mock-editor-body{height:200px;background:#fff;padding:12px;font-size:13px;color:#a7aaad;font-style:italic}
+.mock-editor-foot{padding:6px 12px;background:#f6f7f7;border-top:1px solid #dcdcde;font-size:11px;color:#646970}
+
+/* PRODUCT DATA BOX with Consignment */
+.product-data-box{background:#fff;border:1px solid #c3c4c7;border-radius:3px;margin-bottom:18px;overflow:hidden;border-left:4px solid #7B5EA7}
+.pd-header{display:flex;align-items:center;gap:14px;padding:12px 14px;border-bottom:1px solid #dcdcde;flex-wrap:wrap;background:#fafafa}
+.pd-label{font-size:14px;font-weight:600;color:#1d2327}
+.pd-select-wrap{position:relative}
+.pd-select{background:#fff;border:1px solid #8c8f94;border-radius:3px;height:30px;padding:0 30px 0 12px;font-size:13px;color:#1d2327;font-weight:600;min-width:180px;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.pd-select-dot{width:8px;height:8px;border-radius:50%;background:#7B5EA7;display:inline-block;flex-shrink:0}
+.pd-select-wrap::after{content:"▾";position:absolute;right:10px;top:50%;transform:translateY(-50%);color:#646970;pointer-events:none;font-size:12px}
+
+.pd-body{display:grid;grid-template-columns:200px 1fr;min-height:300px}
+.pd-tabs{background:#f6f7f7;border-right:1px solid #dcdcde;padding:8px 0}
+.pd-tab{display:flex;align-items:center;gap:8px;padding:9px 14px;font-size:13px;color:#2271b1;cursor:default;border-left:4px solid transparent}
+.pd-tab.active{background:#fff;color:#1d2327;font-weight:600;border-left-color:#2271b1}
+.pd-tab .pd-tab-ico{width:14px;height:14px;flex-shrink:0;color:#2271b1}
+
+.pd-content{padding:16px 18px 20px}
+.pd-section-head{margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid #dcdcde;display:flex;align-items:center;gap:10px}
+.pd-section-head h3{margin:0;font-size:16px;font-weight:700;color:#1d2327}
+.pd-section-head .pd-section-pill{background:#f0e6f5;color:#6a3d8a;border:1px solid #d4b8e0;font-size:10px;font-weight:700;padding:3px 8px;border-radius:3px;letter-spacing:.04em;text-transform:uppercase}
+
+.pd-group{margin-bottom:6px;padding-bottom:12px;border-bottom:1px solid #f0f0f1}
+.pd-group:last-of-type{border-bottom:none}
+.pd-group-title{font-size:12px;font-weight:700;color:#1d2327;text-transform:uppercase;letter-spacing:.06em;margin:12px 0 6px;display:flex;align-items:center;gap:8px}
+.pd-group-title::before{content:"";width:3px;height:14px;background:#7B5EA7;border-radius:2px}
+
+.req{color:#d63638;font-weight:700}
+.pd-row{display:grid;grid-template-columns:170px 1fr;gap:14px;align-items:start;padding:8px 0}
+.pd-row label{font-size:13px;color:#1d2327;line-height:30px;font-weight:500}
+.pd-row input[type="text"],.pd-row textarea{height:30px;border:1px solid #8c8f94;background:#fff;padding:0 8px;font-size:13px;border-radius:3px;width:100%;max-width:380px;font-family:inherit}
+.pd-row textarea{height:auto;min-height:80px;padding:8px;line-height:1.45;max-width:520px;resize:vertical}
+.pd-row select{height:30px;border:1px solid #8c8f94;background:#fff;padding:0 24px 0 8px;font-size:13px;border-radius:3px;max-width:380px;cursor:pointer}
+.pd-row select:focus,.pd-row input:focus,.pd-row textarea:focus{outline:none;border-color:#2271b1;box-shadow:0 0 0 1px #2271b1}
+.pd-row .field-hint{display:block;font-size:12px;color:#646970;margin-top:5px;line-height:1.4;font-style:italic}
+
+.enable-toggle{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:#1d2327;cursor:pointer;font-weight:500}
+.enable-toggle input[type="checkbox"]{margin:0}
+
+.markdown-fields{margin-top:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px;color:#2c3338;background:#fffbf0;border:1px solid #f5d57a;border-radius:3px;padding:8px 12px}
+.mini-num{height:28px !important;width:60px !important;border:1px solid #8c8f94;background:#fff;padding:0 6px !important;font-size:13px;border-radius:3px;text-align:center;font-weight:600}
+.mini-suffix{font-size:12px;color:#646970;font-weight:600;margin-left:-4px}
+
+/* RIGHT SIDEBAR boxes */
+.side-box{background:#fff;border:1px solid #c3c4c7;border-radius:3px;margin-bottom:16px;overflow:hidden}
+.side-box-head{padding:9px 12px;border-bottom:1px solid #dcdcde;display:flex;align-items:center;justify-content:space-between}
+.side-box-head h3{font-size:13px;font-weight:600;color:#1d2327;margin:0}
+.side-box-head .head-arrows{color:#646970;font-size:12px;letter-spacing:.2em}
+.side-box-body{padding:12px}
+
+/* Publish box */
+.publish-row{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:13px;color:#2c3338}
+.publish-row .icn{color:#646970;width:16px}
+.publish-row a{color:#2271b1;text-decoration:none;margin-left:auto;font-size:12px}
+.publish-row a:hover{text-decoration:underline}
+.publish-actions{display:flex;justify-content:space-between;align-items:center;padding:10px 0 4px;border-top:1px solid #dcdcde;margin-top:8px}
+.btn-publish{background:#2271b1;color:#fff;border:1px solid #2271b1;padding:6px 18px;font-size:13px;font-weight:600;border-radius:3px;cursor:pointer;font-family:inherit}
+.btn-publish:hover{background:#135e96}
+.btn-secondary-sm{background:#fff;color:#2271b1;border:1px solid #2271b1;padding:5px 12px;font-size:13px;border-radius:3px;cursor:pointer;font-family:inherit}
+
+/* Categories list */
+.cat-tabs{display:flex;gap:14px;font-size:13px;border-bottom:1px solid #dcdcde;margin-bottom:8px;padding-bottom:6px}
+.cat-tabs a{color:#2271b1;text-decoration:none}
+.cat-tabs a.active{color:#1d2327;font-weight:600}
+.cat-list{max-height:160px;overflow-y:auto;border:1px solid #dcdcde;background:#fff;padding:8px;font-size:13px}
+.cat-list label{display:flex;align-items:center;gap:6px;padding:3px 0;color:#2c3338;cursor:default}
+.cat-add{font-size:13px;margin-top:8px}
+.cat-add a{color:#2271b1;text-decoration:none}
+
+/* Brand placeholders */
+.thumb-empty{background:#f6f7f7;border:2px dashed #c3c4c7;border-radius:3px;padding:18px;text-align:center;font-size:13px;color:#2271b1;cursor:default}
+.thumb-empty:hover{background:#f0f0f1}
+
+/* Tags */
+.tags-input{display:flex;gap:6px}
+.tags-input input{flex:1;height:30px;border:1px solid #8c8f94;border-radius:3px;padding:0 8px;font-size:13px}
+.btn-add-tag{background:#f6f7f7;border:1px solid #c3c4c7;padding:0 12px;font-size:13px;color:#2c3338;border-radius:3px;cursor:default}
+
+/* Product Options */
+.opt-row{display:flex;align-items:center;gap:14px;padding:6px 0;font-size:13px}
+.opt-row .label{flex:0 0 200px;color:#1d2327;font-weight:500}
+.opt-toggle{display:inline-flex;align-items:center;background:#fff;border:1px solid #8c8f94;border-radius:3px;height:30px;overflow:hidden}
+.opt-toggle .ot-off{padding:0 14px;height:100%;display:flex;align-items:center;background:#fff;color:#1d2327;font-weight:600;border-right:1px solid #8c8f94}
+.opt-toggle .ot-on{padding:0 14px;color:#a7aaad;display:flex;align-items:center;background:#f6f7f7}
+
+/* Common fields */
+.common-row{display:grid;grid-template-columns:1fr;gap:8px;padding:10px 0;border-bottom:1px solid #f0f0f1}
+.common-row:last-child{border-bottom:none}
+.cr-label{font-size:13px;color:#1d2327;font-weight:500}
+.cr-sub{font-size:12px;color:#646970;font-style:italic}
+.cr-input{height:30px;border:1px solid #8c8f94;background:#fff;padding:0 8px;font-size:13px;border-radius:3px;max-width:380px}
+
+/* Notice (red highlighted area in mockup) */
+.attr-callout{background:#fffbf0;border:1px solid #f5d57a;border-left:4px solid #dba617;padding:10px 14px;font-size:12px;color:#2c3338;margin-bottom:16px;border-radius:3px}
+.attr-callout strong{color:#1d2327}
+
+/* Yellow side note */
+.side-note{background:#fffbf0;border:1px solid #f5d57a;border-left:4px solid #dba617;padding:14px 18px;margin:24px 0 0;font-size:13px;color:#2c3338;line-height:1.55;border-radius:3px}
+.side-note strong{color:#1d2327}
+
+@media(max-width:900px){
+  .wp-side{width:48px}
+  .wp-side .ws-item span{display:none}
+  .pd-body{grid-template-columns:1fr}
+  .pd-tabs{display:flex;overflow-x:auto;border-right:none;border-bottom:1px solid #dcdcde}
+}
+</style>
+</head>
+<body>
+
+<!-- WP TOOLBAR -->
+<div class="wp-toolbar">
+  <a class="tb-item tb-home" href="#">Office Furniture Plus | Texas Furniture...</a>
+  <span class="live-badge">Live</span>
+  <a class="tb-item" href="#">+ New</a>
+  <a class="tb-item" href="#">WP Engine Quick Links</a>
+  <a class="tb-item" href="#">Edit Columns</a>
+  <a class="tb-item" href="#">UpdraftPlus</a>
+  <div class="tb-right">
+    <a class="tb-item" href="#">OFP Admin</a>
+  </div>
+</div>
+
+<div class="wp-shell">
+
+  <nav class="wp-side">
+    <div class="ws-item"><svg class="ws-ico" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg><span>Dashboard</span></div>
+    <div class="ws-item"><svg class="ws-ico" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg><span>Site Kit</span></div>
+    <div class="ws-item"><svg class="ws-ico" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/></svg><span>Elementor</span></div>
+    <div class="ws-item"><svg class="ws-ico" viewBox="0 0 24 24"><path d="M3 5h18M3 12h18M3 19h18"/></svg><span>Posts</span></div>
+    <div class="ws-item active"><svg class="ws-ico" viewBox="0 0 24 24"><path d="M20 7h-7L9 3H4a2 2 0 00-2 2v14a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/></svg><span>Products</span></div>
+    <div class="ws-item"><svg class="ws-ico" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg><span>Media</span></div>
+    <div class="ws-divider"></div>
+    <div class="ws-item"><svg class="ws-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/></svg><span>Settings</span></div>
+  </nav>
+
+  <main class="wp-main">
+
+    <h1 class="page-title">Add New</h1>
+    <p class="page-sub">Add new product</p>
+
+    <!-- Consignor link banner -->
+    <div class="consignor-banner">
+      <span class="cb-dot"></span>
+      <div><strong>Adding consignment product for:</strong> Sarah Reynolds · Lakewood Capital Partners · OFP 65% / Consignor 35%</div>
+      <a href="ofp-cms-product-type.html">Change consignor</a>
+    </div>
+
+    <div class="product-layout">
+
+      <!-- MAIN COLUMN -->
+      <div>
+
+        <!-- PRODUCT NAME -->
+        <div class="title-wrap">
+          <input type="text" class="title-input" placeholder="Product name">
+        </div>
+
+        <!-- PRODUCT DESCRIPTION -->
+        <div class="postbox">
+          <div class="postbox-head"><h2>Product description</h2><span class="head-arrows">∧ ∨</span></div>
+          <div class="mock-toolbar">
+            <button class="mock-tb-btn">📷 Add Media</button>
+            <button class="mock-tb-btn">★ Add Font Awesome</button>
+            <span style="margin-left:auto;font-size:11px;color:#646970;align-self:center">⓵</span>
+            <div class="mock-tabs">
+              <span class="mock-tab active">Visual</span>
+              <span class="mock-tab">Code</span>
+              <span class="mock-tab">Page Builder</span>
+            </div>
+          </div>
+          <div class="mock-format-bar">
+            <select style="height:24px;font-size:11px;border:1px solid #c3c4c7;border-radius:2px"><option>Paragraph</option></select>
+            <span class="mock-fmt"><strong>B</strong></span>
+            <span class="mock-fmt"><em>I</em></span>
+            <span class="mock-fmt">≡</span>
+            <span class="mock-fmt">1≡</span>
+            <span class="mock-fmt">"</span>
+            <span class="mock-fmt">⟸</span>
+            <span class="mock-fmt">⊟</span>
+            <span class="mock-fmt">⟹</span>
+            <span class="mock-fmt">🔗</span>
+            <span class="mock-fmt">⊟</span>
+          </div>
+          <div class="mock-editor-body">Click to write your product description…</div>
+          <div class="mock-editor-foot">Word count: 0</div>
+        </div>
+
+        <!-- YOAST SEO -->
+        <div class="postbox">
+          <div class="postbox-head"><h2>Yoast SEO</h2><span class="head-arrows">∧ ∨ ∧</span></div>
+          <div class="postbox-body" style="background:#f6f7f7;color:#646970;font-size:12px;font-style:italic;text-align:center;padding:30px">Yoast SEO panel · keyphrase, search appearance, readability, schema, social</div>
+        </div>
+
+        <!-- PRODUCT OPTIONS -->
+        <div class="postbox">
+          <div class="postbox-head"><h2>Product Options</h2><span class="head-arrows">∧ ∨ ∧</span></div>
+          <div class="postbox-body">
+            <div class="opt-row">
+              <div class="label">Hide Product Age</div>
+              <div class="opt-toggle"><span class="ot-off">No</span><span class="ot-on">Yes</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRODUCT DATA — THE BIG ONE -->
+        <div class="attr-callout">
+          <strong>Highlighted below:</strong> the Product Data box with Product Type pre-set to Consignment. The Consignment tab on the left exposes the per-product attributes (Pricing, Availability &amp; Lifecycle, Internal Notes) carried over from the previous wireframe.
+        </div>
+
+        <div class="product-data-box">
+
+          <div class="pd-header">
+            <span class="pd-label">Product data —</span>
+            <div class="pd-select-wrap">
+              <button class="pd-select" type="button">
+                <span class="pd-select-dot"></span>
+                Consignment
+              </button>
+            </div>
+          </div>
+
+          <div class="pd-body">
+
+            <div class="pd-tabs">
+              <div class="pd-tab active">
+                <svg class="pd-tab-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 010 1.4l-1.6 1.6m-3.4 3.4l-1.6 1.6a1 1 0 11-1.4-1.4l1.6-1.6m3.4-3.4l1.6-1.6"/><circle cx="12" cy="12" r="9"/></svg>
+                General
+              </div>
+              <div class="pd-tab">
+                <svg class="pd-tab-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/></svg>
+                Inventory
+              </div>
+              <div class="pd-tab">
+                <svg class="pd-tab-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/></svg>
+                Linked Products
+              </div>
+              <div class="pd-tab">
+                <svg class="pd-tab-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                Attributes
+              </div>
+              <div class="pd-tab">
+                <svg class="pd-tab-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="9"/></svg>
+                Advanced
+              </div>
+            </div>
+
+            <div class="pd-content">
+
+              <div class="pd-section-head">
+                <h3>Consignment Attributes</h3>
+                <span class="pd-section-pill">Sarah Reynolds · Lakewood Capital Partners</span>
+              </div>
+
+              <!-- PRICING -->
+              <div class="pd-group">
+                <div class="pd-group-title">Pricing</div>
+                <div class="pd-row">
+                  <label>Consignor Asking Price ($)</label>
+                  <div><input type="text" placeholder="0.00"> <span class="field-hint">What the consignor wants to net</span></div>
+                </div>
+                <div class="pd-row">
+                  <label>List Price ($) <span class="req">*</span></label>
+                  <div><input type="text" placeholder="0.00"> <span class="field-hint">What we list on the storefront</span></div>
+                </div>
+                <div class="pd-row">
+                  <label>Floor Price ($)</label>
+                  <div><input type="text" placeholder="0.00"> <span class="field-hint">Minimum we can accept without consignor approval</span></div>
+                </div>
+              </div>
+
+              <!-- AVAILABILITY & LIFECYCLE -->
+              <div class="pd-group">
+                <div class="pd-group-title">Availability &amp; Lifecycle</div>
+                <div class="pd-row">
+                  <label>Received Date</label>
+                  <div><input type="text" placeholder="MM / DD / YYYY"> <span class="field-hint">When the item arrived in our warehouse</span></div>
+                </div>
+                <div class="pd-row">
+                  <label>Auto-Publish Date</label>
+                  <div>
+                    <input type="text" placeholder="MM / DD / YYYY">
+                    <span class="field-hint">If set, the product goes live on the storefront automatically on this date. Leave blank to publish immediately.</span>
+                  </div>
+                </div>
+                <div class="pd-row">
+                  <label>Return-By Date</label>
+                  <div><input type="text" placeholder="MM / DD / YYYY"> <span class="field-hint">If not sold by this date, item returns to consignor or rolls to clearance</span></div>
+                </div>
+                <div class="pd-row">
+                  <label>Storage Location</label>
+                  <div>
+                    <select>
+                      <option>— Select location —</option>
+                      <option>Irving (DFW) Warehouse</option>
+                      <option>Fort Worth Showroom</option>
+                      <option>Austin Showroom</option>
+                      <option>San Antonio Showroom</option>
+                      <option>Third-Party Storage</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="pd-row">
+                  <label>Auto-Markdown Schedule</label>
+                  <div>
+                    <label class="enable-toggle"><input type="checkbox" checked> Enable automatic markdown</label>
+                    <div class="markdown-fields">
+                      Drop price by
+                      <input type="text" value="10" class="mini-num" inputmode="numeric"><span class="mini-suffix">%</span>
+                      after
+                      <input type="text" value="30" class="mini-num" inputmode="numeric"><span class="mini-suffix">days</span>
+                      unsold
+                    </div>
+                    <span class="field-hint">Keeps slow-movers from stagnating without a manual review. Markdown repeats on the same interval until item sells or hits Floor Price.</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- INTERNAL NOTES -->
+              <div class="pd-group">
+                <div class="pd-group-title">Internal Notes</div>
+                <div class="pd-row">
+                  <label>Notes</label>
+                  <div><textarea placeholder="Any internal context the sales or warehouse team should see…"></textarea></div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- PRODUCT SHORT DESCRIPTION -->
+        <div class="postbox">
+          <div class="postbox-head"><h2>Product short description</h2><span class="head-arrows">∧ ∨</span></div>
+          <div class="mock-toolbar">
+            <button class="mock-tb-btn">📷 Add Media</button>
+            <button class="mock-tb-btn">★ Add Font Awesome</button>
+            <div class="mock-tabs" style="margin-left:auto">
+              <span class="mock-tab active">Visual</span>
+              <span class="mock-tab">Code</span>
+            </div>
+          </div>
+          <div class="mock-editor-body" style="height:120px">Short summary shown on listings…</div>
+        </div>
+
+        <!-- PRODUCT FEED INFORMATION -->
+        <div class="postbox">
+          <div class="postbox-head"><h2>Product Feed Information</h2><span class="head-arrows">∧ ∨</span></div>
+          <div class="postbox-body">
+            <label style="display:flex;align-items:center;gap:6px;font-size:13px;margin-bottom:10px"><input type="checkbox"> Hide this product from the feed</label>
+            <div style="font-size:13px;font-weight:600;margin-top:8px;margin-bottom:4px">Images</div>
+            <div style="font-size:12px;color:#646970;margin-bottom:8px">For simple products, the first image (below) will be used as the primary image unless a primary image is specifically chosen. For variable products, the primary image will be the variation image if available.</div>
+            <button class="mock-tb-btn" style="margin-top:4px">Manage images</button>
+
+            <div style="background:#f0f0f1;border-top:1px solid #dcdcde;margin:14px -14px -14px;padding:8px 14px;font-size:13px;font-weight:700">Common fields</div>
+
+            <div class="common-row">
+              <div class="cr-label">Availability (backordered products)</div>
+              <div class="cr-sub">(Default: in stock)</div>
+              <select class="cr-input"><option>Use default</option></select>
+            </div>
+            <div class="common-row">
+              <div class="cr-label">Availability (in stock products)</div>
+              <div class="cr-sub">(Default: in stock)</div>
+              <select class="cr-input"><option>Use default</option></select>
+            </div>
+            <div class="common-row">
+              <div class="cr-label">Availability (out of stock products)</div>
+              <div class="cr-sub">(Default: out of stock)</div>
+              <select class="cr-input"><option>Use default</option></select>
+            </div>
+            <div class="common-row">
+              <div class="cr-label">Condition</div>
+              <div class="cr-sub">(Default: used)</div>
+              <select class="cr-input"><option>Use default</option></select>
+            </div>
+            <div class="common-row">
+              <div class="cr-label">Title</div>
+              <div class="cr-sub">Uses value from Product title field if set.</div>
+              <input type="text" class="cr-input">
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT SIDEBAR -->
+      <aside>
+
+        <!-- PUBLISH -->
+        <div class="side-box">
+          <div class="side-box-head"><h3>Publish</h3><span class="head-arrows">∧ ∨ ∧</span></div>
+          <div class="side-box-body">
+            <div style="display:flex;gap:8px;margin-bottom:10px">
+              <button class="btn-secondary-sm">Save Draft</button>
+              <button class="btn-secondary-sm">Preview</button>
+            </div>
+            <div class="publish-row"><span class="icn">📌</span> Status: <strong>Draft</strong> <a href="#">Edit</a></div>
+            <div class="publish-row"><span class="icn">👁</span> Visibility: <strong>Public</strong> <a href="#">Edit</a></div>
+            <div class="publish-row"><span class="icn">📅</span> Publish <strong>immediately</strong> <a href="#">Edit</a></div>
+            <div class="publish-row"><span class="icn">⓿</span> SEO analysis: <strong>Not available</strong></div>
+            <div class="publish-row"><span class="icn">✓</span> Readability analysis: <strong>Good</strong></div>
+            <div class="publish-row" style="display:block">Catalog visibility: <strong>Shop and search results</strong> <a href="#">Edit</a></div>
+            <div class="publish-actions">
+              <a href="#" style="color:#2271b1;text-decoration:none;font-size:13px">Copy to a new draft</a>
+              <button class="btn-publish">Publish</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRODUCT IMAGE -->
+        <div class="side-box">
+          <div class="side-box-head"><h3>Product image</h3><span class="head-arrows">∧ ∨ ∧</span></div>
+          <div class="side-box-body">
+            <a href="#" style="color:#2271b1;text-decoration:none;font-size:13px">Set product image ⓘ</a>
+          </div>
+        </div>
+
+        <!-- PRODUCT GALLERY -->
+        <div class="side-box">
+          <div class="side-box-head"><h3>Product gallery</h3><span class="head-arrows">∧ ∨ ∧</span></div>
+          <div class="side-box-body">
+            <a href="#" style="color:#2271b1;text-decoration:none;font-size:13px">Add product gallery images ⓘ</a>
+          </div>
+        </div>
+
+        <!-- PRODUCT CATEGORIES -->
+        <div class="side-box">
+          <div class="side-box-head"><h3>Product categories</h3><span class="head-arrows">∧ ∨ ∧</span></div>
+          <div class="side-box-body">
+            <div class="cat-tabs">
+              <a href="#" class="active">All categories</a>
+              <a href="#">Most Used</a>
+            </div>
+            <div class="cat-list">
+              <label><input type="checkbox"> Uncategorized</label>
+              <label><input type="checkbox" checked> Consignment</label>
+              <label><input type="checkbox"> New &amp; Used Office Furniture</label>
+              <div style="margin:6px 0 4px;font-size:12px;color:#646970;font-weight:600">Shop by Brand</div>
+              <label style="padding-left:14px"><input type="checkbox"> Datum®</label>
+              <label style="padding-left:14px"><input type="checkbox"> Great Openings®</label>
+              <label style="padding-left:14px"><input type="checkbox"> Via Seating®</label>
+              <label style="padding-left:14px"><input type="checkbox"> United Chair®</label>
+              <label style="padding-left:14px"><input type="checkbox"> Sit On It®</label>
+            </div>
+            <div class="cat-add"><a href="#">+ Add new category</a></div>
+          </div>
+        </div>
+
+        <!-- PRODUCT TAGS -->
+        <div class="side-box">
+          <div class="side-box-head"><h3>Product tags</h3><span class="head-arrows">∧ ∨ ∧</span></div>
+          <div class="side-box-body">
+            <div class="tags-input"><input type="text" placeholder=""><button class="btn-add-tag">Add</button></div>
+            <div style="font-size:12px;color:#646970;margin-top:6px">Separate tags with commas</div>
+            <a href="#" style="color:#2271b1;text-decoration:none;font-size:13px;display:inline-block;margin-top:6px">Choose from the most used tags</a>
+          </div>
+        </div>
+
+        <!-- BRANDS -->
+        <div class="side-box">
+          <div class="side-box-head"><h3>Brands</h3><span class="head-arrows">∧ ∨ ∧</span></div>
+          <div class="side-box-body">
+            <div class="cat-tabs"><a href="#" class="active">All Brands</a><a href="#">Most Used</a></div>
+            <div class="cat-list">
+              <label><input type="checkbox"> Eurotech®</label>
+              <label><input type="checkbox"> Arcadia®</label>
+              <label><input type="checkbox"> Allseating®</label>
+              <label><input type="checkbox"> AIS®</label>
+              <label><input type="checkbox"> Teknion</label>
+              <label><input type="checkbox"> 9to5</label>
+              <label><input type="checkbox"> Vari®</label>
+              <label><input type="checkbox"> Compel®</label>
+            </div>
+            <div class="cat-add"><a href="#">+ Add New Brand</a></div>
+          </div>
+        </div>
+
+      </aside>
+
+    </div>
+
+    <!-- Yellow side note -->
+    <div class="side-note">
+      <strong>What this screen does (Screen 3).</strong> This is the standard WooCommerce Add New Product page, with the Product Data box pre-set to Consignment and the consignor (Sarah Reynolds / Lakewood Capital Partners) already linked, shown in the purple banner at the top. The Consignment tab in the Product Data box is auto-selected and exposes the per-product attributes (Pricing, Availability &amp; Lifecycle, Internal Notes) the developer must add. Everything else on the page — title, description, image gallery, categories, brands, publish box — is the unmodified WooCommerce screen the team already uses. Clicking <em>Publish</em> in the right sidebar pushes the product live (or schedules it for the Auto-Publish Date).
+    </div>
+
+  </main>
+
+</div>
+
+</body>
+</html>

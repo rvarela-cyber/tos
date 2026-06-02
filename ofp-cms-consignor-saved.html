@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OFP CMS — Consignor Saved</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f0f0f1;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;color:#1d2327;font-size:13px;line-height:1.4}
+
+.wp-toolbar{background:#1d2327;color:#a7aaad;height:32px;display:flex;align-items:center;padding:0 14px;font-size:13px;gap:18px;position:sticky;top:0;z-index:20}
+.wp-toolbar .tb-item{display:flex;align-items:center;gap:6px;color:#a7aaad;text-decoration:none}
+.wp-toolbar .tb-item:hover{color:#72aee6}
+.wp-toolbar .tb-home::before{content:"⌂";font-size:18px;line-height:1}
+.wp-toolbar .live-badge{background:#00a32a;color:#fff;font-size:10px;font-weight:600;padding:2px 6px;border-radius:2px;letter-spacing:.04em}
+.wp-toolbar .tb-right{margin-left:auto;display:flex;gap:18px;align-items:center}
+
+.wp-shell{display:flex;min-height:calc(100vh - 32px)}
+.wp-side{width:160px;background:#1d2327;color:#c3c4c7;flex-shrink:0;padding-top:8px}
+.wp-side .ws-item{display:flex;align-items:center;gap:8px;padding:8px 12px;font-size:13px;color:#c3c4c7;cursor:default;border-left:4px solid transparent}
+.wp-side .ws-item:hover{background:#2c3338;color:#72aee6}
+.wp-side .ws-item.active{background:#2271b1;color:#fff;border-left-color:#fff}
+.wp-side .ws-ico{width:14px;height:14px;flex-shrink:0;stroke:currentColor;fill:none;stroke-width:2}
+.wp-side .ws-divider{height:1px;background:#2c3338;margin:8px 0}
+
+.wp-main{flex:1;padding:20px 24px 40px;min-width:0;display:flex;justify-content:center;align-items:flex-start}
+
+.success-card{background:#fff;border:1px solid #c3c4c7;border-radius:6px;max-width:640px;width:100%;margin-top:60px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.05)}
+.success-banner{background:linear-gradient(135deg,#007017 0%,#00a32a 100%);color:#fff;padding:36px 32px;text-align:center}
+.success-banner .check-circle{width:72px;height:72px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:38px;color:#007017;font-weight:900;line-height:1}
+.success-banner h1{font-size:24px;font-weight:700;margin:0 0 6px;letter-spacing:-.005em}
+.success-banner p{margin:0;font-size:14px;opacity:.95}
+
+.consignor-summary{padding:24px 32px;border-bottom:1px solid #f0f0f1}
+.cs-label{font-size:11px;font-weight:700;color:#646970;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+.cs-row{display:grid;grid-template-columns:140px 1fr;gap:10px;padding:6px 0;font-size:14px;border-bottom:1px solid #f6f7f7}
+.cs-row:last-child{border-bottom:none}
+.cs-row .cs-key{color:#646970;font-weight:500}
+.cs-row .cs-val{color:#1d2327;font-weight:600}
+.cs-row .badge{display:inline-block;background:#e7f5ec;color:#007017;font-size:11px;font-weight:700;padding:2px 8px;border-radius:3px;border:1px solid #b8e0c5;letter-spacing:.04em}
+
+.next-step{padding:24px 32px;background:#f6f7f7}
+.ns-header{font-size:13px;font-weight:700;color:#1d2327;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.ns-text{font-size:14px;color:#2c3338;margin:0 0 18px;line-height:1.55}
+.ns-text strong{color:#1d2327}
+
+.ns-actions{display:flex;gap:10px;flex-wrap:wrap}
+.btn-primary{background:#2271b1;color:#fff;border:1px solid #2271b1;padding:11px 22px;font-size:14px;font-weight:700;border-radius:3px;cursor:pointer;font-family:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:background .15s}
+.btn-primary:hover{background:#135e96;border-color:#135e96}
+.btn-primary .arrow{font-size:16px;line-height:1}
+.btn-secondary{background:#fff;color:#2271b1;border:1px solid #2271b1;padding:10px 18px;font-size:14px;font-weight:600;border-radius:3px;cursor:pointer;font-family:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.btn-secondary:hover{background:#f6f7f7}
+
+/* Floating "click here" callout */
+.click-here-wrap{position:relative;display:inline-block}
+.click-here-tag{position:absolute;top:50%;left:calc(100% + 14px);transform:translateY(-50%);background:#d63638;color:#fff;font-size:12px;font-weight:700;padding:7px 12px;border-radius:20px;letter-spacing:.02em;white-space:nowrap;box-shadow:0 4px 10px rgba(214,54,56,.35);animation:pulse 1.6s ease-in-out infinite}
+.click-here-tag::before{content:"";position:absolute;left:-6px;top:50%;transform:translateY(-50%) rotate(45deg);width:10px;height:10px;background:#d63638}
+@keyframes pulse{0%,100%{transform:translateY(-50%) scale(1)}50%{transform:translateY(-50%) scale(1.05)}}
+@media(max-width:700px){
+  .click-here-tag{position:static;transform:none;display:inline-block;margin-top:8px;animation:none}
+  .click-here-tag::before{display:none}
+}
+
+/* Yellow note */
+.side-note{background:#fffbf0;border:1px solid #f5d57a;border-left:4px solid #dba617;padding:14px 18px;margin:24px auto 0;font-size:13px;color:#2c3338;line-height:1.55;max-width:1080px;border-radius:3px}
+.side-note strong{color:#1d2327}
+
+@media(max-width:900px){
+  .wp-side{width:48px}
+  .wp-side .ws-item span{display:none}
+  .success-card{margin-top:24px}
+  .success-banner{padding:28px 22px}
+  .consignor-summary,.next-step{padding:20px 22px}
+  .cs-row{grid-template-columns:1fr;gap:2px}
+}
+</style>
+</head>
+<body>
+
+<!-- WP TOOLBAR -->
+<div class="wp-toolbar">
+  <a class="tb-item tb-home" href="#">Office Furniture Plus | Texas Furniture...</a>
+  <span class="live-badge">Live</span>
+  <a class="tb-item" href="#">+ New</a>
+  <a class="tb-item" href="#">WP Engine Quick Links</a>
+  <a class="tb-item" href="#">Edit Columns</a>
+  <a class="tb-item" href="#">UpdraftPlus</a>
+  <div class="tb-right">
+    <a class="tb-item" href="#">OFP Admin</a>
+  </div>
+</div>
+
+<div class="wp-shell">
+
+  <nav class="wp-side">
+    <div class="ws-item"><svg class="ws-ico" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg><span>Dashboard</span></div>
+    <div class="ws-item"><svg class="ws-ico" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg><span>Site Kit</span></div>
+    <div class="ws-item"><svg class="ws-ico" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/></svg><span>Elementor</span></div>
+    <div class="ws-item"><svg class="ws-ico" viewBox="0 0 24 24"><path d="M3 5h18M3 12h18M3 19h18"/></svg><span>Posts</span></div>
+    <div class="ws-item active"><svg class="ws-ico" viewBox="0 0 24 24"><path d="M20 7h-7L9 3H4a2 2 0 00-2 2v14a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/></svg><span>Products</span></div>
+    <div class="ws-item"><svg class="ws-ico" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg><span>Media</span></div>
+    <div class="ws-divider"></div>
+    <div class="ws-item"><svg class="ws-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/></svg><span>Settings</span></div>
+  </nav>
+
+  <main class="wp-main">
+    <div style="width:100%;max-width:640px">
+
+    <div class="success-card">
+
+      <div class="success-banner">
+        <div class="check-circle">✓</div>
+        <h1>Consignor Saved Successfully</h1>
+        <p>Sarah Reynolds of Lakewood Capital Partners is now in the system.</p>
+      </div>
+
+      <div class="consignor-summary">
+        <div class="cs-label">Consignor Summary</div>
+        <div class="cs-row"><div class="cs-key">Contact Name</div><div class="cs-val">Sarah Reynolds</div></div>
+        <div class="cs-row"><div class="cs-key">Company</div><div class="cs-val">Lakewood Capital Partners</div></div>
+        <div class="cs-row"><div class="cs-key">Email</div><div class="cs-val">sarah@lakewoodcap.com</div></div>
+        <div class="cs-row"><div class="cs-key">Phone</div><div class="cs-val">(214) 555-0100</div></div>
+        <div class="cs-row"><div class="cs-key">Revenue Split</div><div class="cs-val">OFP 65% / Consignor 35%</div></div>
+        <div class="cs-row"><div class="cs-key">Portal Access</div><div class="cs-val"><span class="badge">Enabled</span></div></div>
+        <div class="cs-row"><div class="cs-key">Signed Agreement</div><div class="cs-val">📎 lakewood-consignment-agreement.pdf</div></div>
+      </div>
+
+      <div class="next-step">
+        <div class="ns-header">Next Step</div>
+        <p class="ns-text">Now you're ready to add a product from <strong>Lakewood Capital Partners</strong> to inventory. Clicking the button below opens the standard WooCommerce Add New Product screen, with the Product Type pre-set to Consignment and this consignor already linked.</p>
+        <div class="ns-actions">
+          <div class="click-here-wrap">
+            <a href="ofp-cms-add-product.html" class="btn-primary">
+              + Add Product
+              <span class="arrow">→</span>
+            </a>
+            <span class="click-here-tag">👉 Click here to see Screen 3</span>
+          </div>
+          <a href="#" class="btn-secondary">Done, Return to Consignors</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="side-note">
+      <strong>What this screen does.</strong> It's a confirmation page shown after the user saves a new consignor on Screen 1. It surfaces the data they just entered so they can verify nothing is wrong, and gives them one clear next action: <em>Add Product</em>. Clicking it takes them to the standard WooCommerce Add New Product screen (Screen 3) with the Product Type already set to Consignment and the consignor association written in behind the scenes.
+    </div>
+
+    </div>
+  </main>
+
+</div>
+
+</body>
+</html>
