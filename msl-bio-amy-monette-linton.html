@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Amy Monette Linton | Move Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --red:#d51f2b;--red-dark:#a8161f;
+  --dark:#1c1c1c;--mid:#555;--soft:#888;
+  --light:#f6f6f4;--border:#e4e4e0;--white:#fff;
+}
+*{box-sizing:border-box}
+body{font-family:'Source Sans 3',sans-serif;background:#fff;color:var(--dark);margin:0;padding:34px 20px 60px}
+.frame{max-width:1280px;margin:0 auto;background:var(--white);border:2px solid var(--dark);overflow:hidden}
+.util{display:flex;align-items:center;justify-content:space-between;padding:16px 30px 12px;border-bottom:1px solid var(--border);gap:18px}
+.util-mid{text-align:center;flex:1;padding:0 20px}
+.util-phone{font-family:'Oswald',sans-serif;font-size:22px;font-weight:600;color:var(--red);line-height:1.1}
+.util-sub-top{font-size:12px;color:var(--soft);letter-spacing:.04em;margin-bottom:3px;font-weight:500}
+.util-search{display:flex;align-items:center;background:#f3f3ef;border:1px solid #dcdcd6;border-radius:3px;height:42px;padding:0 4px 0 14px;flex:0 1 280px}
+.util-search input{flex:1;border:none;background:transparent;outline:none;font-size:13px;color:var(--dark);height:100%;padding:0}
+.util-search button{background:transparent;border:none;color:var(--red);cursor:pointer;display:flex;padding:8px}
+.util-search button svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2}
+.util-btns{display:flex;gap:10px;align-items:center}
+.btn-quote{background:var(--red);color:#fff;font-size:14px;font-weight:700;letter-spacing:.06em;padding:13px 26px;border-radius:3px;text-decoration:none;text-transform:uppercase}
+.btn-meet-nav{background:#fff;color:var(--red);border:2px solid var(--red);font-size:14px;font-weight:700;letter-spacing:.06em;padding:11px 24px;border-radius:3px;text-decoration:none;text-transform:uppercase}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:0 22px;border-bottom:3px solid var(--red);flex-wrap:nowrap;gap:14px}
+.nav-links{display:flex;gap:2px;flex-wrap:nowrap}
+.nav-links a{font-family:'Source Sans 3',sans-serif;font-size:13px;font-weight:600;color:#333;text-decoration:none;padding:15px 10px;letter-spacing:.01em;border-bottom:3px solid transparent;margin-bottom:-3px;white-space:nowrap}
+.nav-links a:hover,.nav-links a.active{color:var(--red);border-bottom-color:var(--red)}
+.nav-phone{font-family:'Oswald',sans-serif;font-size:18px;font-weight:600;color:var(--red);flex-shrink:0}
+.crumb{padding:14px 30px;font-size:12px;color:var(--soft);background:#fafaf6;border-bottom:1px solid var(--border)}
+.crumb a{color:var(--mid);text-decoration:none;margin-right:6px}
+.crumb span{margin-right:6px}
+.crumb strong{color:var(--dark);font-weight:600}
+
+/* BIO HERO */
+.bio-hero{background:linear-gradient(135deg,#a8161f 0%,#d51f2b 60%,#e8303d 100%);padding:52px 0 52px 48px;position:relative;overflow:hidden}
+.bio-hero::before{content:'';position:absolute;top:-30%;right:-5%;width:480px;height:480px;border-radius:50%;background:rgba(255,200,200,.06)}
+.bio-hero-inner{width:100%;display:grid;grid-template-columns:200px 1fr 340px;gap:40px;align-items:stretch;position:relative}
+.bio-photo-hero{width:200px;height:240px;background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.25);border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;flex-shrink:0}
+.bio-photo-hero svg{width:48px;height:48px;stroke:rgba(255,255,255,.45);fill:none;stroke-width:1.5}
+.bio-photo-hero .ph-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45);font-family:'Source Sans 3',sans-serif}
+.bio-photo-hero .ph-note{font-size:11px;color:rgba(255,255,255,.35);font-style:italic;text-align:center;max-width:160px;line-height:1.4;font-family:'Source Sans 3',sans-serif}
+.bio-hero-text .eyebrow{display:inline-block;background:rgba(255,255,255,.15);color:#fff;font-size:11px;font-weight:700;letter-spacing:.16em;padding:5px 12px;border-radius:2px;text-transform:uppercase;margin-bottom:14px;font-family:'Source Sans 3',sans-serif}
+.bio-hero-text h1{font-family:'Oswald',sans-serif;font-size:44px;font-weight:700;color:#fff;margin:0 0 6px;line-height:1.05;text-transform:uppercase}
+.bio-hero-text .bio-title{font-family:'Source Sans 3',sans-serif;font-size:17px;color:rgba(255,255,255,.88);margin-bottom:4px;font-weight:600}
+.bio-hero-text .bio-company{font-family:'Source Sans 3',sans-serif;font-size:14px;color:rgba(255,255,255,.65);margin-bottom:22px}
+.bio-ctas{display:flex;gap:12px;flex-wrap:wrap}
+.cta-li{background:#fff;color:var(--red-dark);font-size:13px;font-weight:800;letter-spacing:.06em;padding:12px 22px;border-radius:3px;text-decoration:none;text-transform:uppercase;font-family:'Source Sans 3',sans-serif;display:inline-flex;align-items:center;gap:8px}
+.cta-li svg{width:16px;height:16px;fill:var(--red-dark)}
+.cta-contact{background:transparent;color:#fff;border:2px solid #fff;font-size:13px;font-weight:700;letter-spacing:.06em;padding:10px 20px;border-radius:3px;text-decoration:none;text-transform:uppercase;font-family:'Source Sans 3',sans-serif}
+
+/* BIO BODY */
+.bio-body{max-width:1180px;margin:0 auto;padding:52px 48px;display:grid;grid-template-columns:1fr 300px;gap:52px;align-items:start}
+.bio-content p{font-size:15px;color:var(--mid);line-height:1.75;margin:0 0 18px;font-family:'Source Sans 3',sans-serif}
+.bio-content p:last-child{margin-bottom:0}
+.bio-content p strong{color:var(--dark)}
+
+/* SIDEBAR */
+.bio-sidebar{}
+.sidebar-card{background:var(--light);border:1.5px solid var(--border);border-radius:6px;padding:24px;margin-bottom:20px}
+.sidebar-card h3{font-family:'Oswald',sans-serif;font-size:16px;font-weight:700;color:var(--dark);margin:0 0 14px;text-transform:uppercase;letter-spacing:.02em}
+.sidebar-item{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;font-size:13.5px;color:var(--mid);line-height:1.5;font-family:'Source Sans 3',sans-serif}
+.sidebar-item:last-child{margin-bottom:0}
+.sidebar-dot{width:7px;height:7px;border-radius:50%;background:var(--red);flex-shrink:0;margin-top:5px}
+.sidebar-card .cta-li-full{display:flex;align-items:center;gap:8px;background:var(--red);color:#fff;font-size:13px;font-weight:700;letter-spacing:.05em;padding:12px 16px;border-radius:3px;text-decoration:none;text-transform:uppercase;font-family:'Source Sans 3',sans-serif;justify-content:center;margin-top:6px}
+.sidebar-card .cta-li-full svg{width:15px;height:15px;fill:#fff}
+
+/* RELATED POSTS */
+.related-section{background:var(--light);border-top:1px solid var(--border);padding:48px 48px 56px;clear:both}
+.related-inner{max-width:1180px;margin:0 auto}
+.related-eyebrow{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--red-dark);margin-bottom:8px;font-family:'Source Sans 3',sans-serif}
+.related-h{font-family:'Oswald',sans-serif;font-size:26px;font-weight:700;color:var(--dark);margin:0 0 28px;text-transform:uppercase}
+.posts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.post-card{background:#fff;border:1.5px solid var(--border);border-radius:6px;overflow:hidden;text-decoration:none;color:inherit;display:block}
+.post-card:hover{border-color:var(--red)}
+.post-img{aspect-ratio:16/9;background:#e8e4de;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;border-bottom:1px solid var(--border)}
+.post-img .ph-bar{width:28px;height:3px;background:#c8c0b8;border-radius:2px}
+.post-img .ph-txt{font-family:'Source Sans 3',sans-serif;font-size:9px;color:#bbb;letter-spacing:.1em;text-transform:uppercase}
+.post-body{padding:16px 18px}
+.post-date{font-family:'Source Sans 3',sans-serif;font-size:11px;color:var(--soft);margin-bottom:6px}
+.post-title{font-family:'Oswald',sans-serif;font-size:16px;font-weight:600;color:var(--dark);line-height:1.35}
+.post-card:hover .post-title{color:var(--red)}
+
+/* FINAL CTA */
+.final-cta{background:linear-gradient(135deg,#a8161f,#d51f2b);color:#fff;padding:56px 30px;text-align:center}
+.final-cta h2{font-family:'Oswald',sans-serif;font-size:30px;font-weight:700;margin:0 0 12px;text-transform:uppercase}
+.final-cta p{font-size:15px;color:rgba(255,255,255,.9);line-height:1.55;margin:0 0 24px;font-family:'Source Sans 3',sans-serif;max-width:600px;margin-left:auto;margin-right:auto}
+.final-cta .fc-primary{background:#fff;color:var(--red-dark);font-size:14px;font-weight:800;letter-spacing:.06em;padding:14px 28px;border-radius:3px;text-decoration:none;text-transform:uppercase;font-family:'Source Sans 3',sans-serif}
+.footer-ph{background:#fff;padding:52px 30px;text-align:center;display:block;clear:both}
+.footer-ph .ph-txt{font-size:14px;font-weight:700;letter-spacing:.12em;color:var(--soft);text-transform:uppercase;font-family:'Source Sans 3',sans-serif}
+
+
+/* ACTION IMAGE */
+.bio-hero-action{position:relative;overflow:hidden;margin:-52px -30px -52px 0;align-self:stretch;flex-shrink:0}
+.bio-hero-action-inner{width:100%;height:100%;min-height:300px;background:rgba(0,0,0,.25);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;position:relative}
+.bio-hero-action-inner::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(168,22,31,.6) 0%,transparent 50%)}
+.bio-hero-action .ph-icon-lg{width:56px;height:56px;border:1.5px dashed rgba(255,255,255,.35);border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;z-index:1}
+.bio-hero-action .ph-icon-lg svg{width:26px;height:26px;stroke:rgba(255,255,255,.4);fill:none;stroke-width:1.4}
+.bio-hero-action .ph-action-label{font-family:'Source Sans 3',sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);position:relative;z-index:1;text-align:center;padding:0 20px}
+</style>
+</head>
+<body>
+<div class="frame">
+
+  <div class="util">
+    <div style="background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;letter-spacing:.1em;color:#aaa;text-transform:uppercase;height:62px;width:220px;border:1px solid #ddd;">LOGO PLACEHOLDER</div>
+    <div class="util-search">
+      <input type="text" placeholder="Search services, resources...">
+      <button type="button" aria-label="Search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+    </div>
+    <div class="util-mid">
+      <div class="util-sub-top">Ready To Move? Call Us Today!</div>
+      <div class="util-phone">1.800.668.3752</div>
+    </div>
+    <div class="util-btns"><a href="#" class="btn-meet-nav">Book Meeting</a><a href="#" class="btn-quote">Get Quote</a></div>
+  </div>
+  <nav class="nav">
+    <div class="nav-links">
+      <a href="#">Services</a>
+      <a href="#">Who We Serve</a>
+      <a href="#">Technology</a>
+      <a href="#">Storage</a>
+      <a href="#">Resources</a>
+      <a href="#" class="active">About Us</a>
+      <a href="#">Contact Us</a>
+    </div>
+    <div class="nav-phone">1.800.668.3752</div>
+  </nav>
+
+  <!-- BIO HERO -->
+  <div class="bio-hero">
+    <div class="bio-hero-inner">
+      <div class="bio-photo-hero">
+        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <div class="ph-label">Photo Placeholder</div>
+        <div class="ph-note">Professional photo of Amy Monette Linton</div>
+      </div>
+      <div class="bio-hero-text">
+        <span class="eyebrow">Move Solutions Leadership</span>
+        <h1>Amy Monette Linton</h1>
+        <div class="bio-title">General Manager, Dallas-Fort Worth</div>
+        <div class="bio-company">Move Solutions — A Total Office Solutions Company</div>
+        <div class="bio-ctas">
+          <a href="https://www.linkedin.com/in/amy-linton/" target="_blank" rel="noopener" class="cta-li">
+            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            Connect on LinkedIn
+          </a>
+        </div>
+      </div>
+
+      <div class="bio-hero-action">
+        <div class="bio-hero-action-inner">
+          <div class="ph-icon-lg"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="14" rx="1"/><path d="M8 21h8M12 17v4"/></svg></div>
+          <div class="ph-action-label">Amy Monette Linton — Action Shot</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BIO BODY -->
+  <div class="bio-body">
+    <div class="bio-content">
+        <p>With more than two decades of experience in the office relocation and contract furniture industries, Amy Monette Linton brings a deep understanding of operations, client service, and business strategy to her role as General Manager of Move Solutions' Dallas-Fort Worth region.</p>
+        <p>In her role, Amy leads the DFW team and is responsible for day-to-day operations, revenue and profitability forecasting, monthly P&L management, client and industry partner relationships, and fostering collaboration between sales and operations. Her leadership is grounded in process, people, and performance.</p>
+        <p>Prior to her current position, Amy served as General Manager of Move Solutions' Austin office from 2009 to 2019, overseeing significant growth and regional expansion. In 2019, she returned to Dallas to assume the role of General Manager for the company's flagship market.</p>
+        <p>Amy is an active leader within the Office Moving Alliance (OMA), a highly vetted global network of relocation partners. She serves as OMA Partner Advocate (OPA) and Chair of the OMA Sales Committee, recognized for fostering collaboration, driving innovation, and mentoring the next generation of professionals. Her contributions were recognized with the first-ever OPA of the Year award in 2024.</p>
+        <p>She is currently an active member of Vistage, Commercial Real Estate for Women (Austin and Dallas chapters), and serves on the Board of Directors for the Greater Irving-Las Colinas Chamber of Commerce. Amy earned her Bachelor of Science in Business Administration from the University of Texas at Dallas.</p>
+    </div>
+    <div class="bio-sidebar">
+      <div class="sidebar-card">
+        <h3>Highlights</h3>
+            <div class="sidebar-item"><div class="sidebar-dot"></div><span>20+ years in office relocation and contract furniture</span></div>
+            <div class="sidebar-item"><div class="sidebar-dot"></div><span>General Manager, Move Solutions DFW</span></div>
+            <div class="sidebar-item"><div class="sidebar-dot"></div><span>Former General Manager, Move Solutions Austin (2009–2019)</span></div>
+            <div class="sidebar-item"><div class="sidebar-dot"></div><span>OMA Partner Advocate of the Year, 2024</span></div>
+            <div class="sidebar-item"><div class="sidebar-dot"></div><span>Chair, OMA Sales Committee</span></div>
+            <div class="sidebar-item"><div class="sidebar-dot"></div><span>Board Member, Greater Irving-Las Colinas Chamber of Commerce</span></div>
+            <div class="sidebar-item"><div class="sidebar-dot"></div><span>B.S. Business Administration, University of Texas at Dallas</span></div>
+      </div>
+  </div>
+
+  </div><!-- /bio-body -->
+
+  <!-- RELATED POSTS -->
+  <div class="related-section">
+    <div class="related-inner">
+      <div class="related-eyebrow">From The Desk Of Amy Monette Linton</div>
+      <div class="related-h">Latest Insights &amp; Articles</div>
+      <div class="posts-grid">
+          <a href="#" class="post-card">
+            <div class="post-img"><div class="ph-bar"></div><div class="ph-txt">Post thumbnail</div></div>
+            <div class="post-body"><div class="post-date">[Post Date]</div><div class="post-title">[Post title pulls dynamically by author tag]</div></div>
+          </a>
+          <a href="#" class="post-card">
+            <div class="post-img"><div class="ph-bar"></div><div class="ph-txt">Post thumbnail</div></div>
+            <div class="post-body"><div class="post-date">[Post Date]</div><div class="post-title">[Post title pulls dynamically by author tag]</div></div>
+          </a>
+          <a href="#" class="post-card">
+            <div class="post-img"><div class="ph-bar"></div><div class="ph-txt">Post thumbnail</div></div>
+            <div class="post-body"><div class="post-date">[Post Date]</div><div class="post-title">[Post title pulls dynamically by author tag]</div></div>
+          </a>
+      </div>
+    </div>
+  </div>
+<div class="footer-ph"><div class="ph-txt">Footer Here</div></div>
+
+</div>
+</body>
+</html>

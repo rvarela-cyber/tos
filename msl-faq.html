@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Frequently Asked Questions | Move Solutions</title>
+<style>
+:root{
+  --red:#d51f2b;--red-dk:#a8161f;--red-lt:#fce8e9;--red-soft:#fdf3f3;
+  --ink:#1c1c1c;--mid:#555;--soft:#888;
+  --line:#e0e0dc;--wire:#cfcfcf;--bg:#f5f4f0;--paper:#fff;
+  --shadow:0 4px 14px rgba(0,0,0,.06);--shadow-lg:0 8px 24px rgba(0,0,0,.08)
+}
+*{box-sizing:border-box}
+body{font-family:'Source Sans 3',Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);margin:0;padding:34px 20px 60px}
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap');
+.frame{max-width:1280px;margin:0 auto;background:var(--paper);border:2px solid var(--ink);overflow:hidden}
+
+/* UTIL */
+.util{display:flex;align-items:center;justify-content:space-between;padding:16px 30px 12px;border-bottom:1px solid var(--line);gap:18px}
+.util .logo-ph{height:62px;width:220px;background:#f0f0f0;border:1px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;letter-spacing:.1em;color:#aaa;text-transform:uppercase;flex-shrink:0}
+.util-mid{text-align:center;flex:1;padding:0 20px}
+.util-phone{font-family:'Oswald',sans-serif;font-size:23px;font-weight:600;color:var(--ink);line-height:1.1}
+.util-sub-top{font-size:12px;color:var(--soft);letter-spacing:.04em;margin-bottom:3px;font-weight:500}
+.util-search{display:flex;align-items:center;background:#f3f3ef;border:1px solid #dcdcd6;border-radius:3px;height:42px;padding:0 4px 0 14px;flex:0 1 280px}
+.util-search input{flex:1;border:none;background:transparent;outline:none;font-size:13px;color:var(--ink);height:100%;padding:0}
+.util-search button{background:transparent;border:none;color:var(--red);cursor:pointer;display:flex;padding:8px;border-radius:2px}
+.util-btns{display:flex;gap:10px;align-items:center}
+.btn-quote{background:var(--red);color:#fff;font-size:14px;font-weight:600;letter-spacing:.06em;padding:13px 26px;border-radius:3px;text-decoration:none;text-transform:uppercase}
+.btn-meet{background:#fff;color:var(--red);border:2px solid var(--red);font-size:14px;font-weight:700;letter-spacing:.06em;padding:11px 24px;border-radius:3px;text-decoration:none;text-transform:uppercase}
+
+/* NAV */
+.nav{display:flex;align-items:center;justify-content:space-between;padding:0 22px;border-bottom:3px solid var(--ink);flex-wrap:nowrap;gap:14px}
+.nav-links{display:flex;gap:2px;flex-wrap:nowrap}
+.nav-links a{font-size:13px;font-weight:600;color:#333;text-decoration:none;padding:15px 10px;letter-spacing:.01em;border-bottom:3px solid transparent;margin-bottom:-3px;transition:color .15s,border-color .15s;white-space:nowrap}
+.nav-links a:hover,.nav-links a.active{color:var(--red);border-bottom-color:var(--red)}
+.nav-phone{font-family:'Oswald',sans-serif;font-size:18px;font-weight:600;color:var(--red);flex-shrink:0}
+
+/* BREADCRUMB */
+/* PAGE HEADER */
+.page-header{padding:28px 40px 24px;background:#fafaf6;border-bottom:1px solid var(--line);text-align:center}
+.page-header .eyebrow{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--red-dk);background:var(--red-soft);border:1px solid var(--red-lt);padding:5px 12px;border-radius:2px;display:inline-block;margin-bottom:14px}
+.page-header h1{font-family:'Oswald',sans-serif;font-size:42px;font-weight:700;color:var(--ink);letter-spacing:-.01em;margin:0 0 8px;line-height:1.1;text-transform:uppercase;text-align:center}
+.page-header h1 .accent{color:var(--red-dk)}
+.page-header .sub{font-size:16px;color:var(--mid);line-height:1.55;text-align:center;white-space:nowrap}
+
+/* FAQ LAYOUT */
+.faq-wrap{padding:50px 40px 64px;background:#fff}
+.faq-inner{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:280px 1fr;gap:48px;align-items:start}
+@media(max-width:900px){.faq-inner{grid-template-columns:1fr;gap:28px}}
+
+/* SIDEBAR */
+.faq-sidebar{position:sticky;top:20px}
+@media(max-width:900px){.faq-sidebar{position:static}}
+.sidebar-label{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--red-dk);margin-bottom:14px;padding-bottom:12px;border-bottom:2px solid var(--red)}
+.cat-list{display:flex;flex-direction:column;gap:4px}
+.cat-item{font-size:14px;font-weight:600;letter-spacing:.005em;color:var(--mid);background:transparent;border:none;padding:11px 14px;border-radius:4px;cursor:pointer;text-align:left;display:flex;align-items:center;justify-content:space-between;gap:10px;transition:all .15s;line-height:1.3}
+.cat-item:hover{background:var(--red-soft);color:var(--red-dk)}
+.cat-item.active{background:var(--red);color:#fff;font-weight:700}
+.cat-item .count{font-size:11px;font-weight:800;background:rgba(0,0,0,.08);padding:2px 8px;border-radius:10px;flex-shrink:0}
+.cat-item.active .count{background:rgba(255,255,255,.22);color:#fff}
+.cat-item:hover .count{background:rgba(213,31,43,.1);color:var(--red-dk)}
+
+/* FAQ SECTIONS */
+.faq-section{margin-bottom:44px}
+.faq-section:last-child{margin-bottom:0}
+.faq-section.hidden{display:none}
+.faq-section-head{display:flex;align-items:center;gap:14px;margin-bottom:22px;padding-bottom:14px;border-bottom:2px solid var(--red)}
+.faq-section-head .sec-icon{width:36px;height:36px;background:var(--red-soft);border:1.5px solid var(--red-lt);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--red-dk);flex-shrink:0}
+.faq-section-head .sec-icon svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.faq-section-head h2{font-family:'Oswald',sans-serif;font-size:24px;font-weight:700;color:var(--ink);letter-spacing:-.005em;margin:0;line-height:1.2;text-transform:uppercase}
+.faq-section-head .sec-count{margin-left:auto;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
+
+/* ACCORDION */
+details.faq-item{border:1px solid var(--line);border-radius:6px;margin-bottom:10px;background:#fff;transition:box-shadow .15s,border-color .15s}
+details.faq-item[open]{border-color:var(--red);box-shadow:var(--shadow)}
+details.faq-item summary{padding:18px 50px 18px 22px;font-size:15px;font-weight:700;color:var(--ink);cursor:pointer;list-style:none;position:relative;letter-spacing:-.005em;line-height:1.4}
+details.faq-item summary::-webkit-details-marker{display:none}
+details.faq-item summary::after{content:"+";position:absolute;right:22px;top:50%;transform:translateY(-50%);font-size:22px;font-weight:400;color:var(--red-dk);line-height:1;transition:transform .2s}
+details.faq-item[open] summary::after{content:"−";color:var(--red-dk)}
+details.faq-item summary:hover{color:var(--red-dk)}
+details.faq-item .faq-body{padding:0 22px 20px;font-size:14.5px;color:var(--mid);line-height:1.65}
+details.faq-item .faq-body p{margin:0 0 12px}
+details.faq-item .faq-body p:last-child{margin-bottom:0}
+details.faq-item .faq-body strong{color:var(--ink);font-weight:700}
+details.faq-item .faq-body ul{margin:8px 0 12px;padding-left:20px}
+details.faq-item .faq-body li{margin-bottom:5px}
+
+/* CTA */
+.still-cta{background:linear-gradient(135deg,var(--red) 0%,var(--red-dk) 100%);color:#fff;padding:48px 40px;text-align:center}
+.still-cta .eyebrow-w{font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,200,200,.9);margin-bottom:12px}
+.still-cta h2{font-family:'Oswald',sans-serif;font-size:30px;font-weight:700;letter-spacing:-.01em;margin:0 0 12px;line-height:1.15;text-transform:uppercase}
+.still-cta p{font-size:15px;color:rgba(255,255,255,.88);max-width:540px;margin:0 auto 24px;line-height:1.55}
+.still-cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.still-cta-btns a{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:800;letter-spacing:.06em;padding:14px 26px;border-radius:3px;text-decoration:none;text-transform:uppercase;transition:transform .15s}
+.btn-w-pri{background:#fff;color:var(--red-dk)}
+.btn-w-sec{background:transparent;color:#fff;border:2px solid #fff}
+.still-cta-btns a:hover{transform:translateY(-2px)}
+.still-cta-btns a svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+
+/* FOOTER */
+.footer-ph{background:#fff;border-top:3px solid var(--red);padding:60px 30px;text-align:center}
+.footer-ph .ph-txt{font-size:14px;font-weight:700;letter-spacing:.12em;color:var(--soft);text-transform:uppercase}
+
+@media(max-width:760px){
+  body{padding:14px 8px 40px}
+  .page-header{padding:26px 22px 22px}
+  .page-header h1{font-size:30px}
+  .faq-wrap{padding:34px 22px 44px}
+  .faq-section-head h2{font-size:20px}
+  details.faq-item summary{font-size:14px;padding:16px 44px 16px 18px}
+  .still-cta{padding:36px 22px}
+  .still-cta h2{font-size:22px}
+}
+</style>
+</head>
+<body>
+<div class="frame">
+
+  <!-- UTIL -->
+  <div class="util">
+    <div class="logo-ph">Logo Placeholder</div>
+    <div class="util-search">
+      <input type="text" placeholder="Search services, resources...">
+      <button type="button" aria-label="Search"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+    </div>
+    <div class="util-mid">
+      <div class="util-sub-top">Ready To Move? Call Us Today!</div>
+      <div class="util-phone">1.800.668.3752</div>
+    </div>
+    <div class="util-btns"><a href="#" class="btn-meet">Book Meeting</a><a href="#" class="btn-quote">Get Quote</a></div>
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-links">
+      <a href="#">Services</a>
+      <a href="#">Who We Serve</a>
+      <a href="#">Technology</a>
+      <a href="#">Storage</a>
+      <a href="#" class="active">Resources</a>
+      <a href="#">About Us</a>
+      <a href="#">Contact Us</a>
+    </div>
+    <div class="nav-phone">1.800.668.3752</div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="eyebrow">Frequently Asked Questions</div>
+    <h1>Answers To <span class="accent">Your Questions.</span></h1>
+    <p class="sub">The questions we hear most before a move starts, and the answers you and your team are looking for.</p>
+  </div>
+
+  <!-- FAQ CONTENT -->
+  <div class="faq-wrap">
+    <div class="faq-inner">
+
+      <!-- SIDEBAR -->
+      <aside class="faq-sidebar">
+        <div class="sidebar-label">Browse By Category</div>
+        <div class="cat-list" id="catList">
+          <button class="cat-item active" data-cat="all" onclick="filterCat('all',this)">All Questions <span class="count" id="cntAll">0</span></button>
+          <button class="cat-item" data-cat="company" onclick="filterCat('company',this)">About The Company <span class="count" id="cntCompany">0</span></button>
+          <button class="cat-item" data-cat="services" onclick="filterCat('services',this)">Services &amp; Capabilities <span class="count" id="cntServices">0</span></button>
+          <button class="cat-item" data-cat="process" onclick="filterCat('process',this)">Process &amp; Logistics <span class="count" id="cntProcess">0</span></button>
+          <button class="cat-item" data-cat="tech" onclick="filterCat('tech',this)">Technology &amp; Tracking <span class="count" id="cntTech">0</span></button>
+          <button class="cat-item" data-cat="payment" onclick="filterCat('payment',this)">Payment &amp; Billing <span class="count" id="cntPayment">0</span></button>
+          <button class="cat-item" data-cat="gov" onclick="filterCat('gov',this)">Government &amp; Contracts <span class="count" id="cntGov">0</span></button>
+          <button class="cat-item" data-cat="docs" onclick="filterCat('docs',this)">Insurance &amp; Documents <span class="count" id="cntDocs">0</span></button>
+        </div>
+      </aside>
+
+      <!-- MAIN -->
+      <div class="faq-content" id="faqContent">
+
+        <!-- ABOUT THE COMPANY -->
+        <div class="faq-section" data-cat="company">
+          <div class="faq-section-head">
+            <div class="sec-icon"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4M9 9v.01M9 12v.01M9 15v.01M9 18v.01"/></svg></div>
+            <h2>About The Company</h2>
+            <span class="sec-count" id="hdrCompany"></span>
+          </div>
+
+          <details class="faq-item">
+            <summary>How long has Move Solutions been in business and is commercial moving your only focus?</summary>
+            <div class="faq-body">
+              <p>Move Solutions has been providing commercial moving services since 1987 with zero layoffs in over 40+ years of operation. Commercial office and industrial moving is our entire focus. Every employee, every truck, and every piece of equipment we own exists to serve that singular purpose.</p>
+              <p>We are part of the Total Office Solutions family of companies, which gives our clients access to furniture, technology, decommissioning, and facilities services under one accountable partner when a project needs more than just the move.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>How many people do you employ and are they all W-2 employees?</summary>
+            <div class="faq-body">
+              <p>We support more than 400 families and operate with 275+ full-time W-2 trained professionals. We do not use day-labor staffing agencies or subcontract site crews to third parties. The crew that shows up on your move day has been background-checked, drug-screened, and trained to our standards before they ever set foot on a client site.</p>
+              <p>We also own the largest quantity of company-owned office-moving equipment in the Southwest, which means we do not rent equipment on the fly or improvise on large projects.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Is Move Solutions a woman-owned or minority-owned business?</summary>
+            <div class="faq-body">
+              <p>Yes. Move Solutions is 51% woman-owned and 48% veteran-owned. We hold the following certifications:</p>
+              <ul>
+                <li><strong>WBENC</strong> (Woman's Business Enterprise National Council)</li>
+                <li><strong>NAWBO</strong> (National Association of Women Business Owners)</li>
+                <li><strong>Texas HUB</strong> (Historically Underutilized Business)</li>
+                <li><strong>GSA</strong> (General Services Administration Schedule)</li>
+                <li><strong>TXMAS</strong> (Texas Multiple Award Schedule)</li>
+              </ul>
+              <p>Companies and agencies with diversity supplier requirements can use our contracts toward their reporting goals.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Are you part of a larger organization?</summary>
+            <div class="faq-body">
+              <p>Yes. Move Solutions is a member of the Total Office Solutions (TOS) family of brands, which includes Office Furniture Plus, TechTeam Solutions, Office Boy, Corporate Source, Paint &amp; Carpet, and others. When a project involves furniture, IT relocation, decommissioning, or ongoing facility support, we coordinate those services through TOS so you have one point of accountability.</p>
+              <p>We are also a member of the Office Moving Alliance (OMA), a nationwide network of 45 member companies operating across 228 markets with more than 15,000 movers, which allows us to serve multi-city and national accounts consistently.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>What sets Move Solutions apart from other commercial movers?</summary>
+            <div class="faq-body">
+              <p>Three things are meaningfully different about how we operate:</p>
+              <ul>
+                <li><strong>Process-driven execution.</strong> We run every project through BrassTacks, our proprietary technology platform that creates, tracks, and reports all project data in real time. You see what we see, when we see it.</li>
+                <li><strong>Employee-based crews.</strong> Our people are W-2 employees, not contract day labor. That means consistent training, accountability, and a crew that takes ownership of your project from first contact to final punch list.</li>
+                <li><strong>Scale and equipment.</strong> We own 40+ air ride cargo trucks, 150,000 RFID-tracked reusable crates, 2,500 four-wheel dollies, and 8 forklifts. We are not improvising.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Do you work with non-profits or community organizations?</summary>
+            <div class="faq-body">
+              <p>Yes. We partner with 25+ charitable causes and nonprofits across North Texas, including serving as the lead organizer for the Toys for Tots drive across all TOS companies. If your organization has a move need and a tight budget, reach out. We will be honest about what we can offer and point you to the right contact if we cannot take it on directly.</p>
+            </div>
+          </details>
+        </div>
+
+        <!-- SERVICES & CAPABILITIES -->
+        <div class="faq-section" data-cat="services">
+          <div class="faq-section-head">
+            <div class="sec-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></div>
+            <h2>Services &amp; Capabilities</h2>
+            <span class="sec-count" id="hdrServices"></span>
+          </div>
+
+          <details class="faq-item">
+            <summary>What services does Move Solutions provide?</summary>
+            <div class="faq-body">
+              <p>We provide comprehensive commercial office moving and workplace transition services, including:</p>
+              <ul>
+                <li>Office and industrial relocations, locally and nationally</li>
+                <li>MAC (Moves, Adds, Changes) for ongoing workspace support</li>
+                <li>FF&amp;E installation and reconfiguration</li>
+                <li>Secure warehousing and inventory management</li>
+                <li>Facility decommissioning and lease-compliant space returns</li>
+                <li>Technology relocation through TechTeam Solutions (servers, cabling, IT equipment)</li>
+                <li>Pre-move surveys, post-move support, and project management</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Can you handle after-hours, weekend, or holiday moves?</summary>
+            <div class="faq-body">
+              <p>Yes. We execute moves 24 hours a day, 7 days a week, including nights, weekends, and holidays. Our dispatch center coordinates scheduling around your operational requirements, and after-hours pricing is detailed transparently in your project proposal. If business continuity matters to your project, after-hours scheduling is often the right call.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>What is MAC service and do you offer embedded crews?</summary>
+            <div class="faq-body">
+              <p><strong>MAC</strong> stands for Moves, Adds, and Changes. It is ongoing workplace support for internal relocations, workstation reconfigurations, department changes, and equipment adds that happen after your initial move is complete.</p>
+              <p>Yes, we provide dedicated embedded teams that work at your location on an ongoing basis for facilities and MAC support. We also offer same-day assistance for small tasks through our Office Boy division with no minimums and no advance notice required.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Do you coordinate technology relocation and IT equipment?</summary>
+            <div class="faq-body">
+              <p>Yes. <strong>TechTeam Solutions</strong>, our technology division, handles PC disconnect and reconnect, server relocation, network cabling installation and removal, A/V setup, and IT equipment inventory management. TechTeam also provides R2-certified electronics recycling, secure hard drive destruction, and NAID AAA certified shredding with certificates of destruction.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Can you handle facility decommissioning when we leave a space?</summary>
+            <div class="faq-body">
+              <p>Yes. We provide complete decommissioning services to return your lease space to landlord-compliant condition. That includes furniture liquidation and removal, low-voltage cabling removal (plenum removal), electronics and e-waste recycling, secure shredding, and final cleanup. We coordinate directly with your property manager to make sure all requirements are met before you hand back the keys.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Can you move multiple locations or handle a national rollout?</summary>
+            <div class="faq-body">
+              <p>Yes. Through the Office Moving Alliance we serve clients nationally and internationally across 228 markets. We assign a single point of contact at Move Solutions and coordinate all partner markets through our OMA network, so your experience and standards stay consistent regardless of where the project lands.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>What types of specialized environments can you handle?</summary>
+            <div class="faq-body">
+              <p>We have experience across a wide range of environments beyond standard office moves, including:</p>
+              <ul>
+                <li>Data centers and server room relocations with specialized climate and security protocols</li>
+                <li>Healthcare and medical offices with HIPAA-aware chain of custody</li>
+                <li>Cleanrooms with contamination control protocols</li>
+                <li>Hospitality with a dedicated department for hotel room and FF&amp;E projects</li>
+                <li>Call centers with technology and rapid setup requirements</li>
+                <li>Universities, schools, and government facilities</li>
+                <li>Manufacturing and industrial relocations with heavy equipment</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+
+        <!-- PROCESS & LOGISTICS -->
+        <div class="faq-section" data-cat="process">
+          <div class="faq-section-head">
+            <div class="sec-icon"><svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+            <h2>Process &amp; Logistics</h2>
+            <span class="sec-count" id="hdrProcess"></span>
+          </div>
+
+          <details class="faq-item">
+            <summary>How do I start a project with Move Solutions?</summary>
+            <div class="faq-body">
+              <p>The fastest way is to call 1.800.668.3752 or request a quote through our website. You can also book a meeting directly with someone on our team. The first step is always the same: a short conversation to understand your scope, your timeline, and any building or site constraints. From there we will schedule a pre-move survey if needed and turn around a proposal.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Do you do pre-move surveys and project timelines?</summary>
+            <div class="faq-body">
+              <p>Yes. We conduct detailed pre-move surveys, either in person or via video call for remote or multi-city projects. The survey is free and it is how we catch things that matter for the quote: access constraints, elevator size, dock availability, building rules, and items that need special handling. Every project also includes a detailed timeline with milestones, coordination points, and completion dates tracked through our BrassTacks platform.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>How far in advance should I book my move?</summary>
+            <div class="faq-body">
+              <p>We recommend 4 to 6 weeks for large projects. For urgent situations, call us immediately at <strong>1.800.668.3752</strong> and we will tell you honestly whether we can accommodate the timeline. Our busiest periods are end-of-quarter months (March, June, September, December) due to lease cycles, so the earlier you engage, the more scheduling flexibility you have.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>What site protections do you put in place on move day?</summary>
+            <div class="faq-body">
+              <p>Site protection is standard on every project. We provide floor runners, wall padding, corner guards, door jamb protectors, elevator pads, and equipment with non-marking wheels. Our project managers also coordinate with building engineers ahead of the move for HVAC shutdown windows, power requirements, loading dock reservations, and elevator holds to ensure nothing in the building is at risk during execution.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>What is your damage claim rate?</summary>
+            <div class="faq-body">
+              <p>Our damage claim rate is <strong>less than 1%</strong>. We achieve this through RFID-tracked reusable crates, specialized protection protocols on every move, experienced W-2 crews, OSHA-certified quality control managers who audit every job site, and detailed work orders verified after every project. In the rare event damage occurs, we have comprehensive insurance and an established claims process to address it immediately.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>What are your reusable crates and why do you use them instead of cardboard?</summary>
+            <div class="faq-body">
+              <p>We maintain a fleet of <strong>150,000 RFID-tracked Stack-N-Pack No-Lift Crates</strong>. These are crush-proof, lockable, stackable reusable containers that replace single-use cardboard on every move we run. One crate serves hundreds of projects over its lifetime. They protect assets better than cardboard, reduce landfill waste substantially, and make moves more efficient because they stack uniformly in our trucks. We pick them back up after you unpack, clean them, and return them to rotation.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Do you provide post-move support once installation is done?</summary>
+            <div class="faq-body">
+              <p>Yes. We offer post-move verification, punch list completion, and ongoing MAC support after your project closes. If something shifts, a piece needs adjustment, or a department needs to move three months later, we keep your project records and floor plans on file so the next round goes faster. Our Office Boy division also provides same-day assistance for smaller tasks that come up between larger projects.</p>
+            </div>
+          </details>
+        </div>
+
+        <!-- TECHNOLOGY & TRACKING -->
+        <div class="faq-section" data-cat="tech">
+          <div class="faq-section-head">
+            <div class="sec-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+            <h2>Technology &amp; Tracking</h2>
+            <span class="sec-count" id="hdrTech"></span>
+          </div>
+
+          <details class="faq-item">
+            <summary>What is BrassTacks and how does it benefit my project?</summary>
+            <div class="faq-body">
+              <p><strong>BrassTacks</strong> is Move Solutions' proprietary project management platform. It is cyber-secure, mobile, and real-time — if we know something about your project, you know it too. BrassTacks handles proposals, work orders, scheduling, crew assignments, inventory tracking, completion reports, and job-site photos in one place.</p>
+              <p>For clients, this means no information gaps between the office and the crew. You have access to the same data we do, from any device, at any time during your project.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>How do you track furniture and assets during a move?</summary>
+            <div class="faq-body">
+              <p>Our 150,000-crate RFID system tracks every crate from your origin space through transit to your destination. For asset-intensive projects, we also provide barcode or RFID tagging of individual furniture pieces, equipment, and IT assets with online client portal access so your team can see where everything is in real time.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Can I see project updates in real time or do I have to wait for a report?</summary>
+            <div class="faq-body">
+              <p>You do not have to wait. BrassTacks gives you real-time access to project data, scheduling, and status updates. Job-site photos are uploaded as they are taken. For national or multi-market projects, you see progress across all locations from a single dashboard, which is particularly useful for facilities managers overseeing simultaneous rollouts.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Do your trucks have GPS tracking?</summary>
+            <div class="faq-body">
+              <p>Yes. Our fleet of 40+ air ride cargo trucks uses GPS tracking. For time-sensitive deliveries or projects where a building has specific arrival windows, our dispatch team uses live fleet data to coordinate access and communicate ETAs to your building manager proactively.</p>
+            </div>
+          </details>
+        </div>
+
+        <!-- PAYMENT & BILLING -->
+        <div class="faq-section" data-cat="payment">
+          <div class="faq-section-head">
+            <div class="sec-icon"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+            <h2>Payment &amp; Billing</h2>
+            <span class="sec-count" id="hdrPayment"></span>
+          </div>
+
+          <details class="faq-item">
+            <summary>What payment methods and terms do you offer?</summary>
+            <div class="faq-body">
+              <p>We accept checks, ACH bank transfers, wire transfers, and major credit cards. For established commercial clients, we extend Net-30 terms after a credit application is approved. Payment terms are customized per project and detailed transparently in your proposal and invoice through BrassTacks. Call 1.800.668.3752 to discuss terms for a specific project.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Do you require a deposit before starting a project?</summary>
+            <div class="faq-body">
+              <p>For new clients without an established credit history, we typically request a deposit before the project begins, with the balance due on or before completion. For approved net-terms clients, full payment is scheduled against the invoice. We are transparent about the deposit structure before you commit to anything.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Do you accept purchase orders?</summary>
+            <div class="faq-body">
+              <p>Yes. We accept purchase orders for qualified commercial accounts, government entities, and institutions. If your organization requires a PO prior to scheduling, provide it during the project setup phase and we will reference it on all billing documents. For government purchases against a contract vehicle (GSA, TXMAS, BuyBoard), include the contract number with your PO.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>How do I pay an invoice that has already been sent?</summary>
+            <div class="faq-body">
+              <p>The fastest way is through our BrassTacks client portal, which is linked directly on your invoice. You can pay by ACH or credit card there. If you prefer to mail a check or wire, remittance details are included on the invoice. If you have a question about an invoice, contact your dedicated account manager or call 1.800.668.3752.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>What happens if my project scope changes after we agree on pricing?</summary>
+            <div class="faq-body">
+              <p>Changes in scope are managed through a change order process in BrassTacks. Any pricing adjustment is documented, priced transparently, and requires your approval before we execute. We do not add undisclosed charges after the fact. If scope changes on the day of the move, our project manager will flag it with you before proceeding.</p>
+            </div>
+          </details>
+        </div>
+
+        <!-- GOVERNMENT & CONTRACTS -->
+        <div class="faq-section" data-cat="gov">
+          <div class="faq-section-head">
+            <div class="sec-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="2" x2="12" y2="6"/><path d="M3 10h18M5 10v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V10M7 14h2M11 14h2M15 14h2"/></svg></div>
+            <h2>Government &amp; Contracts</h2>
+            <span class="sec-count" id="hdrGov"></span>
+          </div>
+
+          <details class="faq-item">
+            <summary>What contract vehicles can government buyers use to engage Move Solutions?</summary>
+            <div class="faq-body">
+              <p>We hold several vehicles that allow federal, state, and local buyers to work with us without a separate bid process:</p>
+              <ul>
+                <li><strong>GSA Schedule</strong> for federal agencies</li>
+                <li><strong>TXMAS</strong> (Texas Multiple Award Schedule) for Texas state and local entities</li>
+                <li><strong>Texas HUB</strong> certification for diversity supplier credit</li>
+                <li><strong>WBENC</strong> certification for federal and corporate diversity requirements</li>
+              </ul>
+              <p>If you do not see the vehicle your agency requires, ask. We may have it or be able to route the engagement through a partner.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Do you work with military installations and Department of Defense facilities?</summary>
+            <div class="faq-body">
+              <p>Yes. We have experience moving offices, common areas, and equipment on military installations. Our crews can follow facility security protocols, work within base access requirements, and accommodate escort policies for restricted areas. Contact us with your facility requirements before the project begins and we will confirm compatibility.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Are you SAM.gov registered and do you hold a CAGE code?</summary>
+            <div class="faq-body">
+              <p>Yes. We are SAM.gov registered and maintain a current CAGE code. We hold active certifications for WBENC, Texas HUB, GSA, and TXMAS. We can provide all required documentation as part of any bid response or solicitation. If your agency requires a specific certification we do not hold, we will tell you and may team with a partner who does.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Can you handle a government project with a tight delivery window or fiscal year deadline?</summary>
+            <div class="faq-body">
+              <p>Yes, depending on scope and available scheduling. We understand that fiscal year deadlines are real and non-negotiable. Tell us the hard deadline upfront and we will be direct about whether we can meet it. We will not promise a completion date we cannot deliver. For projects requiring rapid mobilization, our OMA network can supplement our local capacity.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Do you partner with prime contractors on government opportunities?</summary>
+            <div class="faq-body">
+              <p>Yes. We frequently subcontract to prime contractors on federal and state projects, particularly where our WBENC or HUB status helps meet small business or diversity participation goals. If you are a prime contractor looking for a qualified moving subcontractor for a Texas-based project, contact us with the solicitation details and we will respond with qualifications and pricing.</p>
+            </div>
+          </details>
+        </div>
+
+        <!-- INSURANCE & DOCUMENTS -->
+        <div class="faq-section" data-cat="docs">
+          <div class="faq-section-head">
+            <div class="sec-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/><line x1="9" y1="11" x2="15" y2="11"/></svg></div>
+            <h2>Insurance &amp; Documents</h2>
+            <span class="sec-count" id="hdrDocs"></span>
+          </div>
+
+          <details class="faq-item">
+            <summary>What types of insurance does Move Solutions carry?</summary>
+            <div class="faq-body">
+              <p>We carry the following types of coverage and provide ACCORD Form 25 documentation before any project begins:</p>
+              <ul>
+                <li><strong>Texas "Subscription" Workers Compensation</strong> for all employees</li>
+                <li><strong>General Liability</strong></li>
+                <li><strong>Cargo / Transportation Coverage</strong></li>
+                <li><strong>Auto Liability</strong></li>
+              </ul>
+              <p>Our limits meet or exceed standard commercial requirements for access to office buildings, government facilities, and institutional sites.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>What does Texas "Subscription" Workers Compensation mean for me as a client?</summary>
+            <div class="faq-body">
+              <p>Texas "Subscription" Workers Compensation provides you with the <strong>full legal defenses available under Texas statute</strong>. This is important because alternative workers compensation programs, sometimes offered by non-subscribing companies, strip you of those statutory defenses when their crews are on your property. When Move Solutions crews are on your site, you are protected under the strongest available legal framework.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Can you provide a Certificate of Insurance for our building or property manager?</summary>
+            <div class="faq-body">
+              <p>Yes. We provide COIs to the specifications required by your building, property manager, or accounts payable team. Contact your Move Solutions account manager or call 1.800.668.3752 with the requirements. We typically turn a COI request around within one business day.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Can I get a W-9 on file from you?</summary>
+            <div class="faq-body">
+              <p>Yes. Our current W-9 is available on request. Email or call us and we will send it directly to your accounts payable team. If your finance department requires a specific format or attestation, let us know what they need and we will provide it.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Are your crews background-checked and can you work in secure facilities?</summary>
+            <div class="faq-body">
+              <p>Yes. All W-2 crew members are background-checked and drug-screened before their first day and are subject to random drug testing throughout employment. For projects in secure facilities, government installations, healthcare sites, or financial services environments, we can provide crew documentation and coordinate access requirements in advance. Let us know your facility protocols before the project is scheduled.</p>
+            </div>
+          </details>
+        </div>
+
+      </div><!-- /.faq-content -->
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="still-cta">
+    <div class="eyebrow-w">Didn't Find Your Answer?</div>
+    <h2>Talk To Someone On Our Team.</h2>
+    <p>Some questions are easier to answer over a five-minute call than through a form. Pick whichever route fits your project.</p>
+    <div class="still-cta-btns">
+      <a href="#" class="btn-w-pri">Contact Our Team <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      <a href="tel:18006683752" class="btn-w-sec">Call 1.800.668.3752</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer-ph"><div class="ph-txt">Footer Here</div></div>
+
+</div>
+
+<script>
+function filterCat(cat, btn) {
+  document.querySelectorAll('.cat-item').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.faq-section').forEach(sec => {
+    if (cat === 'all' || sec.dataset.cat === cat) {
+      sec.classList.remove('hidden');
+    } else {
+      sec.classList.add('hidden');
+    }
+  });
+  document.querySelectorAll('details.faq-item[open]').forEach(d => d.removeAttribute('open'));
+}
+
+(function() {
+  const cats = { all:0, company:0, services:0, process:0, tech:0, payment:0, gov:0, docs:0 };
+  const hdrMap = { company:'hdrCompany', services:'hdrServices', process:'hdrProcess', tech:'hdrTech', payment:'hdrPayment', gov:'hdrGov', docs:'hdrDocs' };
+  document.querySelectorAll('.faq-section').forEach(sec => {
+    const cat = sec.dataset.cat;
+    const n = sec.querySelectorAll('details.faq-item').length;
+    cats[cat] = n;
+    cats.all += n;
+    if (hdrMap[cat]) {
+      const el = document.getElementById(hdrMap[cat]);
+      if (el) el.textContent = n + ' Question' + (n === 1 ? '' : 's');
+    }
+  });
+  document.getElementById('cntAll').textContent = cats.all;
+  document.getElementById('cntCompany').textContent = cats.company;
+  document.getElementById('cntServices').textContent = cats.services;
+  document.getElementById('cntProcess').textContent = cats.process;
+  document.getElementById('cntTech').textContent = cats.tech;
+  document.getElementById('cntPayment').textContent = cats.payment;
+  document.getElementById('cntGov').textContent = cats.gov;
+  document.getElementById('cntDocs').textContent = cats.docs;
+})();
+</script>
+</body>
+</html>

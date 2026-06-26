@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Our Team | Move Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#d51f2b;--red-dark:#a8161f;
+  --dark:#1c1c1c;--mid:#555;--soft:#888;
+  --light:#f6f6f4;--border:#e4e4e0;--white:#fff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif;background:#fff;color:var(--dark);padding:34px 20px 60px}
+.frame{max-width:1280px;margin:0 auto;background:var(--white);border:2px solid var(--dark)}
+
+/* UTIL */
+.util{display:flex;align-items:center;justify-content:space-between;padding:16px 30px 12px;border-bottom:1px solid var(--border);gap:18px}
+.util-mid{text-align:center;flex:1;padding:0 20px}
+.util-phone{font-family:'Oswald',sans-serif;font-size:22px;font-weight:600;color:var(--red);line-height:1.1}
+.util-sub-top{font-size:12px;color:var(--soft);letter-spacing:.04em;margin-bottom:3px;font-weight:500}
+.util-search{display:flex;align-items:center;background:#f3f3ef;border:1px solid #dcdcd6;border-radius:3px;height:42px;padding:0 4px 0 14px;flex:0 1 280px}
+.util-search input{flex:1;border:none;background:transparent;outline:none;font-size:13px;color:var(--dark);height:100%;padding:0}
+.util-search button{background:transparent;border:none;color:var(--red);cursor:pointer;display:flex;padding:8px}
+.util-search button svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2}
+.util-btns{display:flex;gap:10px;align-items:center}
+.btn-quote{background:var(--red);color:#fff;font-size:14px;font-weight:700;letter-spacing:.06em;padding:13px 26px;border-radius:3px;text-decoration:none;text-transform:uppercase}
+.btn-meet-nav{background:#fff;color:var(--red);border:2px solid var(--red);font-size:14px;font-weight:700;letter-spacing:.06em;padding:11px 24px;border-radius:3px;text-decoration:none;text-transform:uppercase}
+
+/* NAV */
+.nav{display:flex;align-items:center;justify-content:space-between;padding:0 22px;border-bottom:3px solid var(--red);gap:14px}
+.nav-links{display:flex;gap:2px;flex-wrap:nowrap}
+.nav-links a{font-family:'Source Sans 3',sans-serif;font-size:13px;font-weight:600;color:#333;text-decoration:none;padding:15px 10px;letter-spacing:.01em;border-bottom:3px solid transparent;margin-bottom:-3px;white-space:nowrap}
+.nav-links a:hover,.nav-links a.active{color:var(--red);border-bottom-color:var(--red)}
+.nav-phone{font-family:'Oswald',sans-serif;font-size:18px;font-weight:600;color:var(--red);flex-shrink:0}
+
+/* PAGE HERO */
+.page-hero{background:linear-gradient(135deg,#a8161f 0%,#d51f2b 60%,#e8303d 100%);padding:52px 48px;text-align:center;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;top:-30%;right:-5%;width:480px;height:480px;border-radius:50%;background:rgba(255,200,200,.06)}
+.page-hero .eyebrow{display:inline-block;background:rgba(255,255,255,.15);color:#fff;font-size:11px;font-weight:700;letter-spacing:.16em;padding:5px 14px;border-radius:2px;text-transform:uppercase;margin-bottom:14px;font-family:'Source Sans 3',sans-serif}
+.page-hero h1{font-family:'Oswald',sans-serif;font-size:46px;font-weight:700;color:#fff;margin:0 0 12px;text-transform:uppercase}
+.page-hero p{font-family:'Source Sans 3',sans-serif;font-size:16px;color:rgba(255,255,255,.88);max-width:580px;margin:0 auto;line-height:1.6}
+
+/* SECTION HEADERS */
+.team-section{padding:52px 48px}
+.team-section.alt{background:var(--light)}
+.team-section-inner{max-width:1180px;margin:0 auto}
+.section-label{display:inline-block;font-size:11px;font-weight:800;color:var(--red-dark);letter-spacing:.16em;text-transform:uppercase;margin-bottom:10px;background:#fff0f0;padding:5px 12px;border-radius:2px;border:1px solid #ffd0d0;font-family:'Source Sans 3',sans-serif}
+.section-title{font-family:'Oswald',sans-serif;font-size:30px;font-weight:700;color:var(--dark);margin:0 0 8px;text-transform:uppercase;letter-spacing:-.01em}
+.section-sub{font-size:14px;color:var(--mid);line-height:1.55;margin:0 0 36px;max-width:100%;white-space:nowrap;font-family:'Source Sans 3',sans-serif}
+.btn-bio{display:block;margin-top:12px;background:var(--red);color:#fff;font-family:'Source Sans 3',sans-serif;font-size:12px;font-weight:700;letter-spacing:.06em;padding:10px 14px;border-radius:3px;text-decoration:none;text-transform:uppercase;text-align:center}
+
+/* LEADERSHIP GRID — 4 up */
+.leadership-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+
+/* STAFF GRID — 5 up */
+.staff-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+
+/* CARD */
+.team-card{background:#fff;border:1.5px solid var(--border);border-radius:6px;overflow:hidden;text-decoration:none;color:inherit;display:block;transition:border-color .15s,box-shadow .15s}
+.team-card:hover{border-color:var(--red);box-shadow:0 6px 20px rgba(213,31,43,.1)}
+.card-photo{aspect-ratio:4/3;background:var(--light);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.card-photo svg{width:44px;height:44px;stroke:#ccc;fill:none;stroke-width:1.4}
+.card-photo .ph-name{font-family:'Source Sans 3',sans-serif;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#ccc;text-align:center;padding:0 12px}
+.card-photo .red-bar{position:absolute;bottom:0;left:0;right:0;height:4px;background:var(--red);opacity:0;transition:opacity .15s}
+.team-card:hover .red-bar{opacity:1}
+.card-body{padding:16px 18px 18px}
+.card-name{font-family:'Oswald',sans-serif;font-size:17px;font-weight:700;color:var(--dark);margin:0 0 4px;line-height:1.2}
+.card-title{font-family:'Source Sans 3',sans-serif;font-size:12.5px;color:var(--red-dark);font-weight:600;line-height:1.4}
+.card-company{font-family:'Source Sans 3',sans-serif;font-size:11.5px;color:var(--soft);margin-top:3px}
+
+/* PLACEHOLDER CARD for staff */
+.ph-card{background:#fff;border:1.5px dashed var(--border);border-radius:6px;overflow:hidden;display:block}
+.ph-card .card-photo{background:#fafaf6}
+.ph-card .card-photo svg{stroke:#ddd}
+.ph-card .card-body{opacity:.5}
+
+/* DIVIDER */
+.section-divider{border:none;border-top:1px solid var(--border);margin:0}
+
+/* FOOTER */
+.footer-ph{background:#fff;padding:52px 30px;text-align:center}
+.footer-ph .ph-txt{font-size:14px;font-weight:700;letter-spacing:.12em;color:var(--soft);text-transform:uppercase;font-family:'Source Sans 3',sans-serif}
+</style>
+</head>
+<body>
+<div class="frame">
+
+  <!-- UTIL BAR -->
+  <div class="util">
+    <div style="background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;letter-spacing:.1em;color:#aaa;text-transform:uppercase;height:62px;width:220px;border:1px solid #ddd;">LOGO PLACEHOLDER</div>
+    <div class="util-search">
+      <input type="text" placeholder="Search services, resources...">
+      <button type="button" aria-label="Search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+    </div>
+    <div class="util-mid">
+      <div class="util-sub-top">Ready To Move? Call Us Today!</div>
+      <div class="util-phone">1.800.668.3752</div>
+    </div>
+    <div class="util-btns"><a href="#" class="btn-meet-nav">Book Meeting</a><a href="#" class="btn-quote">Get Quote</a></div>
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-links">
+      <a href="#">Services</a>
+      <a href="#">Who We Serve</a>
+      <a href="#">Technology</a>
+      <a href="#">Storage</a>
+      <a href="#">Resources</a>
+      <a href="#" class="active">About Us</a>
+      <a href="#">Contact Us</a>
+    </div>
+    <div class="nav-phone">1.800.668.3752</div>
+  </nav>
+
+  <!-- LEADERSHIP -->
+  <div class="team-section">
+    <div class="team-section-inner">
+      <div class="section-label">Leadership Team</div>
+      <h2 class="section-title">The Team Behind The Team.</h2>
+      <p class="section-sub">Our leadership team brings decades of combined experience across relocation management, national accounts, operations, and business strategy.</p>
+
+      <div class="leadership-grid">
+
+        <!-- Michael Monette -->
+        <div class="team-card">
+          <div class="card-photo">
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <div class="ph-name">Photo — Michael Monette</div>
+            <div class="red-bar"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-name">Michael Monette</div>
+            <div class="card-title">Co-Founder &amp; Co-Principal</div>
+            <a href="https://rvarela-cyber.github.io/tos/msl-bio-michael-monette.html" class="btn-bio">View Full Bio</a>
+          </div>
+        </div>
+
+        <!-- Linda Monette -->
+        <div class="team-card">
+          <div class="card-photo">
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <div class="ph-name">Photo — Linda Monette</div>
+            <div class="red-bar"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-name">Linda Monette</div>
+            <div class="card-title">Co-Founder &amp; Co-Principal</div>
+            <a href="https://rvarela-cyber.github.io/tos/msl-bio-linda-monette.html" class="btn-bio">View Full Bio</a>
+          </div>
+        </div>
+
+        <!-- Amy Monette Linton -->
+        <div class="team-card">
+          <div class="card-photo">
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <div class="ph-name">Photo — Amy Monette Linton</div>
+            <div class="red-bar"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-name">Amy Monette Linton</div>
+            <div class="card-title">General Manager, Dallas-Fort Worth</div>
+            <a href="https://rvarela-cyber.github.io/tos/msl-bio-amy-monette-linton.html" class="btn-bio">View Full Bio</a>
+          </div>
+        </div>
+
+        <!-- Megan Monette -->
+        <div class="team-card">
+          <div class="card-photo">
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <div class="ph-name">Photo — Megan Monette</div>
+            <div class="red-bar"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-name">Megan Monette</div>
+            <div class="card-title">Vice President of National Accounts</div>
+            <a href="https://rvarela-cyber.github.io/tos/msl-bio-megan-monette.html" class="btn-bio">View Full Bio</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- GENERAL MANAGERS -->
+  <div class="team-section alt">
+    <div class="team-section-inner">
+      <div class="section-label">General Managers</div>
+      <h2 class="section-title">Regional Leaders, Local Expertise.</h2>
+      <p class="section-sub">Our General Managers oversee day-to-day operations across every market we serve, ensuring consistent standards and client-first execution on every project.</p>
+
+            <div class="staff-grid">
+        <div class="ph-card">
+          <div class="card-photo">
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <div class="ph-name">Photo Placeholder</div>
+          </div>
+          <div class="card-body">
+            <div class="card-name">[Full Name]</div>
+            <div class="card-title">General Manager</div>
+          </div>
+        </div>
+        <div class="ph-card">
+          <div class="card-photo">
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <div class="ph-name">Photo Placeholder</div>
+          </div>
+          <div class="card-body">
+            <div class="card-name">[Full Name]</div>
+            <div class="card-title">General Manager</div>
+          </div>
+        </div>
+        <div class="ph-card">
+          <div class="card-photo">
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <div class="ph-name">Photo Placeholder</div>
+          </div>
+          <div class="card-body">
+            <div class="card-name">[Full Name]</div>
+            <div class="card-title">General Manager</div>
+          </div>
+        </div>
+        <div class="ph-card">
+          <div class="card-photo">
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <div class="ph-name">Photo Placeholder</div>
+          </div>
+          <div class="card-body">
+            <div class="card-name">[Full Name]</div>
+            <div class="card-title">General Manager</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ACCOUNT MANAGERS -->
+  <div class="team-section">
+    <div class="team-section-inner">
+      <div class="section-label">Account Managers</div>
+      <h2 class="section-title">Your Dedicated Point Of Contact.</h2>
+      <p class="section-sub">Account managers are the relationship hub between you and every moving crew, vendor, and operations team member involved in your project.</p>
+
+      <div class="staff-grid">
+        <div class="ph-card">
+          <div class="card-photo">
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <div class="ph-name">Photo Placeholder</div>
+          </div>
+          <div class="card-body">
+            <div class="card-name">[Full Name]</div>
+            <div class="card-title">Account Manager</div>
+          </div>
+        </div>
+        <div class="ph-card">
+          <div class="card-photo">
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <div class="ph-name">Photo Placeholder</div>
+          </div>
+          <div class="card-body">
+            <div class="card-name">[Full Name]</div>
+            <div class="card-title">Account Manager</div>
+          </div>
+        </div>
+        <div class="ph-card">
+          <div class="card-photo">
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <div class="ph-name">Photo Placeholder</div>
+          </div>
+          <div class="card-body">
+            <div class="card-name">[Full Name]</div>
+            <div class="card-title">Account Manager</div>
+          </div>
+        </div>
+        <div class="ph-card">
+          <div class="card-photo">
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <div class="ph-name">Photo Placeholder</div>
+          </div>
+          <div class="card-body">
+            <div class="card-name">[Full Name]</div>
+            <div class="card-title">Account Manager</div>
+          </div>
+        </div>
+        <div class="ph-card">
+          <div class="card-photo">
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <div class="ph-name">Photo Placeholder</div>
+          </div>
+          <div class="card-body">
+            <div class="card-name">[Full Name]</div>
+            <div class="card-title">Account Manager</div>
+          </div>
+        </div>
+        <div class="ph-card">
+          <div class="card-photo">
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <div class="ph-name">Photo Placeholder</div>
+          </div>
+          <div class="card-body">
+            <div class="card-name">[Full Name]</div>
+            <div class="card-title">Account Manager</div>
+          </div>
+        </div>
+        <div class="ph-card">
+          <div class="card-photo">
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <div class="ph-name">Photo Placeholder</div>
+          </div>
+          <div class="card-body">
+            <div class="card-name">[Full Name]</div>
+            <div class="card-title">Account Manager</div>
+          </div>
+        </div>
+        <div class="ph-card">
+          <div class="card-photo">
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <div class="ph-name">Photo Placeholder</div>
+          </div>
+          <div class="card-body">
+            <div class="card-name">[Full Name]</div>
+            <div class="card-title">Account Manager</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer-ph"><div class="ph-txt">Footer Here</div></div>
+
+</div>
+</body>
+</html>

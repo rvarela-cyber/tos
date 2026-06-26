@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sustainability | Move Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#d51f2b;--red-dark:#a8161f;
+  --dark:#1c1c1c;--mid:#555;--soft:#888;
+  --light:#f6f6f4;--border:#e4e4e0;--white:#fff;
+  --shadow:0 4px 14px rgba(0,0,0,.06);--shadow-lg:0 8px 24px rgba(0,0,0,.08)
+}
+*{box-sizing:border-box}
+body{font-family:'Source Sans 3',sans-serif;background:#fff;color:var(--dark);margin:0;padding:34px 20px 60px}
+.frame{max-width:1280px;margin:0 auto;background:var(--white);border:2px solid var(--dark);overflow:hidden}
+
+/* UTILITY BAR */
+.util{display:flex;align-items:center;justify-content:space-between;padding:16px 30px 12px;border-bottom:1px solid var(--border);gap:18px}
+.util .logo{height:62px;display:block;max-width:320px;object-fit:contain;object-position:left center;background:#eee;border:1px solid #ddd;min-width:200px}
+.util-mid{text-align:center;flex:1;padding:0 20px}
+.util-phone{font-family:'Oswald',sans-serif;font-size:22px;font-weight:600;color:var(--red);line-height:1.1}
+.util-sub-top{font-size:12px;color:var(--soft);letter-spacing:.04em;margin-bottom:3px;font-weight:500}
+.util-search{display:flex;align-items:center;background:#f3f3ef;border:1px solid #dcdcd6;border-radius:3px;height:42px;padding:0 4px 0 14px;flex:0 1 280px}
+.util-search input{flex:1;border:none;background:transparent;outline:none;font-size:13px;color:var(--dark);height:100%;padding:0}
+.util-search button{background:transparent;border:none;color:var(--red);cursor:pointer;display:flex;padding:8px;border-radius:2px}
+.util-search button svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2}
+.util-btns{display:flex;gap:10px;align-items:center}
+.btn-quote{background:var(--red);color:#fff;font-size:14px;font-weight:700;letter-spacing:.06em;padding:13px 26px;border-radius:3px;text-decoration:none;text-transform:uppercase}
+.btn-meet{background:#fff;color:var(--red);border:2px solid var(--red);font-size:14px;font-weight:700;letter-spacing:.06em;padding:11px 24px;border-radius:3px;text-decoration:none;text-transform:uppercase}
+
+/* NAV */
+.nav{display:flex;align-items:center;justify-content:space-between;padding:0 22px;border-bottom:3px solid var(--red);flex-wrap:nowrap;gap:14px}
+.nav-links{display:flex;gap:2px;flex-wrap:nowrap}
+.nav-links a{font-family:'Source Sans 3',sans-serif;font-size:13px;font-weight:600;color:#333;text-decoration:none;padding:15px 10px;letter-spacing:.01em;border-bottom:3px solid transparent;margin-bottom:-3px;white-space:nowrap}
+.nav-links a:hover,.nav-links a.active{color:var(--red);border-bottom-color:var(--red)}
+.nav-phone{font-family:'Oswald',sans-serif;font-size:18px;font-weight:600;color:var(--red);flex-shrink:0}
+
+/* CRUMB */
+.crumb{padding:14px 30px;font-size:12px;color:var(--soft);background:#fafaf6;border-bottom:1px solid var(--border)}
+.crumb a{color:var(--mid);text-decoration:none;margin-right:6px}
+.crumb a:hover{color:var(--red)}
+.crumb span{margin-right:6px}
+.crumb strong{color:var(--dark);font-weight:600}
+
+/* HERO */
+.sp-hero{background:linear-gradient(135deg,#a8161f 0%,#d51f2b 55%,#e8303d 100%);color:#fff;padding:72px 30px 64px;position:relative;overflow:hidden}
+.sp-hero::before{content:'';position:absolute;top:-30%;right:-5%;width:520px;height:520px;border-radius:50%;background:rgba(255,200,200,.06)}
+.sp-hero::after{content:'';position:absolute;bottom:-45%;left:-8%;width:460px;height:460px;border-radius:50%;background:rgba(255,255,255,.04)}
+.sp-hero-grid{position:relative;max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+@media(max-width:880px){.sp-hero-grid{grid-template-columns:1fr;gap:32px}}
+.sp-hero .eyebrow{display:inline-block;background:#fff;color:var(--red-dark);font-size:11px;font-weight:800;letter-spacing:.16em;padding:6px 12px;border-radius:2px;text-transform:uppercase;margin-bottom:18px;font-family:'Source Sans 3',sans-serif}
+.sp-hero h1{font-family:'Oswald',sans-serif;font-size:52px;font-weight:700;margin:0 0 16px;line-height:1.04;letter-spacing:-.01em;text-transform:uppercase}
+.sp-hero h1 span{color:#fff}
+.sp-hero .sp-sub{font-size:17px;line-height:1.55;color:rgba(255,255,255,.92);margin:0 0 30px;max-width:680px;font-family:'Source Sans 3',sans-serif}
+.sp-hero .sp-sub strong{color:#fff;font-weight:700}
+.cta-primary{background:#fff;color:var(--red-dark);font-size:14px;font-weight:800;letter-spacing:.06em;padding:15px 28px;border-radius:3px;text-decoration:none;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;border:none;cursor:pointer;font-family:'Source Sans 3',sans-serif}
+.cta-secondary{background:transparent;color:#fff;border:2px solid #fff;font-size:14px;font-weight:700;letter-spacing:.06em;padding:13px 26px;border-radius:3px;text-decoration:none;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;font-family:'Source Sans 3',sans-serif}
+.sp-hero-ctas{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+
+/* HERO VISUAL PLACEHOLDER */
+.sp-hero-image{background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.18);border-radius:8px;aspect-ratio:5/4;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:rgba(255,255,255,.55);padding:40px 30px}
+.sp-hero-image .ph-icon{width:64px;height:64px;border:1.5px dashed rgba(255,255,255,.4);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.sp-hero-image .ph-icon svg{width:28px;height:28px;stroke:currentColor;fill:none;stroke-width:1.6}
+.sp-hero-image .ph-label{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;font-family:'Source Sans 3',sans-serif}
+.sp-hero-image .ph-note{font-size:12px;color:rgba(255,255,255,.45);text-align:center;font-style:italic;max-width:240px;line-height:1.4}
+
+/* STATS BAND */
+.stat-band{background:#1c1c1c;color:#fff;padding:38px 30px;position:relative}
+.stat-band-inner{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+@media(max-width:760px){.stat-band-inner{grid-template-columns:1fr;gap:24px;text-align:center}}
+.stat-item{display:flex;flex-direction:column;gap:6px;border-left:3px solid var(--red);padding-left:22px}
+@media(max-width:760px){.stat-item{border-left:none;border-top:3px solid var(--red);padding-left:0;padding-top:14px}}
+.stat-num{font-family:'Oswald',sans-serif;font-size:46px;font-weight:700;line-height:1;letter-spacing:-.02em;color:#fff}
+.stat-num span{color:#ff8888;font-weight:800}
+.stat-label{font-size:13px;font-weight:600;color:rgba(255,255,255,.85);line-height:1.4;max-width:280px;font-family:'Source Sans 3',sans-serif}
+.stat-label strong{color:#ff8888;font-weight:700}
+
+/* SECTIONS */
+.section{padding:64px 30px;background:#fff}
+.section.alt{background:var(--light)}
+.section-inner{max-width:1180px;margin:0 auto}
+.section-h{margin-bottom:38px}
+.section-h .h-eyebrow{display:inline-block;font-size:11px;font-weight:800;color:var(--red-dark);letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;background:#fff0f0;padding:5px 12px;border-radius:2px;border:1px solid #ffd0d0;font-family:'Source Sans 3',sans-serif}
+.section-h h2{font-family:'Oswald',sans-serif;font-size:34px;font-weight:700;color:var(--dark);margin:0 0 8px;letter-spacing:-.01em;line-height:1.15;text-transform:uppercase}
+.section-h h2 span{color:var(--red-dark)}
+.section-h .h-sub{font-size:15px;color:var(--mid);line-height:1.55;margin:0;max-width:780px;font-family:'Source Sans 3',sans-serif}
+
+/* CRATE STORY */
+.story-split{display:grid;grid-template-columns:1fr 1.1fr;gap:48px;align-items:center}
+@media(max-width:880px){.story-split{grid-template-columns:1fr;gap:30px}}
+.story-split-image{aspect-ratio:5/4;background:linear-gradient(135deg,#f7f6f1,#ebe9e0);border:1px solid var(--border);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--red-dark);padding:30px;position:relative;overflow:hidden}
+.story-split-image .ph-icon{width:60px;height:60px;border:1.5px dashed var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.7)}
+.story-split-image .ph-icon svg{width:28px;height:28px;stroke:currentColor;fill:none;stroke-width:1.6}
+.story-split-image .ph-label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-family:'Source Sans 3',sans-serif}
+.story-split-image .ph-note{font-size:12px;color:var(--soft);font-style:italic;text-align:center;line-height:1.4;max-width:260px}
+.story-split-body .ss-eyebrow{display:inline-block;font-size:11px;font-weight:800;color:var(--red-dark);letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;background:#fff0f0;padding:5px 12px;border-radius:2px;border:1px solid #ffd0d0;font-family:'Source Sans 3',sans-serif}
+.story-split-body h2{font-family:'Oswald',sans-serif;font-size:32px;font-weight:700;color:var(--dark);margin:0 0 14px;letter-spacing:-.01em;line-height:1.18;text-transform:uppercase}
+.story-split-body p{font-size:15px;color:var(--mid);line-height:1.65;margin:0 0 14px;font-family:'Source Sans 3',sans-serif}
+.story-split-body p strong{color:var(--dark);font-weight:700}
+
+/* THREE-PILLAR COMMITMENT */
+.commitment-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:880px){.commitment-grid{grid-template-columns:1fr}}
+.commit-card{background:#fff;border:1.5px solid var(--border);border-radius:6px;overflow:hidden;display:flex;flex-direction:column}
+.commit-card .cc-band{height:6px;background:var(--red)}
+.commit-card .cc-band.donate{background:#d97706}
+.commit-card .cc-band.compact{background:#1c1c1c}
+.commit-card .cc-image{aspect-ratio:16/9;background:#f7f6f1;border-bottom:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--red-dark);padding:18px}
+.commit-card .cc-image .ph-icon{width:48px;height:48px;border:1.5px dashed var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.7)}
+.commit-card .cc-image .ph-icon svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.6}
+.commit-card .cc-image .ph-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-family:'Source Sans 3',sans-serif}
+.commit-card .cc-image .ph-note{font-size:11px;color:var(--soft);font-style:italic;text-align:center;line-height:1.4;max-width:220px}
+.commit-card .cc-body{padding:22px 24px 26px;flex:1;display:flex;flex-direction:column;gap:8px}
+.commit-card .cc-tag{font-size:11px;font-weight:800;color:var(--red-dark);letter-spacing:.14em;text-transform:uppercase;font-family:'Source Sans 3',sans-serif}
+.commit-card .cc-tag.donate{color:#b45309}
+.commit-card .cc-tag.compact{color:#1c1c1c}
+.commit-card h3{margin:0 0 4px;font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;color:var(--dark);line-height:1.2}
+.commit-card p{margin:0;font-size:13.5px;color:var(--mid);line-height:1.6;font-family:'Source Sans 3',sans-serif}
+.commit-card p strong{color:var(--dark);font-weight:700}
+
+/* OPERATIONAL PRACTICES */
+.ops-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:880px){.ops-grid{grid-template-columns:1fr}}
+.ops-card{background:#fff;border:1.5px solid var(--border);border-radius:6px;padding:24px 26px;display:flex;flex-direction:column;gap:12px}
+.ops-card h3{margin:0;font-family:'Oswald',sans-serif;font-size:17px;font-weight:700;color:var(--dark);line-height:1.25}
+.ops-card p{margin:0;font-size:13.5px;color:var(--mid);line-height:1.6;font-family:'Source Sans 3',sans-serif}
+
+/* SISTER BLOCK */
+.sister-block{background:#fff;border:1.5px solid var(--border);border-radius:8px;padding:36px 40px;display:grid;grid-template-columns:.85fr 1.15fr;gap:36px;align-items:center}
+@media(max-width:880px){.sister-block{grid-template-columns:1fr;gap:24px;padding:28px 26px}}
+.sister-image{aspect-ratio:5/4;background:linear-gradient(135deg,#f7f6f1,#ebe9e0);border:1px solid var(--border);border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--red-dark);padding:24px}
+.sister-image .ph-icon{width:50px;height:50px;border:1.5px dashed var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.6)}
+.sister-image .ph-icon svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.6}
+.sister-image .ph-label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-family:'Source Sans 3',sans-serif}
+.sister-image .ph-note{font-size:11px;color:var(--soft);font-style:italic;text-align:center;line-height:1.4;max-width:220px}
+.sister-body .sb-eyebrow{display:inline-block;font-size:11px;font-weight:800;color:var(--red-dark);letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;background:#fff0f0;padding:5px 12px;border-radius:2px;border:1px solid #ffd0d0;font-family:'Source Sans 3',sans-serif}
+.sister-body h2{font-family:'Oswald',sans-serif;font-size:28px;font-weight:700;color:var(--dark);margin:0 0 12px;letter-spacing:-.01em;line-height:1.2;text-transform:uppercase}
+.sister-body p{font-size:14.5px;color:var(--mid);line-height:1.6;margin:0 0 14px;font-family:'Source Sans 3',sans-serif}
+.sister-body p strong{color:var(--dark);font-weight:700}
+.sister-certs{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+.sister-cert{background:#fff0f0;border:1px solid #ffd0d0;color:var(--red-dark);font-size:12px;font-weight:700;padding:7px 14px;border-radius:3px;letter-spacing:.04em;font-family:'Source Sans 3',sans-serif}
+
+/* FAQ */
+.faq-list{display:flex;flex-direction:column;gap:10px;max-width:880px;margin:0 auto}
+.faq-item{background:#fff;border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.faq-item summary{padding:18px 24px;font-size:15.5px;font-weight:700;color:var(--dark);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;font-family:'Source Sans 3',sans-serif}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary:hover{background:#fafaf6}
+.faq-item .faq-arrow{width:18px;height:18px;color:var(--red);flex-shrink:0;transition:transform .2s}
+.faq-item[open] .faq-arrow{transform:rotate(180deg)}
+.faq-item .faq-arrow svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:2.4}
+.faq-body{padding:0 24px 22px;font-size:14px;color:var(--mid);line-height:1.65;border-top:1px solid var(--border);padding-top:16px;font-family:'Source Sans 3',sans-serif}
+.faq-body strong{color:var(--dark);font-weight:700}
+
+/* FINAL CTA */
+.final-cta{background:linear-gradient(135deg,#a8161f,#d51f2b);color:#fff;padding:64px 30px;text-align:center}
+.final-cta-inner{max-width:780px;margin:0 auto}
+.final-cta h2{font-family:'Oswald',sans-serif;font-size:34px;font-weight:700;margin:0 0 14px;letter-spacing:-.01em;line-height:1.18;text-transform:uppercase}
+.final-cta p{font-size:16px;color:rgba(255,255,255,.92);line-height:1.55;margin:0 0 26px;font-family:'Source Sans 3',sans-serif}
+.final-cta-buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.fc-primary{background:#fff;color:var(--red-dark);font-size:14px;font-weight:800;letter-spacing:.06em;padding:15px 30px;border-radius:3px;text-decoration:none;text-transform:uppercase;border:none;cursor:pointer;font-family:'Source Sans 3',sans-serif}
+.fc-outline{background:transparent;color:#fff;border:2px solid #fff;font-size:14px;font-weight:700;letter-spacing:.06em;padding:13px 28px;border-radius:3px;text-decoration:none;text-transform:uppercase;font-family:'Source Sans 3',sans-serif}
+
+/* FOOTER */
+.footer-ph{background:#fff;border-top:3px solid var(--red);padding:60px 30px;text-align:center}
+.footer-ph .ph-txt{font-size:14px;font-weight:700;letter-spacing:.12em;color:var(--soft);text-transform:uppercase;font-family:'Source Sans 3',sans-serif}
+
+@media(max-width:760px){
+  body{padding:14px 8px 40px}
+  .section{padding:44px 18px}
+  .sp-hero{padding:44px 22px 38px}
+  .sp-hero h1{font-size:34px}
+  .section-h h2{font-size:24px}
+  .stat-band{padding:28px 20px}
+  .stat-num{font-size:36px}
+  .final-cta{padding:40px 22px}
+  .final-cta h2{font-size:24px}
+}
+</style>
+</head>
+<body>
+<div class="frame">
+
+  <!-- UTILITY BAR -->
+  <div class="util">
+    <div class="logo" style="background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;letter-spacing:.1em;color:#aaa;text-transform:uppercase;height:62px;width:220px;border:1px solid #ddd;">LOGO PLACEHOLDER</div>
+    <div class="util-search">
+      <input type="text" placeholder="Search services, resources...">
+      <button type="button" aria-label="Search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+    </div>
+    <div class="util-mid">
+      <div class="util-sub-top">Ready To Move? Call Us Today!</div>
+      <div class="util-phone">1.800.668.3752</div>
+    </div>
+    <div class="util-btns"><a href="#" class="btn-meet">Book Meeting</a><a href="#" class="btn-quote">Get Quote</a></div>
+  </div>
+
+  <nav class="nav">
+    <div class="nav-links">
+      <a href="#">Services</a>
+      <a href="#">Who We Serve</a>
+      <a href="#">Technology</a>
+      <a href="#">Storage</a>
+      <a href="#">Resources</a>
+      <a href="#" class="active">About Us</a>
+      <a href="#">Contact Us</a>
+    </div>
+    <div class="nav-phone">1.800.668.3752</div>
+  </nav>
+
+  <div class="crumb">
+    <a href="#">Home</a><span>›</span><a href="#">About Us</a><span>›</span><strong>Sustainability</strong>
+  </div>
+
+
+  <!-- HERO -->
+  <section class="sp-hero">
+    <div class="sp-hero-grid">
+      <div>
+        <span class="eyebrow">Responsible Moving. Every Time.</span>
+        <h1>Sustainable Commercial Moving, <span>Built Into Everything We Do.</span></h1>
+        <p class="sp-sub">Commercial moving generates more waste than most companies ever see. Boxes, packing materials, leftover furniture, and equipment that simply gets left behind. Move Solutions was founded on the idea that a better approach exists. Every project we run reflects a commitment to reducing that footprint, from the equipment we bring through the door to the way we manage what comes out the other side.</p>
+      </div>
+      <div class="sp-hero-image">
+        <div class="ph-icon"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="1"/><path d="M3 10h18M8 6V4h8v2"/></svg></div>
+        <div class="ph-label">Image Placeholder</div>
+        <div class="ph-note">Hero photo: Move Solutions crew in action loading signature red crates onto a truck, or a wide shot of crates in rotation at a client site</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BAND -->
+  <section class="stat-band">
+    <div class="stat-band-inner">
+      <div class="stat-item">
+        <div class="stat-num">150,000<span>+</span></div>
+        <div class="stat-label">Reusable crates in active rotation, displacing <strong>single-use cardboard</strong> on every job we run</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">Up To <span>50%</span></div>
+        <div class="stat-label">Landfill reduction through on-site <strong>Rhino waste compaction</strong> on Dallas metro projects</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">100<span>%</span></div>
+        <div class="stat-label">Electronics recovery through our <strong>R2 Certified</strong> recycling channel for decommissioned tech assets</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE CRATE STORY -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="story-split">
+        <div class="story-split-image">
+          <div class="ph-icon"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="1"/><path d="M3 10h18M8 6V4h8v2"/></svg></div>
+          <div class="ph-label">Image Placeholder</div>
+          <div class="ph-note">The signature red Move Solutions Stack-N-Pack crates stacked on a dolly, or worker scanning the RFID tag in a client office</div>
+        </div>
+        <div class="story-split-body">
+          <span class="ss-eyebrow">A Crate That Changed The Industry</span>
+          <h2>We Engineered Our Way Out Of The Cardboard Problem.</h2>
+          <p>Commercial moving ran on cardboard for decades. Single-use boxes assembled, packed, loaded, and crushed into a dumpster within days. Across thousands of office relocations, that volume adds up to a staggering amount of landfill material.</p>
+          <p>Move Solutions developed the <strong>Stack-N-Pack, No-Lift Crate</strong> as a direct response to that problem. Every crate is crush-proof, secure, and stackable. Each one is RFID-tagged so it gets recovered, cleaned, and recirculated after every job. One crate serves hundreds of moves before it ever needs to be replaced.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THREE PILLAR COMMITMENT -->
+  <section class="section alt">
+    <div class="section-inner">
+      <div class="section-h">
+        <span class="h-eyebrow">How We Approach Every Project</span>
+        <h2>How We Reduce Waste On Every Project.</h2>
+        <p class="h-sub">Sustainability isn't added on at the end of a project. It's structured into how we schedule, how we operate on-site, and how we handle everything that comes out of a space. These three practices run across every project, every time.</p>
+      </div>
+
+      <div class="commitment-grid">
+
+        <div class="commit-card">
+          <div class="cc-band"></div>
+          <div class="cc-image">
+            <div class="ph-icon"><svg viewBox="0 0 24 24"><path d="M7 19l-3-5 3-5h10l3 5-3 5H7zM10 14h4M12 12v4"/></svg></div>
+            <div class="ph-label">Image Placeholder</div>
+            <div class="ph-note">Sorted recycling bay with metal, plastic, wood streams, or a certified electronics recycling bin</div>
+          </div>
+          <div class="cc-body">
+            <div class="cc-tag">Recycle</div>
+            <h3>Authorized Recycling Streams.</h3>
+            <p>Metal, plastic, wood, fabric, and electronics all have designated recovery channels. Materials that can be diverted from a landfill are. Nothing gets hauled off to a generic dumpster and counted as handled.</p>
+          </div>
+        </div>
+
+        <div class="commit-card">
+          <div class="cc-band donate"></div>
+          <div class="cc-image">
+            <div class="ph-icon"><svg viewBox="0 0 24 24"><path d="M12 21l-7-7a4.5 4.5 0 015-7l2 2 2-2a4.5 4.5 0 015 7l-7 7z"/></svg></div>
+            <div class="ph-label">Image Placeholder</div>
+            <div class="ph-note">Furniture being staged for charity pickup, or delivered inside a nonprofit workspace</div>
+          </div>
+          <div class="cc-body">
+            <div class="cc-tag donate">Donate</div>
+            <h3>Your Charity, Your Call.</h3>
+            <p>Functional furniture and equipment still has value in the community. We coordinate direct donations to the nonprofit or organization you choose. You pick the recipient, we handle the logistics, and you get the documentation to match.</p>
+          </div>
+        </div>
+
+        <div class="commit-card">
+          <div class="cc-band compact"></div>
+          <div class="cc-image">
+            <div class="ph-icon"><svg viewBox="0 0 24 24"><rect x="2" y="8" width="16" height="10" rx="1"/><path d="M18 12h4v6h-4M6 18v2M14 18v2"/></svg></div>
+            <div class="ph-label">Image Placeholder</div>
+            <div class="ph-note">Rhino compaction truck on-site, or compacted waste being loaded from a client facility</div>
+          </div>
+          <div class="cc-body">
+            <div class="cc-tag compact">Compact</div>
+            <h3>On-Site Rhino Compaction.</h3>
+            <p>For waste that has no other recovery path, our Rhino compaction trucks crush it on-site before transport. That single step reduces landfill volume by <strong>up to 50%</strong> compared to conventional waste hauling.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- OPERATIONAL PRACTICES -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-h">
+        <span class="h-eyebrow">Inside Our Own Four Walls</span>
+        <h2>How We Run Our Operations.</h2>
+        <p class="h-sub">The same standards we apply on client projects run inside our own facilities. These practices aren't marketing language. They're how we manage equipment, energy, and assets day to day.</p>
+      </div>
+
+      <div class="ops-grid">
+
+        <div class="ops-card">
+          <h3>Energy-Aware Workstations.</h3>
+          <p>Application monitoring tracks resource consumption across our systems and powers down equipment when it goes idle. We're not running machines overnight on jobs that finished in the afternoon.</p>
+        </div>
+
+        <div class="ops-card">
+          <h3>Responsible End-Of-Life Computing.</h3>
+          <p>When our own hardware reaches retirement, it goes through the same certified channel we use for client equipment. CPUs and monitors are disassembled and processed. Nothing in our own fleet quietly ends up in a skip.</p>
+        </div>
+
+        <div class="ops-card">
+          <h3>RFID Crate Recovery System.</h3>
+          <p>Every crate in our 150,000-unit fleet carries an RFID tag. That tracking system is what allows us to recover units from client sites rather than writing them off as lost. Fewer replacements needed means less new plastic produced.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TECHTEAM SISTER BLOCK -->
+  <section class="section alt">
+    <div class="section-inner">
+      <div class="section-h">
+        <span class="h-eyebrow">Certified Partners Within The Same Family</span>
+        <h2>TechTeam Solutions Handles What Moves Can't.</h2>
+        <p class="h-sub">Relocations often surface data-bearing equipment, printed records, and technology assets that require certified handling. TechTeam Solutions is part of the same family of companies as Move Solutions, built on the same ownership, leadership, and accountability structures. When the move is done, the disposition of sensitive assets stays in the same hands you hired at the start.</p>
+      </div>
+
+      <div class="sister-block">
+        <div class="sister-image">
+          <div class="ph-icon"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 014 0v2M10 12v4M14 12v4M3 11h18"/></svg></div>
+          <div class="ph-label">Image Placeholder</div>
+          <div class="ph-note">TechTeam Solutions: hard drive shredder, e-waste processing bay, or data destruction documentation</div>
+        </div>
+        <div class="sister-body">
+          <span class="sb-eyebrow">A Trusted Name In The Same Family</span>
+          <h2>Certified Data Destruction And Tech Recycling.</h2>
+          <p>Data doesn't disappear just because equipment leaves a building. TechTeam Solutions provides supervised destruction with a full chain of custody and a <strong>Certificate of Destruction and Recycling</strong> issued at project close. Every drive gets shredded. Every corporate identifier and asset tag is removed before equipment moves.</p>
+          <p>Recoverable components re-enter the supply chain through R2 Certified processing. What can't be recovered is handled in compliance with environmental regulations, documented, and reported.</p>
+          <div class="sister-certs">
+            <span class="sister-cert">NAID AAA Certified</span>
+            <span class="sister-cert">R2 Certified</span>
+            <span class="sister-cert">100% Recycling</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" style="padding-top:48px">
+    <div class="section-inner">
+      <div class="section-h" style="text-align:center">
+        <span class="h-eyebrow">Common Questions</span>
+        <h2>What Most Clients Ask About Sustainability.</h2>
+      </div>
+
+      <div class="faq-list">
+
+        <details class="faq-item">
+          <summary>How do you handle leftover items after a move or decommission?<span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+          <div class="faq-body">It depends on the condition and category of material. Furniture and equipment in working condition typically gets donated or resold. Items without a reuse path go to recycling streams sorted by material type. Only what genuinely cannot be diverted ends up in landfill, and we document the breakdown in your project closeout so you know exactly what went where.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Do I get to decide which organization receives donated items?<span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+          <div class="faq-body">Yes. You name the recipient, we coordinate the delivery and documentation. If you'd like a suggestion, we have working relationships with regional nonprofits that regularly accept commercial office furniture and equipment in various conditions. Either way, you receive written confirmation of the donation for your records.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary>What certifications cover your data destruction and e-waste services?<span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+          <div class="faq-body">TechTeam Solutions, the data and technology arm of our family of companies, holds <strong>NAID AAA Certification</strong> for hard drive destruction and <strong>R2 Certification</strong> for electronics recycling. Every project that touches sensitive media results in a Certificate of Destruction and Recycling documenting what was processed, how, and where materials went afterward.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary>How much material actually gets kept out of the landfill?<span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+          <div class="faq-body">The exact figure varies by project, but on-site compaction alone cuts landfill volume by up to 50%. Layer in the donation and recycling channels and the majority of material from a typical commercial relocation or decommission never reaches disposal. Diversion rates are tracked and can be included in your project closeout documentation.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Why are reusable crates genuinely better than cardboard boxes?<span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+          <div class="faq-body">A single crate handles hundreds of projects across its lifetime. A cardboard box gets one move, sometimes two. Beyond the environmental math, reusable crates are crush-proof, lockable, and designed to stack without shifting, which means less product damage and faster loading. The environmental benefit and the operational benefit point in the same direction.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Does a sustainability-focused approach cost more?<span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+          <div class="faq-body">Generally, no. The crate system, the recycling infrastructure, and the donation coordination are part of how we operate, not premium add-ons. In decommission work especially, resale and donation value from exiting assets can <strong>offset</strong> a portion of the project cost. When there are incremental costs for certified destruction or specialty recycling, those are line-itemed clearly in your proposal so there are no surprises.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Can you support clients with formal ESG or sustainability reporting requirements?<span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+          <div class="faq-body">Yes. A substantial share of our work runs through enterprise accounts and national clients with active ESG programs. We coordinate with internal sustainability teams, procurement, and facilities to produce the diversion data, donation documentation, and chain-of-custody records those programs require. Share your reporting framework early and we'll structure deliverables to match.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary>What happens to materials that can't be recycled through standard channels?<span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+          <div class="faq-body">For materials outside standard municipal or commercial recycling, we work through certified regional specialists who handle those streams. Foam, certain composites, and specialty electronics often need processing that goes beyond what local channels accept. If a material has no viable recovery path, that's documented in the project closeout, so the diversion data we report is accurate rather than inflated.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Can Move Solutions provide sustainability documentation for our corporate records?<span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+          <div class="faq-body">Yes. Project documentation at close can include material diversion rates by category, donation recipient confirmation, recycling stream summaries, and Certificates of Destruction for any data-bearing media. If your team uses a specific reporting template, share it during project planning and we'll align our deliverables to fit it.</div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="final-cta-inner">
+      <h2>Every Move Starts With A Plan. Let's Build Yours.</h2>
+      <p>Tell us what you're relocating, decommissioning, or clearing out. We'll map the diversion plan, identify donation opportunities, and lay out the documentation before a single crate leaves our warehouse.</p>
+      <div class="final-cta-buttons">
+        <a href="#" class="fc-primary">Contact Us To Get Started</a>
+        <a href="#" class="fc-outline">View Our Services</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER PLACEHOLDER -->
+  <div class="footer-ph"><div class="ph-txt">Footer Here</div></div>
+
+</div>
+</body>
+</html>
