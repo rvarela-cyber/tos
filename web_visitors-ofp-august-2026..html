@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Office Furniture Plus — August Web Visitors Report</title>
+<style>
+:root {
+  --primary: #3498db;
+  --dark: #2c3e50;
+  --success: #27ae60;
+  --muted: #7f8c8d;
+  --light: #f8f9fa;
+  --danger: #e74c3c;
+  --warn: #f39c12;
+  --indigo: #667eea;
+}
+* { box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: #fff;
+  color: var(--dark);
+  margin: 0; padding: 24px;
+}
+h1 { margin: 0 0 8px; font-size: 28px; color: var(--dark); }
+.subtle { color: #6b7280; font-size: 14px; margin-bottom: 20px; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 16px 0 24px;
+}
+.card {
+  background: linear-gradient(180deg, var(--light) 0%, #ffffff 100%);
+  border: 1px solid #edf2f7;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+.kpi { font-size: 28px; font-weight: 700; color: var(--primary); }
+.kpi-label { color: #6b7280; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+.toolbar {
+  display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+  margin: 6px 0 14px;
+}
+.btn {
+  border: 1px solid #e5e7eb; border-radius: 999px; padding: 6px 10px; font-size: 12px;
+  background: #fff; color: var(--dark); cursor: pointer;
+}
+.btn.primary { background: var(--primary); color:#fff; border-color: var(--primary); }
+.search {
+  margin-left: auto; position: relative;
+}
+.search input {
+  border:1px solid #e5e7eb; border-radius:999px; padding:8px 28px 8px 12px; font-size:13px; width: 280px;
+}
+.search .icon { position:absolute; right:8px; top:50%; transform:translateY(-50%); font-size:14px; color:#9ca3af; }
+.legend {
+  display:flex; gap:10px; align-items:center; flex-wrap: wrap; margin: 8px 0 10px;
+}
+.badge { border-radius:6px; padding:2px 8px; font-size:12px; color:#fff; }
+.v20 { background: var(--danger); }
+.v15 { background: var(--warn); }
+.v10 { background: var(--indigo); }
+.v6  { background: var(--primary); }
+.v3  { background: var(--success); }
+.table-wrap { border:1px solid #e5e7eb; border-radius:12px; overflow:hidden; }
+table { width:100%; border-collapse: collapse; font-size: 13px; }
+thead th {
+  position: sticky; top: 0; z-index: 1; background: var(--primary); color:#fff; text-align:left; padding:10px;
+}
+tbody td { padding:10px; border-top:1px solid #f3f4f6; }
+.visits { font-weight: 700; color: var(--primary); }
+.caption { display:flex; justify-content:space-between; align-items:center; margin:10px 0; font-size:12px; color:#6b7280; }
+a.export { text-decoration:none; color: var(--primary); font-weight:600; }
+@media (max-width: 900px) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .search input { width: 200px; }
+}
+
+/* === Augmentation: map our interactive UI to the prior theme === */
+:root {
+  --primary: #3498db;
+  --dark: #2c3e50;
+  --success: #27ae60;
+  --muted: #7f8c8d;
+  --light: #f8f9fa;
+  --danger: #e74c3c;
+  --warn: #f39c12;
+  --indigo: #667eea;
+}
+/* Container look aligned to prior light theme */
+.container{max-width:1200px;margin:0 auto;background:#fff;border:1px solid #edf2f7;border-radius:12px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+h1{color:var(--dark)}
+.sub{color:#6b7280}
+/* KPI cards to match prior cards */
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:16px 0 24px}
+.kpi{font-size:28px;font-weight:700;color:var(--primary)}
+.kpi .label{color:#6b7280;font-size:12px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px}
+/* Toolbar & chips */
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:6px 0 14px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:1px solid #e5e7eb;border-radius:999px;padding:6px 10px;font-size:12px;background:#fff;color:var(--dark);cursor:pointer}
+.chip.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.search{margin-left:auto;position:relative}
+.search input{border:1px solid #e5e7eb;border-radius:999px;padding:8px 28px 8px 12px;font-size:13px;width:280px}
+/* Legend pills using the prior color scale */
+.pill{border-radius:6px;padding:2px 8px;font-size:12px;color:#fff;display:inline-block}
+.pill.p15{background:#7c2d12}
+.pill.p14{background:#9a3412}
+.pill.p13{background:#b91c1c}
+.pill.p12{background:#dc2626}
+.pill.p11{background:var(--danger)}
+.pill.p9{background:var(--warn)}
+.pill.p7{background:var(--indigo)}
+.pill.p3{background:var(--primary)}
+.pill.p2{background:#6b7280}
+/* Table */
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead th{position:sticky;top:0;z-index:1;background:var(--primary);color:#fff;text-align:left;padding:10px}
+tbody td{padding:10px;border-top:1px solid #f3f4f6}
+/* Count + button */
+.counts{font-size:12px;color:#6b7280;margin-left:auto}
+.btn{border:1px solid #e5e7eb;border-radius:999px;padding:6px 10px;font-size:12px;background:#fff;color:var(--dark);cursor:pointer}
+.btn:hover{filter:brightness(0.98)}
+.btn:active{transform:translateY(1px)}
+/* CSV primary button variant */
+.btn.primary{background:var(--primary);color:#fff;border-color:var(--primary)}
+a{color:var(--primary);text-decoration:none}
+@media (max-width: 900px){
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .search input{width:200px}
+}
+
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>High-Intent Prospects Report</h1>
+    <div class="sub">Office Furniture Plus Website Visitors — August — Prioritized Contact Information</div>
+
+    <div class="kpis">
+      <div class="kpi">
+        <div class="label">High-Intent Prospects (3+ visits)</div>
+        <div class="value">2</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Premium Prospects (10+ visits)</div>
+        <div class="value">0</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Prospects with Company Info</div>
+        <div class="value">98.1%</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Average Visits per Prospect</div>
+        <div class="value">1.1</div>
+      </div>
+    </div>
+
+    <div class="toolbar">
+      <div class="chips">
+        <div class="chip active" data-filter="all">All Prospects</div>
+        <div class="chip" data-filter="pv7">7+</div>
+        <div class="chip" data-filter="pv9">9+</div>
+        <div class="chip" data-filter="pv11">11+</div>
+        <div class="chip" data-filter="pv12">12+</div>
+        <div class="chip" data-filter="pv13">13+</div>
+        <div class="chip" data-filter="pv14">14+</div>
+        <div class="chip" data-filter="pv15">15+</div>
+        <div class="chip" data-filter="with_company">With Company</div>
+        <div class="chip" data-filter="with_linkedin">With LinkedIn</div>
+      </div>
+      <div class="search">
+        <input id="searchInput" type="text" placeholder="Search by name, company, email, or job title..." />
+      </div>
+      <div class="counts" id="counts">Showing 0 of 155 prospects</div>
+      <button class="btn" id="exportCsv">Export to CSV</button>
+    </div>
+
+    <div class="legend">
+      <span class="pill p15">15+ visits</span>
+      <span class="pill p14">14 visits</span>
+      <span class="pill p13">13 visits</span>
+      <span class="pill p12">12 visits</span>
+      <span class="pill p11">11 visits</span>
+      <span class="pill p9">9-10 visits</span>
+      <span class="pill p7">7-8 visits</span>
+      <span class="pill p3">3-6 visits</span>
+      <span class="pill p2">2 visits</span>
+    </div>
+
+    <table id="dataTable">
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Pages Visited</th>
+          <th>Contact Name</th>
+          <th>Company</th>
+          <th>Job Title</th>
+          <th>LinkedIn URL</th>
+          <th>Work Email</th>
+          <th>Primary Phone</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+<script>
+const rows = [{"rank": 1, "visa_count": 4, "contact_name": "Rhonda Stroud", "lead_company": "Wrg Texas", "lead_job_title": "Sr Sales Associate", "lead_linkedin_url": "linkedin.com/in/rhonda-stroud-58782a78", "lead_email_work": "rstroud@wrgtexas.com", "lead_phone": "Not available"}, {"rank": 2, "visa_count": 3, "contact_name": "Cira Levano", "lead_company": "Lewisville Isd", "lead_job_title": "Individual Contributor", "lead_linkedin_url": "Not available", "lead_email_work": "levanoc@lisd.net", "lead_phone": "4697135178"}, {"rank": 3, "visa_count": 2, "contact_name": "Peter Bakala", "lead_company": "Gold Medal Products Co Hq", "lead_job_title": "Vice President, Branch Sales And Operations", "lead_linkedin_url": "linkedin.com/in/peter-bakala-73763711", "lead_email_work": "pbakala@gmpopcorn.com", "lead_phone": "8474562434"}, {"rank": 4, "visa_count": 2, "contact_name": "Ross Hendley", "lead_company": "Fransen Pittman Construction", "lead_job_title": "Project Estimator", "lead_linkedin_url": "linkedin.com/in/ross-hendley-b98803194", "lead_email_work": "rhendley@fransenpittman.com", "lead_phone": "4792511161"}, {"rank": 5, "visa_count": 2, "contact_name": "Shelly Rhodes", "lead_company": "Bennett & Rhodes A Professional Corpor", "lead_job_title": "Senior Leadership", "lead_linkedin_url": "linkedin.com/in/shelly-rhodes-558173a", "lead_email_work": "shelly@bennettandrhodes.com", "lead_phone": "9252168695"}, {"rank": 6, "visa_count": 2, "contact_name": "Simon Parakattel", "lead_company": "Chemplast", "lead_job_title": "Individual Contributor", "lead_linkedin_url": "linkedin.com/in/joseph-devecchio-a753b27", "lead_email_work": "simon@chemplastinc.com", "lead_phone": "4806079797"}, {"rank": 7, "visa_count": 2, "contact_name": "Stella Culver", "lead_company": "Central Coast Physical Therapy Physical Therapists", "lead_job_title": "Executive & Ownership", "lead_linkedin_url": "Not available", "lead_email_work": "stellaculver@centralcoastpt.com", "lead_phone": "8054621110"}, {"rank": 8, "visa_count": 2, "contact_name": "Steven Smith", "lead_company": "Twelve Rivers Realty", "lead_job_title": "Realtor", "lead_linkedin_url": "linkedin.com/in/steve-smith-95aa1447", "lead_email_work": "steve@twelveriversrealty.com", "lead_phone": "5129665082"}, {"rank": 9, "visa_count": 2, "contact_name": "Stormi Gardner", "lead_company": "Microsoft", "lead_job_title": "C-Level Or C-Suite.", "lead_linkedin_url": "linkedin.com/in/stormi-hill-a464852a1", "lead_email_work": "sgardner@microsoft.com", "lead_phone": "2142075993"}, {"rank": 10, "visa_count": 2, "contact_name": "Wendy Elizardo", "lead_company": "We Are Alexander", "lead_job_title": "Account Executive", "lead_linkedin_url": "linkedin.com/in/wendy-elizardo-10748011", "lead_email_work": "wendyelizardo@wearealexander.com", "lead_phone": "2144984508"}, {"rank": 11, "visa_count": 1, "contact_name": "Adam Etienne", "lead_company": "Perry-Spencer Communications", "lead_job_title": "Teacher", "lead_linkedin_url": "linkedin.com/in/adam-etienne-b1084983", "lead_email_work": "etiennefn@psci.net", "lead_phone": "8125497346"}, {"rank": 12, "visa_count": 1, "contact_name": "Alan Sladek", "lead_company": "Sandlin Custom Homes", "lead_job_title": "Chief Operating Officer", "lead_linkedin_url": "linkedin.com/in/alansladek", "lead_email_work": "alans@sandlinhomes.com", "lead_phone": "9104848121"}, {"rank": 13, "visa_count": 1, "contact_name": "Albert Polito", "lead_company": "Mercy Hospital & Medical Center", "lead_job_title": "Senior Leadership", "lead_linkedin_url": "linkedin.com/in/albert--zhou", "lead_email_work": "apolito@mdmercy.com", "lead_phone": "4105610200"}, {"rank": 14, "visa_count": 1, "contact_name": "Alexia Boyd", "lead_company": "Eco Minded Solutions", "lead_job_title": "Operations Manager", "lead_linkedin_url": "linkedin.com/in/alexia-boyd-5183aa1ba", "lead_email_work": "alexia@ecomindedsolutions.com", "lead_phone": "2173224321"}, {"rank": 15, "visa_count": 1, "contact_name": "Alisha Chhabra", "lead_company": "Snipebridge", "lead_job_title": "Executive & Ownership", "lead_linkedin_url": "Not available", "lead_email_work": "alishaac@snipebridge.com", "lead_phone": "9728227483"}, {"rank": 16, "visa_count": 1, "contact_name": "Amy Farnham", "lead_company": "Revision Energy", "lead_job_title": "Solar Design Specialist", "lead_linkedin_url": "linkedin.com/in/amy-farnham-1b87531b0", "lead_email_work": "afarnham@revisionenergy.com", "lead_phone": "2072216342"}, {"rank": 17, "visa_count": 1, "contact_name": "Amy Powell", "lead_company": "Seminole County Public Schools", "lead_job_title": "Kindergarten Teacher", "lead_linkedin_url": "linkedin.com/in/amy-powell-4b304883", "lead_email_work": "amy_powell@scps.us", "lead_phone": "8125694641"}, {"rank": 18, "visa_count": 1, "contact_name": "Andrea West", "lead_company": "Technical College Of The Lowcountry", "lead_job_title": "Instructor", "lead_linkedin_url": "linkedin.com/in/andrea-west-3aa7893a", "lead_email_work": "awest@tcl.edu", "lead_phone": "8438126772"}, {"rank": 19, "visa_count": 1, "contact_name": "Andrew Tang", "lead_company": "Tenways International Corporat", "lead_job_title": "Individual Contributor", "lead_linkedin_url": "Not available", "lead_email_work": "andrew.tang@pfsf.org", "lead_phone": "Not available"}, {"rank": 20, "visa_count": 1, "contact_name": "Andy Munitz", "lead_company": "Sony", "lead_job_title": "Professional Audio And Pro Video Monitor Sr. Product Manager - Sony Professional Ipsa Division", "lead_linkedin_url": "linkedin.com/in/andy-munitz-4a6957a6", "lead_email_work": "andy.munitz@sony.com", "lead_phone": "5165769494"}, {"rank": 21, "visa_count": 1, "contact_name": "Andy Schoonover", "lead_company": "Crowdhealth", "lead_job_title": "Ceo", "lead_linkedin_url": "linkedin.com/in/andy-schoonover-6261557", "lead_email_work": "andy@joincrowdhealth.com", "lead_phone": "3124504850"}, {"rank": 22, "visa_count": 1, "contact_name": "Betty Gummo", "lead_company": "Our Lady Of Victory Church", "lead_job_title": "Individual Contributor", "lead_linkedin_url": "Not available", "lead_email_work": "bettyg@ourladyofvictory.com", "lead_phone": "5032321100"}, {"rank": 23, "visa_count": 1, "contact_name": "Brandon Lee", "lead_company": "Legoly", "lead_job_title": "Individual Contributor", "lead_linkedin_url": "linkedin.com/in/brandon-lee-775a3a38", "lead_email_work": "brandon@legoly.com", "lead_phone": "9017894303"}, {"rank": 24, "visa_count": 1, "contact_name": "Brett Carolan", "lead_company": "Brighton Jones", "lead_job_title": "Partner/Advisor", "lead_linkedin_url": "linkedin.com/in/brettcarolan", "lead_email_work": "brett@brightonjones.com", "lead_phone": "2069727221"}, {"rank": 25, "visa_count": 1, "contact_name": "Brianna Hyman", "lead_company": "Dvm Management", "lead_job_title": "Cfo", "lead_linkedin_url": "linkedin.com/in/brianna-hyman-26a331ab", "lead_email_work": "brianna@dvmteam.com", "lead_phone": "9492543470"}, {"rank": 26, "visa_count": 1, "contact_name": "Bridget Fairbrother", "lead_company": "Signature Transaction Management", "lead_job_title": "Office Administrator", "lead_linkedin_url": "linkedin.com/in/bridget-fairbrother-97319515", "lead_email_work": "bridget@signaturetransactions.com", "lead_phone": "3032571737"}, {"rank": 27, "visa_count": 1, "contact_name": "Brooke Kincade", "lead_company": "University Of Houston-Downtown", "lead_job_title": "Adjunct Professor", "lead_linkedin_url": "linkedin.com/in/brooke-kincade", "lead_email_work": "kincadeb@uhd.edu", "lead_phone": "8322893700"}, {"rank": 28, "visa_count": 1, "contact_name": "Brooke Macnee", "lead_company": "Mba Realty", "lead_job_title": "Licensed Real Estate Broker/Owner Of Mba Realty Group, Inc.", "lead_linkedin_url": "linkedin.com/in/brooke-macnee-1bb4167a", "lead_email_work": "brooke.macnee@mbarealty.com", "lead_phone": "7703565631"}, {"rank": 29, "visa_count": 1, "contact_name": "Bruce Humphrey", "lead_company": "Birchfield & Humphrey Pa", "lead_job_title": "Partner", "lead_linkedin_url": "linkedin.com/in/bruce-humphrey-91b7865", "lead_email_work": "bhumphrey@birchfieldhumphrey.com", "lead_phone": "9045090257"}, {"rank": 30, "visa_count": 1, "contact_name": "Cassie Fallon", "lead_company": "Rumson-Fair Haven High School", "lead_job_title": "Teacher", "lead_linkedin_url": "linkedin.com/in/cassie-fallon-0210a370", "lead_email_work": "cfallon@rumsonfairhaven.org", "lead_phone": "3036191251"}, {"rank": 31, "visa_count": 1, "contact_name": "Cathy Gentry", "lead_company": "Sloan Museum And Longway Planetarium", "lead_job_title": "Chief Operating Officer", "lead_linkedin_url": "linkedin.com/in/cathy-gentry-a821877", "lead_email_work": "cgentry@sloanlongway.org", "lead_phone": "8109196883"}, {"rank": 32, "visa_count": 1, "contact_name": "Cathy Morris", "lead_company": "Parish Episcopal School", "lead_job_title": "Teacher And Math Competition Coordinator", "lead_linkedin_url": "linkedin.com/in/cathy-morris-b0270a7", "lead_email_work": "cmorris@parishepiscopal.org", "lead_phone": "2142888612"}, {"rank": 33, "visa_count": 1, "contact_name": "Chase Knowles", "lead_company": "Callaway Golf", "lead_job_title": "Strategic Account Manager", "lead_linkedin_url": "linkedin.com/in/chase-knowles", "lead_email_work": "chase.knowles@callawaygolf.com", "lead_phone": "7609308493"}, {"rank": 34, "visa_count": 1, "contact_name": "Christopher Mullin", "lead_company": "Township Of Livingston", "lead_job_title": "Fire Official", "lead_linkedin_url": "linkedin.com/in/christopher-c-mullin-87b97452", "lead_email_work": "cmullin@livingstonnj.org", "lead_phone": "9735807609"}, {"rank": 35, "visa_count": 1, "contact_name": "Cindy Anderson", "lead_company": "Sunrise Services", "lead_job_title": "Middle Management", "lead_linkedin_url": "linkedin.com/in/cindy-anderson-2552b11a8", "lead_email_work": "canderson@sunriseservices.com.au", "lead_phone": "3608907541"}, {"rank": 36, "visa_count": 1, "contact_name": "Craig Knapke", "lead_company": "Access Engineering Solutions", "lead_job_title": "Project Manager", "lead_linkedin_url": "linkedin.com/in/craig-knapke-pe-3a029186", "lead_email_work": "cknapke@accessengllc.com", "lead_phone": "5125345039"}, {"rank": 37, "visa_count": 1, "contact_name": "Cuixi Quintero", "lead_company": "Pgal", "lead_job_title": "Project Engineer", "lead_linkedin_url": "linkedin.com/in/cuixi-quintero-pe-41760290", "lead_email_work": "cquintero@pgal.com", "lead_phone": "8327235245"}, {"rank": 38, "visa_count": 1, "contact_name": "Curtis Sellers", "lead_company": "Beverly Sellers", "lead_job_title": "Individual Contributor", "lead_linkedin_url": "Not available", "lead_email_work": "pete@rws-assoc.com", "lead_phone": "Not available"}, {"rank": 39, "visa_count": 1, "contact_name": "David Mertz", "lead_company": "Not available", "lead_job_title": "Assistant To The President", "lead_linkedin_url": "linkedin.com/in/dave-mertz-5b3a2b4", "lead_email_work": "dmertz@rwdsu.org", "lead_phone": "9173043453"}, {"rank": 40, "visa_count": 1, "contact_name": "David Morrissey", "lead_company": "Collegis", "lead_job_title": "Senior Leadership", "lead_linkedin_url": "linkedin.com/in/david-morrissey-3001001", "lead_email_work": "david.morrissey@collegiseducation.com", "lead_phone": "3122821816"}, {"rank": 41, "visa_count": 1, "contact_name": "David Percefull", "lead_company": "Yellow Dog Studios", "lead_job_title": "Owner / Producer / Engineer", "lead_linkedin_url": "linkedin.com/in/davidpercefull", "lead_email_work": "david@yellowdogstudios.com", "lead_phone": "7372122502"}, {"rank": 42, "visa_count": 1, "contact_name": "David Tosques", "lead_company": "Move Solutions", "lead_job_title": "Director Of Ff&E/Hospitality", "lead_linkedin_url": "linkedin.com/in/david-tosques-11811aa2", "lead_email_work": "dtosques@movesolutions.com", "lead_phone": "4692782761"}, {"rank": 43, "visa_count": 1, "contact_name": "Debbie Dotson", "lead_company": "Npl Construction", "lead_job_title": "Safety Administrator", "lead_linkedin_url": "linkedin.com/in/debbie-dotson-540ba520", "lead_email_work": "ddotson@gonpl.com", "lead_phone": "5177199949"}, {"rank": 44, "visa_count": 1, "contact_name": "Debra Provolo", "lead_company": "Narragansett Bay Insurance", "lead_job_title": "Vp Of Financial Planning & Analysis", "lead_linkedin_url": "linkedin.com/in/debrahemingwayprovolo", "lead_email_work": "dprovolo@nbic.com", "lead_phone": "Not available"}, {"rank": 45, "visa_count": 1, "contact_name": "Derek Anderson", "lead_company": "Avalon Healthcare Solutions", "lead_job_title": "Head Of Sales, Us Healthcare", "lead_linkedin_url": "linkedin.com/in/derek-anderson-7b88493a", "lead_email_work": "derek.anderson@avalonhcs.com", "lead_phone": "5203340728"}, {"rank": 46, "visa_count": 1, "contact_name": "Destini Ross", "lead_company": "Acme Brick", "lead_job_title": "Dispatcher And Coordinator", "lead_linkedin_url": "linkedin.com/in/destini-ross-442a85ba", "lead_email_work": "dross@brick.com", "lead_phone": "5127854760"}, {"rank": 47, "visa_count": 1, "contact_name": "Diane Randolph", "lead_company": "Laurel Communities", "lead_job_title": "Middle Management", "lead_linkedin_url": "linkedin.com/in/dianerandolph", "lead_email_work": "drandolph@laurelcommunities.com", "lead_phone": "Not available"}, {"rank": 48, "visa_count": 1, "contact_name": "Donald Levin", "lead_company": "Republic Brands", "lead_job_title": "Ceo", "lead_linkedin_url": "linkedin.com/in/don-levin-326a4a126", "lead_email_work": "dlevin@republicbrands.com", "lead_phone": "6174806430"}, {"rank": 49, "visa_count": 1, "contact_name": "Dylan Bunch", "lead_company": "Fransen Pittman Construction", "lead_job_title": "Estimator", "lead_linkedin_url": "linkedin.com/in/dylan-bunch-451b6058", "lead_email_work": "dbunch@fransenpittman.com", "lead_phone": "7207244871"}, {"rank": 50, "visa_count": 1, "contact_name": "Eli Hanslik", "lead_company": "Hornsby Paul", "lead_job_title": "Individual Contributor", "lead_linkedin_url": "linkedin.com/in/eli-hanslik-2674881", "lead_email_work": "ehanslik@paulhornsbyandco.com", "lead_phone": "5122976753"}, {"rank": 51, "visa_count": 1, "contact_name": "Erika Khalek", "lead_company": "Shearman & Sterling Llp Hq", "lead_job_title": "Individual Contributor", "lead_linkedin_url": "Not available", "lead_email_work": "erika.khalek@shearman.com", "lead_phone": "Not available"}, {"rank": 52, "visa_count": 1, "contact_name": "Esteban Arboleda", "lead_company": "Haynes-Roberts", "lead_job_title": "Individual Contributor", "lead_linkedin_url": "linkedin.com/in/esteban-arboleda-2a710185", "lead_email_work": "esteban@haynesroberts.com", "lead_phone": "9175438189"}, {"rank": 53, "visa_count": 1, "contact_name": "Eva Gelman", "lead_company": "College Quest", "lead_job_title": "Educational Consultant", "lead_linkedin_url": "linkedin.com/in/eva-gelman-5ba1129", "lead_email_work": "eva@mycollegequest.com", "lead_phone": "4126572363"}, {"rank": 54, "visa_count": 1, "contact_name": "Evangelos Marsellos", "lead_company": "Miami-Dade County", "lead_job_title": "New Business Plan Review", "lead_linkedin_url": "linkedin.com/in/evangelos-marsellos-b4927a48", "lead_email_work": "evangelos.marsellos@miamidade.gov", "lead_phone": "3059265615"}, {"rank": 55, "visa_count": 1, "contact_name": "Garrett Ball", "lead_company": "Deer Creek Feeding", "lead_job_title": "Executive & Ownership", "lead_linkedin_url": "Not available", "lead_email_work": "garrett.ball@deercreekfeeding.com", "lead_phone": "5593594980"}, {"rank": 56, "visa_count": 1, "contact_name": "Garrett Ball", "lead_company": "Deer Creek Feeding", "lead_job_title": "Executive & Ownership", "lead_linkedin_url": "Not available", "lead_email_work": "garrett@deercreekfeeding.com", "lead_phone": "5593594980"}, {"rank": 57, "visa_count": 1, "contact_name": "Genia Horton", "lead_company": "Kaiser Permanente", "lead_job_title": "Neurodiagnostic Technologist", "lead_linkedin_url": "linkedin.com/in/genia-horton-225386b", "lead_email_work": "ghorton@kaiserpermanente.org", "lead_phone": "8587617128"}, {"rank": 58, "visa_count": 1, "contact_name": "Gina Miller", "lead_company": "Ghd Interiors", "lead_job_title": "Co-Owner", "lead_linkedin_url": "linkedin.com/in/ginajohnsonmiller", "lead_email_work": "gmiller@ghdinteriors.com", "lead_phone": "9187607200"}, {"rank": 59, "visa_count": 1, "contact_name": "Greg Adams", "lead_company": "Huff Realty", "lead_job_title": "Business Relationship Manager", "lead_linkedin_url": "linkedin.com/in/gregorybadams", "lead_email_work": "gadams@huff.com", "lead_phone": "2107108194"}, {"rank": 60, "visa_count": 1, "contact_name": "Greg Howson", "lead_company": "Usi Insurance Services", "lead_job_title": "Senior Vice President, Property And Casualty Producer", "lead_linkedin_url": "linkedin.com/in/greg-howson-cic-82661846", "lead_email_work": "greg.howson@usi.com", "lead_phone": "4846953295"}, {"rank": 61, "visa_count": 1, "contact_name": "Howard Garrett", "lead_company": "Dirtdoctor", "lead_job_title": "Chairman", "lead_linkedin_url": "linkedin.com/in/thedirtdoctor", "lead_email_work": "howard@dirtdoctor.com", "lead_phone": "7704751000"}, {"rank": 62, "visa_count": 1, "contact_name": "Ian Beattie", "lead_company": "Schneider Electric", "lead_job_title": "Individual Contributor", "lead_linkedin_url": "Not available", "lead_email_work": "ian@schneider-electric.com", "lead_phone": "Not available"}, {"rank": 63, "visa_count": 1, "contact_name": "Irma Valdez", "lead_company": "The Corcoran Group", "lead_job_title": "Individual Contributor", "lead_linkedin_url": "linkedin.com/in/irma-valdez-4668776", "lead_email_work": "ivaldez@corcoran.com", "lead_phone": "Not available"}, {"rank": 64, "visa_count": 1, "contact_name": "Jack Starnes", "lead_company": "Doublestar", "lead_job_title": "President", "lead_linkedin_url": "linkedin.com/in/jack-starnes-464538102", "lead_email_work": "jackstarnes@doublestarusa.com", "lead_phone": "8595096409"}, {"rank": 65, "visa_count": 1, "contact_name": "James Moore", "lead_company": "Boulder Valley School District", "lead_job_title": "Middle Management", "lead_linkedin_url": "linkedin.com/in/james-moore-30593547", "lead_email_work": "james.moore@bvsd.org", "lead_phone": "3034472074"}, {"rank": 66, "visa_count": 1, "contact_name": "James Wills", "lead_company": "Crossroads Utility Svc", "lead_job_title": "Vice President Of Operations", "lead_linkedin_url": "linkedin.com/in/james-wills-684a7068", "lead_email_work": "jwills@crossroadsus.com", "lead_phone": "5596754450"}, {"rank": 67, "visa_count": 1, "contact_name": "Jan Davidson", "lead_company": "Davidson Family Farm", "lead_job_title": "Individual Contributor", "lead_linkedin_url": "linkedin.com/in/jane-davidson-32145434", "lead_email_work": "jdavidson@communitybanktopeka.com", "lead_phone": "Not available"}, {"rank": 68, "visa_count": 1, "contact_name": "Jason Crisp", "lead_company": "Poolplayermatchups.Com", "lead_job_title": "Co-Owner, Architect, & Co-Developer", "lead_linkedin_url": "linkedin.com/in/jason-crisp-bba6974", "lead_email_work": "jason@poolplayermatchups.com", "lead_phone": "4024402990"}, {"rank": 69, "visa_count": 1, "contact_name": "Jason Grandone", "lead_company": "Apexnetwork Physical Therapy", "lead_job_title": "Franchise Owner", "lead_linkedin_url": "linkedin.com/in/jason-grandone-aa8a4789", "lead_email_work": "jgrandone@apexnetworkpt.com", "lead_phone": "3092993835"}, {"rank": 70, "visa_count": 1, "contact_name": "Jason Mann", "lead_company": "Acore Capital", "lead_job_title": "Managing Director", "lead_linkedin_url": "linkedin.com/in/jason-mann-7581234", "lead_email_work": "jasonmann@acorecapital.com", "lead_phone": "8702388880"}, {"rank": 71, "visa_count": 1, "contact_name": "Jeanne Grady", "lead_company": "Speiser Krause", "lead_job_title": "Attorney", "lead_linkedin_url": "linkedin.com/in/jeanne-o-grady-a5bab914", "lead_email_work": "jog@speiserkrause.com", "lead_phone": "4088908924"}, {"rank": 72, "visa_count": 1, "contact_name": "Jeff Meyerson", "lead_company": "Meyerson Productions", "lead_job_title": "Executive & Ownership", "lead_linkedin_url": "linkedin.com/in/jeff-meyerson-03488415", "lead_email_work": "jeffm@meyersonfirm.com", "lead_phone": "5123309001"}, {"rank": 73, "visa_count": 1, "contact_name": "Jennifer Szabo", "lead_company": "Forum Architecture & Interior Design", "lead_job_title": "Marketing", "lead_linkedin_url": "linkedin.com/in/jennifer-szabo-6a734312", "lead_email_work": "jszabo@forumarchitecture.com", "lead_phone": "4073103135"}, {"rank": 74, "visa_count": 1, "contact_name": "Jerry Letexier", "lead_company": "Jpl Habitability", "lead_job_title": "President", "lead_linkedin_url": "linkedin.com/in/jerry-letexier-08555736", "lead_email_work": "jerry@jplhabitability.com", "lead_phone": "5746125884"}, {"rank": 75, "visa_count": 1, "contact_name": "Jo Willhite", "lead_company": "Archdiocese Of Portland In Oregon", "lead_job_title": "Cfo", "lead_linkedin_url": "linkedin.com/in/jo-willhite-0998491a", "lead_email_work": "jo.willhite@frbill.org", "lead_phone": "6194811997"}, {"rank": 76, "visa_count": 1, "contact_name": "John Newville", "lead_company": "Apex Spring & Stamping", "lead_job_title": "Customer Liaison/Sales", "lead_linkedin_url": "linkedin.com/in/john-newville-a7677411", "lead_email_work": "john@apexspring.com", "lead_phone": "6164535463"}, {"rank": 77, "visa_count": 1, "contact_name": "John Ridgely", "lead_company": "Elbi Of America, Inc", "lead_job_title": "Vice President", "lead_linkedin_url": "linkedin.com/in/john-ridgely-9a9a3011", "lead_email_work": "john.ridgely@elbiofamerica.com", "lead_phone": "Not available"}, {"rank": 78, "visa_count": 1, "contact_name": "John Samwel", "lead_company": "Patriot Fire Protection", "lead_job_title": "Design Manager", "lead_linkedin_url": "linkedin.com/in/john-samwel-a36a0933", "lead_email_work": "johns@patriotfire.com", "lead_phone": "3605184253"}, {"rank": 79, "visa_count": 1, "contact_name": "John Simpson", "lead_company": "Ward Boland Associates", "lead_job_title": "Account Manager", "lead_linkedin_url": "linkedin.com/in/john-simpson-8a7ba1a0", "lead_email_work": "jsimpson@wardboland.com", "lead_phone": "3343822671"}, {"rank": 80, "visa_count": 1, "contact_name": "Julie Karleskint", "lead_company": "Hazen & Sawyer", "lead_job_title": "Senior Associate", "lead_linkedin_url": "linkedin.com/in/julie-karleskint-b2143513", "lead_email_work": "jkarleskint@hazenandsawyer.com", "lead_phone": "9413214376"}, {"rank": 81, "visa_count": 1, "contact_name": "Julie Watson", "lead_company": "Hurst-Euless-Bedford I.S.D.", "lead_job_title": "Teacher", "lead_linkedin_url": "linkedin.com/in/tracye-fuller-4743b11b", "lead_email_work": "juliewatson@hebisd.edu", "lead_phone": "2148025926"}, {"rank": 82, "visa_count": 1, "contact_name": "Julie Williams", "lead_company": "Convention Designs", "lead_job_title": "Director, Program Management", "lead_linkedin_url": "linkedin.com/in/julie-williams-04649039", "lead_email_work": "jwilliams@conventiondesigns.com", "lead_phone": "8438600858"}, {"rank": 83, "visa_count": 1, "contact_name": "Karen Hutchins", "lead_company": "Peoria Christian", "lead_job_title": "International Program Director", "lead_linkedin_url": "linkedin.com/in/karen-hutchins-b74b9b6", "lead_email_work": "khutchins@peoriachristian.org", "lead_phone": "3092511937"}, {"rank": 84, "visa_count": 1, "contact_name": "Karen White", "lead_company": "Almatis", "lead_job_title": "Business Analyst", "lead_linkedin_url": "linkedin.com/in/karen-white-7462aa9", "lead_email_work": "karen.white@almatis.com", "lead_phone": "5015290670"}, {"rank": 85, "visa_count": 1, "contact_name": "Karl Burrows", "lead_company": "Beacon Technology Solutions In", "lead_job_title": "President", "lead_linkedin_url": "linkedin.com/in/karlburrows", "lead_email_work": "karl@yourbeacon.com", "lead_phone": "7048062307"}, {"rank": 86, "visa_count": 1, "contact_name": "Kathleen Brasky", "lead_company": "Texas Biomedical Research", "lead_job_title": "Veterinarian", "lead_linkedin_url": "linkedin.com/in/kathleen-brasky-85948a44", "lead_email_work": "kbrasky@txbiomed.org", "lead_phone": "2102589605"}, {"rank": 87, "visa_count": 1, "contact_name": "Kayla Evett", "lead_company": "Sellethics Marketing Group", "lead_job_title": "Middle Management", "lead_linkedin_url": "linkedin.com/in/kayla-evett-256317141", "lead_email_work": "kaylaevett@sellethics.com", "lead_phone": "Not available"}, {"rank": 88, "visa_count": 1, "contact_name": "Kelly Murphy", "lead_company": "Netsmart", "lead_job_title": "Senior Director, Solution Management - Finance", "lead_linkedin_url": "linkedin.com/in/kelly-murphy-336aa1a9", "lead_email_work": "kmurphy@ntst.com", "lead_phone": "Not available"}, {"rank": 89, "visa_count": 1, "contact_name": "Kevin Monsalve", "lead_company": "Cbre", "lead_job_title": "Senior Project Manager", "lead_linkedin_url": "linkedin.com/in/kevin-monsalve-b429a8a8", "lead_email_work": "kevin.monsalve@cbre.com", "lead_phone": "Not available"}, {"rank": 90, "visa_count": 1, "contact_name": "Kimberly Guevara", "lead_company": "Chandler Unified School District", "lead_job_title": "Marketing Coordinator", "lead_linkedin_url": "linkedin.com/in/kimberly-guevara-8b825257", "lead_email_work": "guevara.kimberly@cusd80.com", "lead_phone": "4805288308"}, {"rank": 91, "visa_count": 1, "contact_name": "Krystal Watson", "lead_company": "Brazosport College", "lead_job_title": "Program Coordinator, High School Equivalency", "lead_linkedin_url": "linkedin.com/in/krystal-watson-86452173", "lead_email_work": "krystal.watson@brazosport.edu", "lead_phone": "2547447393"}, {"rank": 92, "visa_count": 1, "contact_name": "Latonoa Chavis", "lead_company": "Active Visions", "lead_job_title": "Dsp", "lead_linkedin_url": "linkedin.com/in/latonia-chavis-403b72169", "lead_email_work": "lchavis@activevisions.net", "lead_phone": "7735940921"}, {"rank": 93, "visa_count": 1, "contact_name": "Laura Linton", "lead_company": "Wake County Public School Sys", "lead_job_title": "Teacher", "lead_linkedin_url": "linkedin.com/in/laura-linton-1a2626133", "lead_email_work": "llinton@wcpss.net", "lead_phone": "9193089824"}, {"rank": 94, "visa_count": 1, "contact_name": "Lee Dechant", "lead_company": "Route 66 Sporting Goods", "lead_job_title": "Executive & Ownership", "lead_linkedin_url": "Not available", "lead_email_work": "lee@route66sportinggoods.com", "lead_phone": "Not available"}, {"rank": 95, "visa_count": 1, "contact_name": "Leslie Taylor", "lead_company": "Thornton Early & Naumes", "lead_job_title": "Partner", "lead_linkedin_url": "linkedin.com/in/leslie-anne-taylor-esq-96137a1a", "lead_email_work": "leslie.taylor@tenlaw.com", "lead_phone": "8605085400"}, {"rank": 96, "visa_count": 1, "contact_name": "Linda Boulanger", "lead_company": "Lyons Insurance Agency", "lead_job_title": "Middle Management", "lead_linkedin_url": "linkedin.com/in/linda-boulanger-84aa47a", "lead_email_work": "lboulanger@lyonsinsurance.com", "lead_phone": "Not available"}, {"rank": 97, "visa_count": 1, "contact_name": "Linda December", "lead_company": "Ross Mortgage", "lead_job_title": "Vice  President/Senior Loan Officer", "lead_linkedin_url": "linkedin.com/in/linda-december-9789a24", "lead_email_work": "ldecember@rossmortgage.com", "lead_phone": "2487707778"}, {"rank": 98, "visa_count": 1, "contact_name": "Linda Ramirez", "lead_company": "C Young", "lead_job_title": "Business Analysis Sr. Advisor", "lead_linkedin_url": "linkedin.com/in/linda-ramirez-0566a5151", "lead_email_work": "linda@cyoung.net", "lead_phone": "5127445200"}, {"rank": 99, "visa_count": 1, "contact_name": "Linda Salazar", "lead_company": "Glaz-Tech Industries", "lead_job_title": "Office Manager", "lead_linkedin_url": "linkedin.com/in/linda-salazar-48508980", "lead_email_work": "linda@glaztech.com", "lead_phone": "4807211000"}, {"rank": 100, "visa_count": 1, "contact_name": "Liz Erman", "lead_company": "Nettwerk Music Group", "lead_job_title": "Senior Leadership", "lead_linkedin_url": "linkedin.com/in/lizerman", "lead_email_work": "liz.e@nettwerk.com", "lead_phone": "2132152903"}, {"rank": 101, "visa_count": 1, "contact_name": "Lucina Napper", "lead_company": "Sidley Austin Llp", "lead_job_title": "Software Development Manager", "lead_linkedin_url": "linkedin.com/in/garrick-bunting", "lead_email_work": "gbunting@sidley.com", "lead_phone": "2704013160"}, {"rank": 102, "visa_count": 1, "contact_name": "Luis Perez", "lead_company": "Roma Independent School District", "lead_job_title": "Superintendent", "lead_linkedin_url": "linkedin.com/in/luis-alfredo-barrera-perez-5737ba60", "lead_email_work": "lperez@romaisd.com", "lead_phone": "9568445274"}, {"rank": 103, "visa_count": 1, "contact_name": "Lynn Klamt", "lead_company": "Weston Realty", "lead_job_title": "Executive & Ownership", "lead_linkedin_url": "linkedin.com/in/lynn-klamt-9293033a", "lead_email_work": "lynn.klamt@westonishome.com", "lead_phone": "Not available"}, {"rank": 104, "visa_count": 1, "contact_name": "Madison Clark", "lead_company": "Jones Group Rsdntl Interiors", "lead_job_title": "Accounting Assistant", "lead_linkedin_url": "linkedin.com/in/madison-clark-937128127", "lead_email_work": "mclark@jonesgroupinteriors.com", "lead_phone": "8643893830"}, {"rank": 105, "visa_count": 1, "contact_name": "Magdalena Hernandez", "lead_company": "Ross Stores", "lead_job_title": "Front End Supervisor", "lead_linkedin_url": "linkedin.com/in/magdalena-dominguez-7b16a646", "lead_email_work": "magdalena.hernandez@rossstores.com", "lead_phone": "9567565653"}, {"rank": 106, "visa_count": 1, "contact_name": "Mara Weitzman", "lead_company": "Newton Montessori School", "lead_job_title": "Information Technology Specialist", "lead_linkedin_url": "linkedin.com/in/mara-weitzman-5a4b1a5a", "lead_email_work": "mara.weitzman@wellan.org", "lead_phone": "2123581250"}, {"rank": 107, "visa_count": 1, "contact_name": "Margaret Fulkerson", "lead_company": "Crest Commercial Real Estate", "lead_job_title": "Accounting Manager", "lead_linkedin_url": "linkedin.com/in/margaret-fulkerson-7aa812b", "lead_email_work": "margaret@crestcommercial.com", "lead_phone": "2146966677"}, {"rank": 108, "visa_count": 1, "contact_name": "Mark Klein", "lead_company": "Biamp Systems", "lead_job_title": "Engineering Director", "lead_linkedin_url": "linkedin.com/in/markkklein", "lead_email_work": "mark.klein@biamp.com", "lead_phone": "6023807085"}, {"rank": 109, "visa_count": 1, "contact_name": "Mark Wheeler", "lead_company": "James Bates Brannan Groover Llp", "lead_job_title": "Associate Attorney", "lead_linkedin_url": "linkedin.com/in/mcwheel", "lead_email_work": "mark.wheeler@jamesbatesllp.com", "lead_phone": "7708563818"}, {"rank": 110, "visa_count": 1, "contact_name": "Marsha Schiffman", "lead_company": "All-Florida Realty Services", "lead_job_title": "Professional", "lead_linkedin_url": "Not available", "lead_email_work": "chris@baehman.com", "lead_phone": "9082277242"}, {"rank": 111, "visa_count": 1, "contact_name": "Martin Wiarda", "lead_company": "Jones Allen & Fuquay", "lead_job_title": "Partner", "lead_linkedin_url": "linkedin.com/in/martin-wiarda-00118712", "lead_email_work": "mwiarda@jonesallen.com", "lead_phone": "2143857649"}, {"rank": 112, "visa_count": 1, "contact_name": "Mary Bruno", "lead_company": "Greenberg Traurig", "lead_job_title": "Attorney/Shareholder", "lead_linkedin_url": "linkedin.com/in/mary-bruno-59313b12", "lead_email_work": "brunom@gtlaw.com", "lead_phone": "6785532100"}, {"rank": 113, "visa_count": 1, "contact_name": "Mary Kittrell", "lead_company": "Kittrell", "lead_job_title": "Executive & Ownership", "lead_linkedin_url": "linkedin.com/in/mary-kittrell-kinkaid-csp-6592445", "lead_email_work": "mary@kittrellpaycard.com", "lead_phone": "2143846841"}, {"rank": 114, "visa_count": 1, "contact_name": "Matt Lucas", "lead_company": "Luke'S Locker", "lead_job_title": "President And In House Counsel", "lead_linkedin_url": "linkedin.com/in/matt-lucas-45a3677", "lead_email_work": "mattlucas@lukeslocker.com", "lead_phone": "5126564232"}, {"rank": 115, "visa_count": 1, "contact_name": "Matt Pullen", "lead_company": "Georgetown Isd", "lead_job_title": "Teacher", "lead_linkedin_url": "Not available", "lead_email_work": "pullenm@georgetownisd.org", "lead_phone": "5124680333"}, {"rank": 116, "visa_count": 1, "contact_name": "Matthew Mellon", "lead_company": "Mellon Farms", "lead_job_title": "Carpet Technican", "lead_linkedin_url": "linkedin.com/in/matthew-todd-mellon-999b9196", "lead_email_work": "toddmellon@mellonfarms.com", "lead_phone": "6106675438"}, {"rank": 117, "visa_count": 1, "contact_name": "Megan Armstrong", "lead_company": "Not available", "lead_job_title": "Not available", "lead_linkedin_url": "linkedin.com/in/meganjarmstrong", "lead_email_work": "megan.armstrong@coverica.com", "lead_phone": "2147256852"}, {"rank": 118, "visa_count": 1, "contact_name": "Melissa Beltran", "lead_company": "Round Rock Independent School District", "lead_job_title": "Executive Assistant", "lead_linkedin_url": "Not available", "lead_email_work": "melissa_beltran@roundrockisd.org", "lead_phone": "Not available"}, {"rank": 119, "visa_count": 1, "contact_name": "Michael Bellah", "lead_company": "What If Technologies", "lead_job_title": "Uh-60M Flight Standardization Instructor", "lead_linkedin_url": "linkedin.com/in/michael-bellah-b0a89ab", "lead_email_work": "michael@whatif.com", "lead_phone": "8473458907"}, {"rank": 120, "visa_count": 1, "contact_name": "Michael Greer", "lead_company": "Wilton Re", "lead_job_title": "Senior Vice President", "lead_linkedin_url": "linkedin.com/in/michael-greer-b4a923b", "lead_email_work": "mgreer@wiltonre.com", "lead_phone": "6306776404"}, {"rank": 121, "visa_count": 1, "contact_name": "Michael Limas", "lead_company": "Grace Community Fellowship", "lead_job_title": "Campus Pastor", "lead_linkedin_url": "linkedin.com/in/michael-limas-81744428", "lead_email_work": "michael.limas@gcfwharton.org", "lead_phone": "4029962789"}, {"rank": 122, "visa_count": 1, "contact_name": "Michael Matarwe", "lead_company": "Five Star World Travel", "lead_job_title": "Middle Management", "lead_linkedin_url": "Not available", "lead_email_work": "laila@fivestartvl.com", "lead_phone": "Not available"}, {"rank": 123, "visa_count": 1, "contact_name": "Michele Davis", "lead_company": "Acxiom Llc Hq", "lead_job_title": "Senior Manager - Global Operations Tools & Metrics Unit", "lead_linkedin_url": "linkedin.com/in/michele-davis-1a60485", "lead_email_work": "michele.davis@acxiom.com", "lead_phone": "5017339816"}, {"rank": 124, "visa_count": 1, "contact_name": "Mike Mcdonald", "lead_company": "Richard Sandoval Restaurants", "lead_job_title": "Assistant General Manager", "lead_linkedin_url": "linkedin.com/in/mike-mcdonald-37a67587", "lead_email_work": "mmcdonald@richardsandoval.com", "lead_phone": "4102453851"}, {"rank": 125, "visa_count": 1, "contact_name": "Mike Tuck", "lead_company": "Viva Mexico", "lead_job_title": "Owner/Operator", "lead_linkedin_url": "linkedin.com/in/mike-tuck-29181a9", "lead_email_work": "mike@vivamex.net", "lead_phone": "9529354082"}, {"rank": 126, "visa_count": 1, "contact_name": "Mike Veres", "lead_company": "Veres Quality Water", "lead_job_title": "Executive & Ownership", "lead_linkedin_url": "linkedin.com/in/mike-veres-44499111a", "lead_email_work": "mikeveres@vereswater.com", "lead_phone": "Not available"}, {"rank": 127, "visa_count": 1, "contact_name": "Nomi Ariel", "lead_company": "United Regional Solutions", "lead_job_title": "Director Of Clinical Integration And Adoption", "lead_linkedin_url": "linkedin.com/in/nomiariel", "lead_email_work": "nariel@unitedregional.org", "lead_phone": "Not available"}, {"rank": 128, "visa_count": 1, "contact_name": "Parker Benthin", "lead_company": "Brondell", "lead_job_title": "Chief Revenue Officer", "lead_linkedin_url": "linkedin.com/in/parkerbenthin", "lead_email_work": "parker.benthin@brondell.com", "lead_phone": "4257663633"}, {"rank": 129, "visa_count": 1, "contact_name": "Pat O'Brien", "lead_company": "Pat O'Brien Assoc", "lead_job_title": "Owner", "lead_linkedin_url": "linkedin.com/in/pat-o-brien-72b1526", "lead_email_work": "pat@patobrien.com", "lead_phone": "2315821700"}, {"rank": 130, "visa_count": 1, "contact_name": "Patrick Mcgee", "lead_company": "Missionary Oblates Of Mary Immaculate", "lead_job_title": "Not available", "lead_linkedin_url": "Not available", "lead_email_work": "pmcgee@omiusa.org", "lead_phone": "6309834900"}, {"rank": 131, "visa_count": 1, "contact_name": "Rene Juarez", "lead_company": "Not available", "lead_job_title": "Insurance/Agent", "lead_linkedin_url": "Not available", "lead_email_work": "medinag@epenergy.com", "lead_phone": "9563196460"}, {"rank": 132, "visa_count": 1, "contact_name": "Rhonda Zuniga", "lead_company": "American Excelsior", "lead_job_title": "Customer Service Representative", "lead_linkedin_url": "linkedin.com/in/rhonda-zuniga-8b5b5024a", "lead_email_work": "rzuniga@americanexcelsior.com", "lead_phone": "8173853500"}, {"rank": 133, "visa_count": 1, "contact_name": "Sammy Johnson", "lead_company": "Fort Gibson School District 3", "lead_job_title": "Assistant Football Coach", "lead_linkedin_url": "linkedin.com/in/sammy-johnson-2b022a121", "lead_email_work": "s_johnson@fortgibsontigers.org", "lead_phone": "9497521400"}, {"rank": 134, "visa_count": 1, "contact_name": "Sarah Kuykendall", "lead_company": "Annunciation Church", "lead_job_title": "Teacher", "lead_linkedin_url": "linkedin.com/in/sarah-kuykendall-b884878", "lead_email_work": "skuykendall@annunciationmsp.org", "lead_phone": "2144128306"}, {"rank": 135, "visa_count": 1, "contact_name": "Sarah Natale", "lead_company": "Minor League Baseball", "lead_job_title": "Technical Project Manager", "lead_linkedin_url": "linkedin.com/in/sarahnatale", "lead_email_work": "sarah.natale@mlb.com", "lead_phone": "9492761207"}, {"rank": 136, "visa_count": 1, "contact_name": "Sasha Lifschitz", "lead_company": "Douglas Elliman Real Estate", "lead_job_title": "Licensed Real Estate Agent", "lead_linkedin_url": "linkedin.com/in/sasha-vasquez-91190749", "lead_email_work": "sasha.lifschitz@elliman.com", "lead_phone": "5124174436"}, {"rank": 137, "visa_count": 1, "contact_name": "Scott Farmer", "lead_company": "Housing Finance Agency", "lead_job_title": "Executive Director", "lead_linkedin_url": "linkedin.com/in/scott-farmer-6235b210", "lead_email_work": "bsfarmer@nchfa.com", "lead_phone": "9198775700"}, {"rank": 138, "visa_count": 1, "contact_name": "Scott Sneddon", "lead_company": "Kohls", "lead_job_title": "Middle Management", "lead_linkedin_url": "linkedin.com/in/scott-sneddon-5631327b", "lead_email_work": "scott.sneddon@kohls.com", "lead_phone": "8019107129"}, {"rank": 139, "visa_count": 1, "contact_name": "Shane Thomas", "lead_company": "Tph Acquisition", "lead_job_title": "Sales Representative", "lead_linkedin_url": "linkedin.com/in/shane-thomas-aa349b105", "lead_email_work": "sthomas@thepartshouse.com", "lead_phone": "9045711661"}, {"rank": 140, "visa_count": 1, "contact_name": "Sholem Fishbane", "lead_company": "Chicago Rabbinical Council", "lead_job_title": "Individual Contributor", "lead_linkedin_url": "linkedin.com/in/sholem-fishbane-5b59b48", "lead_email_work": "fishbane@crcweb.org", "lead_phone": "Not available"}, {"rank": 141, "visa_count": 1, "contact_name": "Solomon Ross", "lead_company": "Broadridge", "lead_job_title": "Individual Contributor", "lead_linkedin_url": "linkedin.com/in/ross-solomon-b4916b16", "lead_email_work": "solomon.ross@broadridge.com", "lead_phone": "Not available"}, {"rank": 142, "visa_count": 1, "contact_name": "Stephen Kasberg", "lead_company": "Texas Department Of Transportation", "lead_job_title": "Director Of Maintenance", "lead_linkedin_url": "linkedin.com/in/stephen-kasberg-p-e-5b493ba4", "lead_email_work": "stephen.kasberg@txdot.gov", "lead_phone": "8325206944"}, {"rank": 143, "visa_count": 1, "contact_name": "Steve Boucher", "lead_company": "Sos Steel", "lead_job_title": "Executive & Ownership", "lead_linkedin_url": "linkedin.com/in/steve-boucher-424447114", "lead_email_work": "steveb@sossteelco.com", "lead_phone": "4086901870"}, {"rank": 144, "visa_count": 1, "contact_name": "Steve Elitz", "lead_company": "The Michaels Organization", "lead_job_title": "Accountant", "lead_linkedin_url": "linkedin.com/in/steve-elitz-26971a37", "lead_email_work": "selitz@tmo.com", "lead_phone": "8562968743"}, {"rank": 145, "visa_count": 1, "contact_name": "Sunil Shah", "lead_company": "Dimensional Fund Advisors", "lead_job_title": "Head Of Portfolio Consulting & Vice President, Investment Solutions Group", "lead_linkedin_url": "linkedin.com/in/sunil-shah-cfa-15725", "lead_email_work": "sunil.shah@dimensional.com", "lead_phone": "5124542583"}, {"rank": 146, "visa_count": 1, "contact_name": "Suzanne Brasuell", "lead_company": "Entos Design", "lead_job_title": "Ceo/Principal", "lead_linkedin_url": "linkedin.com/in/suzanne-brasuell-0061a2", "lead_email_work": "sbrasuell@entosdesign.com", "lead_phone": "9727702222"}, {"rank": 147, "visa_count": 1, "contact_name": "Theresa Mcbee", "lead_company": "Century 21 Sowesco Realty", "lead_job_title": "Individual Contributor", "lead_linkedin_url": "Not available", "lead_email_work": "tmcbee@allstarrealtysales.com", "lead_phone": "Not available"}, {"rank": 148, "visa_count": 1, "contact_name": "Tim Thrasher", "lead_company": "Community Action Partnership Of North Alabama", "lead_job_title": "Executive & Ownership", "lead_linkedin_url": "linkedin.com/in/tim-thrasher-955530a5", "lead_email_work": "tim.thrasher@capna.org", "lead_phone": "2565901543"}, {"rank": 149, "visa_count": 1, "contact_name": "Tom Blake", "lead_company": "Coast Income", "lead_job_title": "Administrative Manager", "lead_linkedin_url": "linkedin.com/in/thomas-blake-3a644387", "lead_email_work": "tblake@coastincome.com", "lead_phone": "8585879192"}, {"rank": 150, "visa_count": 1, "contact_name": "Tracey Ross", "lead_company": "Urban Compass", "lead_job_title": "Real Estate Sales", "lead_linkedin_url": "linkedin.com/in/tracey-ross-07437827", "lead_email_work": "tracey.ross@compass.com", "lead_phone": "7605839597"}, {"rank": 151, "visa_count": 1, "contact_name": "Veronica Cantu", "lead_company": "Lone Star National Bank", "lead_job_title": "Vice President", "lead_linkedin_url": "linkedin.com/in/veronica-cantu-a1b9a467", "lead_email_work": "cantuv@lonestarnationalbank.com", "lead_phone": "9565198128"}, {"rank": 152, "visa_count": 1, "contact_name": "Victoria Angello", "lead_company": "Kinetic Arts Center", "lead_job_title": "Owner And Managing Director", "lead_linkedin_url": "linkedin.com/in/victoria-angello-4bb22213", "lead_email_work": "victoria@kineticartscenter.com", "lead_phone": "5104444800"}, {"rank": 153, "visa_count": 1, "contact_name": "Vince Piscopo", "lead_company": "The Walsh Group - Walsh Construction & Archer Western", "lead_job_title": "Vice President / Building Group Leader", "lead_linkedin_url": "linkedin.com/in/vince-piscopo-0946b95", "lead_email_work": "vpiscopo@walshgroup.com", "lead_phone": "6302298571"}, {"rank": 154, "visa_count": 1, "contact_name": "Vincent Lin", "lead_company": "Capital One", "lead_job_title": "Individual Contributor", "lead_linkedin_url": "linkedin.com/in/vincent-lin-466410", "lead_email_work": "vincent.lin@capitalone.com", "lead_phone": "2149385966"}, {"rank": 155, "visa_count": 1, "contact_name": "Yolanda Johnson", "lead_company": "Columbia Residential", "lead_job_title": "Middle Management", "lead_linkedin_url": "linkedin.com/in/yolanda-johnson-cos-hccp-13913042", "lead_email_work": "yjohnson@columbiares.com", "lead_phone": "Not available"}];
+
+const tbody = document.querySelector("#dataTable tbody");
+const searchInput = document.getElementById("searchInput");
+const chips = Array.from(document.querySelectorAll(".chip"));
+const counts = document.getElementById("counts");
+const exportBtn = document.getElementById("exportCsv");
+
+let activeFilter = "all";
+
+function renderTable(data) { 
+  tbody.innerHTML = "";
+  let html = "";
+  data.forEach(r => { 
+    const bandClass = r.visa_count >= 15 ? "p15" :
+                      r.visa_count >= 14 ? "p14" :
+                      r.visa_count >= 13 ? "p13" :
+                      r.visa_count >= 12 ? "p12" :
+                      r.visa_count >= 11 ? "p11" :
+                      r.visa_count >= 9  ? "p9"  :
+                      r.visa_count >= 7  ? "p7"  :
+                      r.visa_count >= 3  ? "p3"  : "p2";
+    html += `
+    <tr>
+      <td>${r.rank}</td>
+      <td><span class="pill ${bandClass}">${r.visa_count}</span></td>
+      <td>${escapeHtml(r.contact_name)}</td>
+      <td>${escapeHtml(r.lead_company)}</td>
+      <td>${escapeHtml(r.lead_job_title)}</td>
+      <td>${formatLink(r.lead_linkedin_url)}</td>
+      <td>${escapeHtml(r.lead_email_work)}</td>
+      <td>${escapeHtml(r.lead_phone)}</td>
+    </tr>`;
+  });
+  tbody.innerHTML = html;
+  counts.textContent = `Showing ${data.length} of 155 prospects`;
+}
+
+function escapeHtml(v){
+  if (v == null) return "";
+  return String(v).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+
+function formatLink(url){
+  if(!url || url === "Not available") return '<span class="muted">Not available</span>';
+  let u = String(url).trim();
+  if(!/^https?:\/\//i.test(u)) u = "https://" + u.replace(/^\/+/, "");
+  return `<a href="${u}" target="_blank" rel="noopener">LinkedIn</a>`;
+}
+
+function applyFilter(){
+  const q = searchInput.value.trim().toLowerCase();
+  let filtered = rows.slice();
+  const pvMatch = activeFilter && activeFilter.match(/^pv(\d+)$/);
+  if(pvMatch){
+    const min = parseInt(pvMatch[1], 10);
+    filtered = filtered.filter(r => r.visa_count >= min);
+  } else if(activeFilter === "with_company"){
+    filtered = filtered.filter(r => r.lead_company && r.lead_company !== "Not available");
+  } else if(activeFilter === "with_linkedin"){
+    filtered = filtered.filter(r => r.lead_linkedin_url && r.lead_linkedin_url !== "Not available");
+  }
+  if(q){
+    filtered = filtered.filter(r => {
+      const hay = [
+        r.contact_name, r.lead_company, r.lead_job_title,
+        r.lead_email_work
+      ].map(v => (v || "").toLowerCase()).join(" ");
+      return hay.includes(q);
+    });
+  }
+  renderTable(filtered);
+}
+
+chips.forEach(chip => {
+  chip.addEventListener("click", () => {
+    chips.forEach(c => c.classList.remove("active"));
+    chip.classList.add("active");
+    activeFilter = chip.dataset.filter;
+    applyFilter();
+  });
+});
+
+let debounceTimer = null;
+searchInput.addEventListener("input", () => {
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(applyFilter, 150);
+});
+
+exportBtn.addEventListener("click", () => {
+  const q = searchInput.value.trim().toLowerCase();
+  let filtered = rows.slice();
+  const pvMatch = activeFilter && activeFilter.match(/^pv(\d+)$/);
+  if(pvMatch){
+    const min = parseInt(pvMatch[1], 10);
+    filtered = filtered.filter(r => r.visa_count >= min);
+  } else if(activeFilter === "with_company"){
+    filtered = filtered.filter(r => r.lead_company && r.lead_company !== "Not available");
+  } else if(activeFilter === "with_linkedin"){
+    filtered = filtered.filter(r => r.lead_linkedin_url && r.lead_linkedin_url !== "Not available");
+  }
+  if(q){
+    filtered = filtered.filter(r => {
+      const hay = [
+        r.contact_name, r.lead_company, r.lead_job_title,
+        r.lead_email_work
+      ].map(v => (v || "").toLowerCase()).join(" ");
+      return hay.includes(q);
+    });
+  }
+  const header = ["Rank","Pages Visited","Contact Name","Company","Job Title","LinkedIn URL","Work Email","Primary Phone"];
+  const rowsData = filtered.map(r => [
+    r.rank, r.visa_count, r.contact_name, r.lead_company, r.lead_job_title,
+    r.lead_linkedin_url, r.lead_email_work, r.lead_phone, r.lead_phone_alt
+  ]);
+  const csv = toCSV([header, ...rowsData]);
+  const blob = new Blob([csv], {type: "text/csv;charset=utf-8;"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "ofp_august_web_visitors.csv";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+});
+
+function toCSV(rows){
+  return rows.map(r => r.map(cell => {
+    let s = String(cell ?? "");
+    s = s.replace(/"/g, '""');
+    if(/[",\n]/.test(s)) s = `"${s}"`;
+    return s;
+  }).join(",")).join("\n");
+}
+
+applyFilter();
+</script>
+</body>
+</html>
