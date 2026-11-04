@@ -1,0 +1,739 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>ESG Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#D51F2B; --red-dark:#B01823; --ink:#1C1C1C; --body:#3A3A3A;
+    --gray-3:#5E5E5E; --gray-4:#9B9B9B; --rule:#DEDEDE; --panel:#F4F4F2; --panel-2:#ECECE9;
+    --hdr:#F0F0F0; --bg:#E6E6E3;
+    --reuse:#D51F2B; --donate:#1F75B8; --recycle:#038145; --landfill:#6B6B6B;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--bg);color:var(--body);font-family:"Open Sans",Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
+
+  /* ===== APP SHELL ===== */
+  .app{display:grid;grid-template-columns:440px 1fr;min-height:100vh}
+  .controls{background:#fff;border-right:1px solid var(--rule);padding:22px 22px 60px;height:100vh;overflow-y:auto;position:sticky;top:0}
+  .controls h1{font-family:Arial,Helvetica,sans-serif;font-size:20px;font-weight:900;color:var(--ink);margin:0 0 2px}
+  .controls .lead{font-size:13px;color:var(--gray-3);margin:0 0 14px;line-height:1.5}
+  .actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 10px}
+  .actions.bottom{margin:18px 0 0}
+  .actions .btn.ghost.on,.actions .btn.ghost.on:hover{background:var(--red);color:#fff;border-color:var(--red)}
+  .btn.dark{background:var(--ink);border-color:var(--ink);color:#fff}
+  .btn.dark:hover{background:#000;border-color:#000}
+  .viewnote{display:none;font-size:12px;color:#0E4F8A;background:#E8F1FA;padding:9px 11px;border-radius:2px;margin:0 0 10px;line-height:1.45}
+  .viewnote.on{display:block}
+  .btn{flex:1;display:inline-block;padding:11px 14px;font-family:Arial,Helvetica,sans-serif;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:2px;cursor:pointer;border:2px solid var(--red);background:var(--red);color:#fff}
+  .btn:hover{background:var(--red-dark);border-color:var(--red-dark)}
+  .btn.ghost{background:#fff;color:var(--ink);border-color:var(--ink)}
+  .btn.ghost:hover{background:var(--ink);color:#fff}
+  .btn.small{flex:none;padding:6px 10px;font-size:10.5px}
+  .btn.add{flex:none;width:100%;background:#fff;color:var(--red);border:1.5px dashed var(--red);padding:9px;margin:2px 0 8px}
+  .btn.add:hover{background:#FDECEE}
+  .warn{display:none;font-size:12px;font-weight:700;color:var(--red-dark);background:#FDECEE;padding:9px 11px;border-radius:2px;margin:0 0 10px;line-height:1.45}
+  .warn.on{display:block}
+  details{border-top:1px solid var(--rule)}
+  details:last-of-type{border-bottom:1px solid var(--rule)}
+  summary{list-style:none;cursor:pointer;padding:13px 0;font-family:Arial,Helvetica,sans-serif;font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--red);display:flex;justify-content:space-between;align-items:center}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font-size:18px;color:var(--ink);letter-spacing:0}
+  details[open] summary::after{content:"\2212"}
+  .sec{padding:0 0 14px}
+  .sec p.help{font-size:12px;color:var(--gray-3);line-height:1.5;margin:0 0 12px}
+  label{display:block;font-size:12px;font-weight:600;color:var(--ink);margin:0 0 10px}
+  label span.hint,.hint{font-weight:400;color:var(--gray-3)}
+  input[type=text],input[type=number],textarea,select{width:100%;margin-top:4px;padding:8px 9px;font:inherit;font-size:13px;color:var(--ink);border:1px solid #C9C9C6;border-radius:2px;background:#fff}
+  input:focus,textarea:focus,select:focus{outline:2px solid var(--red);outline-offset:0;border-color:var(--red)}
+  textarea{resize:vertical;min-height:52px;line-height:1.45}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .seg{display:flex;border:1px solid var(--ink);border-radius:2px;overflow:hidden;margin:4px 0 12px}
+  .seg button{flex:1;padding:8px 6px;border:0;background:#fff;font:inherit;font-size:12px;font-weight:700;cursor:pointer;color:var(--ink)}
+  .seg button.on{background:var(--ink);color:#fff}
+  .card{border:1px solid var(--rule);border-left:5px solid var(--c,var(--gray-4));border-radius:2px;padding:10px 10px 0;margin:0 0 10px;background:#fff;position:relative}
+  .card .x{position:absolute;top:6px;right:6px;border:0;background:none;font-size:18px;line-height:1;color:var(--gray-4);cursor:pointer;padding:2px 6px}
+  .card .x:hover{color:var(--red)}
+  .card .num{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-3);margin:0 0 6px}
+  .card .calc{font-size:11.5px;color:var(--gray-3);margin:-4px 0 10px}
+  .items-head,.item{display:grid;grid-template-columns:1fr 54px 64px 104px 22px;gap:5px;align-items:center}
+  .items-head{font-size:10.5px;font-weight:700;color:var(--gray-3);margin:0 0 4px;text-transform:uppercase;letter-spacing:.06em}
+  .item{margin:0 0 5px}
+  .item input,.item select{margin:0;padding:6px 6px;font-size:12px}
+  .item .x{border:0;background:none;font-size:16px;color:var(--gray-4);cursor:pointer;padding:0}
+  .item .x:hover{color:var(--red)}
+  .sumbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;font-size:12px;font-weight:700;padding:9px 10px;background:var(--panel);border-radius:2px;margin:0 0 12px;gap:6px 8px}
+  .sumbar.bad{background:#FDECEE;color:var(--red-dark)}
+  .sumbar.good{background:#EAF5EE;color:#05592F}
+  .check{display:flex;align-items:center;gap:8px;font-weight:600;margin:0 0 12px}
+  .check input{margin:0;width:16px;height:16px;accent-color:var(--red)}
+  .tip{font-size:12px;color:var(--gray-3);line-height:1.5;background:var(--panel);padding:10px 12px;border-radius:2px;margin:12px 0 0}
+
+  .stage{padding:28px;display:flex;justify-content:center;align-items:flex-start;overflow:hidden}
+  .scaler{transform-origin:top center}
+  #pages{display:flex;flex-direction:column;gap:28px}
+
+  /* ===== PAGE (8.5 x 11) ===== */
+  .page{width:8.5in;height:11in;background:#fff;position:relative;overflow:hidden;box-shadow:0 6px 30px rgba(0,0,0,.18);display:flex;flex-direction:column;color:var(--body)}
+  .page.over{outline:4px solid var(--red)}
+  .p-hdr{background:var(--hdr);height:1.12in;display:flex;flex-direction:column;align-items:center;justify-content:center;flex:none}
+  .p-logo{font-family:Arial,Helvetica,sans-serif;font-size:31px;line-height:1;color:#000;letter-spacing:-.2px}
+  .p-logo sup{font-size:9px;vertical-align:top;position:relative;top:2px;margin-left:1px}
+  .p-tag{font-family:Arial,Helvetica,sans-serif;font-size:11.5px;color:#000;margin:3px 0 5px}
+  .p-pill{background:var(--red);color:#fff;font-family:Arial,Helvetica,sans-serif;font-weight:700;font-size:10.5px;letter-spacing:.02em;padding:4px 14px}
+  .p-rule{height:.11in;background:var(--red);flex:none}
+  .p-body{flex:1;padding:.24in .5in 0;display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .p-ftr{height:.62in;display:flex;justify-content:space-between;align-items:center;padding:0 .6in;font-size:10px;font-weight:700;color:#000;flex:none}
+  .p-ftr-rule{height:.17in;background:var(--red);flex:none}
+
+  .p-titlerow{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex:none}
+  .p-eyebrow{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin:0 0 3px}
+  .p-title{font-size:24px;font-weight:800;color:var(--ink);margin:0;line-height:1.12}
+  .p-meta{font-size:10.5px;color:var(--gray-3);margin:5px 0 0;line-height:1.5}
+  .p-meta b{color:var(--ink);font-weight:700}
+  .p-badge{flex:none;border:1.5px solid var(--red);color:var(--red);font-size:9.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:5px 10px;margin-top:2px;white-space:nowrap}
+  .p-badge.final{background:var(--red);color:#fff}
+  .p-headline{margin:.16in 0 0;font-size:14px;font-weight:700;color:var(--ink);line-height:1.42;flex:none;background:var(--panel);border-left:5px solid var(--red);padding:12px 16px 12px 16px;display:flex;align-items:center;gap:14px}
+  .p-headline .big{flex:none;font-size:30px;font-weight:800;color:var(--red);line-height:1;padding-right:14px;border-right:1px solid #D6D6D2}
+  .p-headline em{font-style:normal;color:var(--red)}
+  .p-kpis{display:grid;grid-template-columns:repeat(var(--n,3),1fr);gap:9px;margin:.13in 0 0;flex:none}
+  .kpi{background:var(--panel);border-top:3px solid var(--red);padding:8px 11px 9px}
+  .kpi .k{font-size:8px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--gray-3);line-height:1.3}
+  .kpi .v{font-size:22px;font-weight:800;color:var(--ink);line-height:1.1;margin-top:3px;font-variant-numeric:tabular-nums}
+  .kpi .s{font-size:9px;color:var(--gray-3);margin-top:1px}
+  h3.sh{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);margin:0 0 8px;display:flex;align-items:center;gap:8px}
+  h3.sh::after{content:"";flex:1;height:1px;background:var(--rule)}
+  .p-split{display:grid;grid-template-columns:2in 1fr;gap:.22in;margin:.15in 0 0;align-items:center;flex:none}
+  .donut{position:relative}
+  .donut svg{display:block;width:100%;height:auto}
+  .donut .center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;pointer-events:none}
+  .donut .center b{font-size:22px;font-weight:800;color:var(--ink);line-height:1}
+  .donut .center span{font-size:7.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-3);margin-top:3px;max-width:1in;line-height:1.3}
+  .cats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .cat{background:var(--panel);border-left:4px solid var(--c);padding:7px 10px 8px;min-height:.8in}
+  .cat .t{display:flex;justify-content:space-between;align-items:baseline;gap:6px}
+  .cat .t b{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+  .cat .t span{font-size:19px;font-weight:800;color:var(--ink);line-height:1}
+  .cat .w{font-size:9px;color:var(--gray-3);margin:2px 0 4px;font-variant-numeric:tabular-nums}
+  .cat ul{margin:0;padding:0;list-style:none}
+  .cat li{font-size:8.6px;line-height:1.35;color:var(--body);padding-left:9px;position:relative;margin:0 0 1px}
+  .cat li::before{content:"";position:absolute;left:0;top:.48em;width:4px;height:4px;border-radius:50%;background:var(--c)}
+  table.p-tbl{width:100%;border-collapse:collapse;font-size:9.8px}
+  .p-tbl th{background:var(--ink);color:#fff;font-weight:700;font-size:8px;letter-spacing:.1em;text-transform:uppercase;text-align:right;padding:6px 8px;white-space:nowrap}
+  .p-tbl th.l,.p-tbl td.l{text-align:left}
+  .p-tbl td{padding:5px 8px;border-bottom:1px solid var(--rule);text-align:right;color:var(--ink);font-variant-numeric:tabular-nums;vertical-align:top}
+  .p-tbl tr:nth-child(even) td{background:#FAFAF8}
+  .p-tbl td small{display:block;font-size:8.4px;color:var(--gray-3);line-height:1.35;margin-top:1px}
+  .p-tbl tr.tot td{font-weight:800;border-bottom:0;border-top:2px solid var(--ink);background:#fff}
+  .sw{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;vertical-align:0}
+  .tag{display:inline-block;font-size:7.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#fff;padding:2px 6px;border-radius:2px;white-space:nowrap}
+  .p-proj{font-size:10px;color:var(--ink);margin:7px 0 0}
+  .p-proj b{font-weight:800}
+  .block{margin:.16in 0 0;flex:none}
+  .charts2{display:grid;grid-template-columns:1fr 1fr;gap:.2in}
+  .chartbox{border:1px solid var(--rule);padding:10px 12px 12px}
+  .chartbox .row{display:grid;grid-template-columns:1.45in 1fr;gap:12px;align-items:center}
+  .legend{list-style:none;margin:0;padding:0}
+  .legend li{display:grid;grid-template-columns:12px 1fr auto;gap:6px;align-items:center;font-size:9px;line-height:1.3;color:var(--ink);padding:3px 0;border-bottom:1px solid #EFEFEC}
+  .legend li:last-child{border-bottom:0}
+  .legend li span:last-child{font-weight:700;font-variant-numeric:tabular-nums}
+  .legend .sw{margin:0}
+  .bars{display:flex;flex-direction:column;gap:5px}
+  .bar{display:grid;grid-template-columns:1.6in 1fr .8in;gap:8px;align-items:center;font-size:9px;color:var(--ink)}
+  .bar .trk{height:11px;background:#F1F1EE;border-radius:0 3px 3px 0;overflow:hidden}
+  .bar .fill{height:100%;border-radius:0 3px 3px 0}
+  .bar span:last-child{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+  .recips{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  .recip{border:1px solid var(--rule);border-top:3px solid var(--c);padding:9px 11px 10px}
+  .recip .tp{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+  .recip h4{margin:0;font-size:11px;font-weight:800;color:var(--ink);line-height:1.3}
+  .recip .loc{font-size:9px;color:var(--gray-3);margin:1px 0 4px}
+  .recip p{font-size:9.2px;line-height:1.45;margin:0;color:var(--body)}
+  .recip .lbs{font-size:9px;font-weight:700;color:var(--ink);margin-top:5px;font-variant-numeric:tabular-nums}
+  .promise{background:var(--ink);color:#fff;padding:12px 16px 12px}
+  .promise h3{color:#fff;margin:0 0 8px;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+  .promise ul{margin:0;padding:0;list-style:none}
+  .promise li{font-size:9.6px;line-height:1.45;padding:3px 0 3px 14px;position:relative;color:#E8E8E8}
+  .promise li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;background:var(--red);border-radius:50%}
+  .promise li b{color:#fff}
+  .basis ul{margin:0;padding:0 0 0 14px}
+  .basis li{font-size:8.8px;line-height:1.5;color:var(--body);margin:0 0 3px}
+  .note{font-size:9.2px;line-height:1.5;color:var(--body);margin:0 0 8px;background:var(--panel);padding:8px 10px;border-left:3px solid var(--red)}
+  .note b{color:var(--ink)}
+  /* certificate */
+  [hidden]{display:none!important}
+
+  @media (max-width:900px){
+    .app{grid-template-columns:1fr}
+    .controls{height:auto;position:static;border-right:0;border-bottom:1px solid var(--rule);padding:18px 16px 28px}
+    .stage{padding:16px}
+  }
+  @page{size:letter;margin:0}
+  @media print{
+    html,body{background:#fff}
+    .controls{display:none!important}
+    .app{display:block}
+    .stage{padding:0;display:block;overflow:visible}
+    .scaler{transform:none!important;height:auto!important;width:auto!important}
+    #pages{display:block}
+    .page{box-shadow:none;margin:0;outline:0!important;break-after:page;page-break-after:always}
+    .page:last-child{break-after:auto;page-break-after:auto}
+    *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="controls" aria-label="Report inputs">
+    <h1>Diversion Report Builder</h1>
+    <p class="lead">Fill in the sections below. The report on the right builds itself, then save it as a Letter-size PDF.</p>
+    <div class="actions">
+      <button class="btn ghost" data-act="draft" type="button">Create ESG Draft</button>
+      <button class="btn ghost" data-act="sample" type="button">Sample Draft</button>
+      <button class="btn dark" data-act="print" type="button">Save as PDF</button>
+      <button class="btn ghost" data-act="clear" type="button">Clear</button>
+    </div>
+    <div class="viewnote" id="viewnote">You’re viewing the sample. Click <b>Create ESG Draft</b> to get back to your own draft.</div>
+    <div class="warn" id="warn"></div>
+
+    <details open>
+      <summary>1. Project</summary>
+      <div class="sec">
+        <label>Client Name<input type="text" data-f="client"></label>
+        <label>Project Name<input type="text" data-f="project"></label>
+        <label>Site Address<input type="text" data-f="address"></label>
+        <div class="row2">
+          <label>Project Dates<input type="text" data-f="dates"></label>
+          <label>Prepared By<input type="text" data-f="preparedBy"></label>
+        </div>
+        <label>Report Status</label>
+        <div class="seg" id="statusSeg">
+          <button type="button" data-v="estimated">Estimated (Proposal)</button>
+          <button type="button" data-v="final">Final (Completed)</button>
+        </div>
+      </div>
+    </details>
+
+    <details open>
+      <summary>2. Disposition Streams</summary>
+      <div class="sec">
+        <p class="help">One card for each place material went. Pick the type so it lands in the right slice of the pie. A stream’s weight is its item list (section 3) plus any bulk pounds you type here.</p>
+        <label>Enter Stream Amounts As</label>
+        <div class="seg" id="modeSeg">
+          <button type="button" data-v="lbs">Pounds (lbs)</button>
+          <button type="button" data-v="pct">Percentages (%)</button>
+        </div>
+        <label id="totalWrap">Total Project Weight (lbs) <span class="hint">turns percentages into pounds and tons</span><input type="number" data-f="totalLbs" min="0" step="any" inputmode="decimal"></label>
+        <div id="streams"></div>
+        <button class="btn add" type="button" id="addStream">+ Add Stream</button>
+        <div class="sumbar" id="sumbar"></div>
+      </div>
+    </details>
+
+    <details>
+      <summary>3. Inventory &amp; Weights</summary>
+      <div class="sec">
+        <p class="help">List the pieces you moved out, with a quantity and an assumed weight for each. Pounds roll up into the stream you pick and build the inventory charts.</p>
+        <div class="items-head"><span>Item</span><span>Qty</span><span>Lbs Each</span><span>Went To</span><span></span></div>
+        <div id="items"></div>
+        <button class="btn add" type="button" id="addItem">+ Add Item</button>
+        <div class="sumbar" id="itemsum"></div>
+      </div>
+    </details>
+
+    <details>
+      <summary>4. Notes &amp; Commitments</summary>
+      <div class="sec">
+        <label>Highlight Note <span class="hint">optional, shows on the inventory page</span><textarea data-f="highlight"></textarea></label>
+        <label>Our Commitment to the Planet <span class="hint">one per line, use a colon to bold the lead</span><textarea data-f="promise" style="min-height:120px"></textarea></label>
+        <label>Reporting Basis and Limitations <span class="hint">one per line</span><textarea data-f="basis" style="min-height:120px"></textarea></label>
+        <button class="btn small ghost" type="button" id="basisDefault">Reset Basis Text for This Status</button>
+      </div>
+    </details>
+
+    <details>
+      <summary>5. Extras</summary>
+      <div class="sec">
+        <label>CO2e Avoided (Metric Tons) <span class="hint">optional, leave blank to hide</span><input type="number" data-f="co2" min="0" step="any" inputmode="decimal"></label>
+        <div class="tip"><b>Saving the PDF:</b> click Save as PDF, set Destination to <b>Save as PDF</b>, Paper size <b>Letter</b>, Margins <b>None</b>, and turn on <b>Background graphics</b>. Chrome or Edge work best. Entries stay saved in this browser only.</div>
+      </div>
+    </details>
+    <div class="actions bottom">
+      <button class="btn ghost" data-act="draft" type="button">Create ESG Draft</button>
+      <button class="btn ghost" data-act="sample" type="button">Sample Draft</button>
+      <button class="btn dark" data-act="print" type="button">Save as PDF</button>
+      <button class="btn ghost" data-act="clear" type="button">Clear</button>
+    </div>
+  </aside>
+
+  <main class="stage" id="stage">
+    <div class="scaler" id="scaler"><div id="pages"></div></div>
+  </main>
+</div>
+
+<script>
+const TYPES = {
+  reuse:   {label:'Reused',   color:'#D51F2B'},
+  donate:  {label:'Donated',  color:'#1F75B8'},
+  recycle: {label:'Recycled', color:'#038145'},
+  landfill:{label:'Landfill', color:'#6B6B6B'}
+};
+const TYPE_ORDER = ['recycle','reuse','donate','landfill'];
+const CAT_COLORS = ['#1F75B8','#D51F2B','#038145','#B08A00','#7A4FA0','#A12846'];
+const OTHER = '#9B9B9B';
+const KEY = 'msl-diversion-builder-v4';
+
+const BASIS = {
+  estimated: [
+    'Furniture inventory quantities are based on the floor plans provided with the RFP and the physical inventory completed by the Move Solutions project team. Total project weight is estimated.',
+    'Item weights use standard assumptions for each furniture category. Bulk recycling and landfill figures are modeled from the overall project weight.',
+    'Showroom placement is classified as held for reuse, not a completed downstream sale or charitable donation.',
+    'Actual recycling, landfill and reuse outcomes may differ from this scenario. Final figures are confirmed in the post-project report.'
+  ],
+  final: [
+    'Weights reflect hauler weight tickets, recycling receipts and partner donation records collected during the project.',
+    'Where an item could not be weighed individually, standard category weights were applied to the confirmed piece count.',
+    'Items released to a liquidation partner for charitable redistribution are reported at transfer. Final recipient organizations may not be visible to Move Solutions.',
+    'Percentages are rounded to one decimal and total 100%.'
+  ]
+};
+const PROMISE = [
+  'Diverting tonnage: we plan every decommission to keep as much material out of the landfill as possible.',
+  'Second life first: usable office furniture is relocated, placed in the Pre-Owned market or donated before anything is recycled.',
+  'Responsible recycling: metal, wood, cardboard and electronics go to recycling partners, not the dumpster.',
+  'Reusable packing: our crates and moving blankets are used job after job, which cuts down on single-use packaging.',
+  'Truckload consolidation: we combine loads to reduce trips, fuel use and emissions.'
+];
+
+const CALC = new Map();
+const uid = () => Math.random().toString(36).slice(2,9);
+function sample(){
+  const s = [
+    {id:uid(), name:'Client reuse: relocated to training campus', type:'reuse', lbs:'', pct:'5.7', recipient:'Client training campus', location:'Westlake, TX', desc:'Task and conference chairs plus modular workstations delivered for continued use.'},
+    {id:uid(), name:'Pre-Owned showroom: held for resale', type:'reuse', lbs:'6500', pct:'6.0', recipient:'Office Furniture Plus Pre-Owned showroom', location:'Irving, TX', desc:'Chairs plus breakroom and lounge furniture. Bulk pounds are a provisional allowance for breakroom and lounge pieces.'},
+    {id:uid(), name:'Liquidation partner: charitable redistribution', type:'donate', lbs:'', pct:'7.9', recipient:'Liquidation partner', location:'Dallas, TX', desc:'Released for redistribution to charitable organizations. Final recipients are not visible to Move Solutions.'},
+    {id:uid(), name:'Recycling: recovered materials', type:'recycle', lbs:'200938', pct:'71.2', recipient:'', location:'', desc:'Metal, wood, cardboard and e-waste processed through recycling partners.'},
+    {id:uid(), name:'Landfill: residual', type:'landfill', lbs:'26187', pct:'9.2', recipient:'', location:'', desc:'Damaged or non-recyclable material that could not be diverted.'}
+  ];
+  const it = (name,qty,w,i) => ({id:uid(), name, qty:String(qty), w:String(w), stream:s[i].id});
+  return {
+    client:'International School', project:'Bee Cave Move', address:'4402 Hudson Bend, Austin, TX 78734', dates:'April 2026',
+    preparedBy:'Megan Monette McDaniel', status:'estimated', mode:'lbs', totalLbs:'282340', co2:'',
+    highlight:'Furniture released to our liquidation partner was redistributed to charitable organizations. The transfer is complete, but specific recipient organizations and quantities are not visible to us.',
+    promise:PROMISE.join('\n'), basis:BASIS.estimated.join('\n'),
+    streams:s,
+    items:[
+      it('Task and conference chairs',400,35,0), it('Modular workstations',8,250,0),
+      it('Chairs to showroom',300,35,1),
+      it('3/4-drawer lateral file cabinets',100,150,2), it('Large conference tables',8,250,2), it('Large general-purpose tables',15,125,2),
+      it('Training tables',20,60,2), it('Medium tables',8,80,2), it('Metal shelving racks',15,100,2)
+    ]
+  };
+}
+function blank(){
+  const b = sample();
+  ['client','project','address','dates','preparedBy','totalLbs','co2','highlight'].forEach(k => b[k]='');
+  b.mode = 'lbs'; b.status = 'estimated';
+  b.items = [];
+  b.streams = [
+    {id:uid(), name:'Reused or relocated', type:'reuse', lbs:'', pct:'', recipient:'', location:'', desc:''},
+    {id:uid(), name:'Donated', type:'donate', lbs:'', pct:'', recipient:'', location:'', desc:''},
+    {id:uid(), name:'Recycled', type:'recycle', lbs:'', pct:'', recipient:'', location:'', desc:''},
+    {id:uid(), name:'Landfill', type:'landfill', lbs:'', pct:'', recipient:'', location:'', desc:''}
+  ];
+  return b;
+}
+
+let VIEW = 'draft';
+let S = load();
+function load(){
+  try{ const r = localStorage.getItem(KEY); if(r){ const o = JSON.parse(r); if(o && Array.isArray(o.streams) && Array.isArray(o.items)) return o; } }catch(e){}
+  return blank();
+}
+function save(){ if(VIEW !== 'draft') return; try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+
+const $ = id => document.getElementById(id);
+const num = v => { const n = parseFloat(String(v ?? '').replace(/,/g,'')); return isFinite(n) && n > 0 ? n : 0; };
+const fmt = (n,d=0) => n.toLocaleString('en-US',{minimumFractionDigits:d, maximumFractionDigits:d});
+const tons = n => fmt(n/2000,2);
+function el(tag, cls, text){ const e = document.createElement(tag); if(cls) e.className = cls; if(text != null) e.textContent = text; return e; }
+
+/* Percentages that always add to exactly 100.0 (largest remainder) */
+function shares(vals){
+  const tot = vals.reduce((a,b)=>a+b,0); if(!tot) return vals.map(()=>0);
+  const raw = vals.map(v=>v/tot*1000), fl = raw.map(Math.floor);
+  let left = 1000 - fl.reduce((a,b)=>a+b,0);
+  raw.map((r,i)=>[r-fl[i],i]).sort((a,b)=>b[0]-a[0]).forEach(([,i])=>{ if(left>0 && vals[i]>0){ fl[i]++; left--; } });
+  return fl.map(x=>x/10);
+}
+
+/* ================= CONTROLS ================= */
+function bindFields(){
+  document.querySelectorAll('[data-f]').forEach(inp => {
+    const f = inp.dataset.f;
+    if(inp.type === 'checkbox') inp.checked = !!S[f]; else inp.value = S[f] ?? '';
+    inp.oninput = () => { S[f] = inp.type === 'checkbox' ? inp.checked : inp.value; render(); };
+  });
+  syncSeg();
+}
+function syncSeg(){
+  $('statusSeg').querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.v === S.status));
+  $('modeSeg').querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.v === S.mode));
+  $('totalWrap').hidden = S.mode !== 'pct';
+}
+$('statusSeg').onclick = e => { const b = e.target.closest('button'); if(!b) return;
+  const was = S.status; S.status = b.dataset.v;
+  if(S.basis.trim() === BASIS[was].join('\n')) { S.basis = BASIS[S.status].join('\n'); document.querySelector('[data-f=basis]').value = S.basis; }
+  syncSeg(); render(); };
+$('modeSeg').onclick = e => { const b = e.target.closest('button'); if(!b) return; S.mode = b.dataset.v; syncSeg(); buildStreams(); render(); };
+$('basisDefault').onclick = () => { S.basis = BASIS[S.status].join('\n'); document.querySelector('[data-f=basis]').value = S.basis; render(); };
+
+function buildStreams(){
+  const wrap = $('streams'); wrap.innerHTML = '';
+  const pct = S.mode === 'pct';
+  S.streams.forEach((s,i) => {
+    const c = el('div','card'); c.style.setProperty('--c', TYPES[s.type].color);
+    c.innerHTML = `<button class="x" type="button" title="Remove stream" aria-label="Remove stream">×</button>
+      <div class="num">Stream ${i+1}</div>
+      <label>Stream Name<input type="text" data-k="name"></label>
+      <div class="row2">
+        <label>Type<select data-k="type">${Object.entries(TYPES).map(([k,t])=>`<option value="${k}">${t.label}</option>`).join('')}</select></label>
+        <label>${pct ? 'Share of Total (%)' : 'Bulk Lbs <span class="hint">plus items</span>'}<input type="number" min="0" step="any" inputmode="decimal" data-k="${pct?'pct':'lbs'}"></label>
+      </div>
+      <div class="calc"></div>
+      <div class="row2">
+        <label>Recipient / Partner <span class="hint">optional</span><input type="text" data-k="recipient"></label>
+        <label>Location<input type="text" data-k="location"></label>
+      </div>
+      <label>Details <span class="hint">shows on the report</span><textarea data-k="desc"></textarea></label>`;
+    c.querySelectorAll('[data-k]').forEach(inp => {
+      const k = inp.dataset.k; inp.value = s[k] ?? '';
+      inp.oninput = () => { s[k] = inp.value; if(k==='type'){ c.style.setProperty('--c', TYPES[s.type].color); } if(k==='name'||k==='type') buildItems(); render(); };
+    });
+    c.querySelector('.x').onclick = () => { if(S.streams.length < 2) return; S.items.forEach(it => { if(it.stream === s.id) it.stream = ''; }); S.streams.splice(i,1); buildStreams(); buildItems(); render(); };
+    CALC.set(s.id, c.querySelector('.calc'));
+    wrap.appendChild(c);
+  });
+}
+$('addStream').onclick = () => { S.streams.push({id:uid(), name:'New stream', type:'donate', lbs:'', pct:'', recipient:'', location:'', desc:''}); buildStreams(); buildItems(); render(); };
+
+function buildItems(){
+  const wrap = $('items'); wrap.innerHTML = '';
+  S.items.forEach((it,i) => {
+    const r = el('div','item');
+    r.innerHTML = `<input type="text" data-k="name" aria-label="Item"><input type="number" min="0" step="any" data-k="qty" aria-label="Quantity"><input type="number" min="0" step="any" data-k="w" aria-label="Pounds each">
+      <select data-k="stream" aria-label="Went to"><option value="">Not assigned</option>${S.streams.map(s=>`<option value="${s.id}"></option>`).join('')}</select><button class="x" type="button" aria-label="Remove item">×</button>`;
+    const opts = r.querySelectorAll('select option'); S.streams.forEach((s,j) => opts[j+1].textContent = s.name || ('Stream '+(j+1)));
+    r.querySelectorAll('[data-k]').forEach(inp => { const k = inp.dataset.k; inp.value = it[k] ?? ''; inp.oninput = () => { it[k] = inp.value; render(); }; });
+    r.querySelector('.x').onclick = () => { S.items.splice(i,1); buildItems(); render(); };
+    wrap.appendChild(r);
+  });
+}
+$('addItem').onclick = () => { const last = S.items[S.items.length-1]; S.items.push({id:uid(), name:'', qty:'', w:'', stream: last ? last.stream : ''}); buildItems(); render();
+  const ins = $('items').querySelectorAll('.item input[data-k=name]'); ins[ins.length-1].focus(); };
+
+function setView(v){
+  if(VIEW === 'draft') save();
+  VIEW = v; S = v === 'sample' ? sample() : load(); initAll();
+}
+function syncView(){
+  document.querySelectorAll('[data-act=draft]').forEach(b => b.classList.toggle('on', VIEW === 'draft'));
+  document.querySelectorAll('[data-act=sample]').forEach(b => b.classList.toggle('on', VIEW === 'sample'));
+  $('viewnote').classList.toggle('on', VIEW === 'sample');
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-act]'); if(!b) return;
+  const a = b.dataset.act;
+  if(a === 'print') window.print();
+  else if(a === 'draft'){ if(VIEW !== 'draft') setView('draft'); }
+  else if(a === 'sample'){ if(VIEW !== 'sample') setView('sample'); }
+  else if(a === 'clear') armed(b, 'Clear', () => { VIEW = 'draft'; S = blank(); save(); initAll(); });
+});
+function armed(btn, label, fn){ if(btn.dataset.arm){ delete btn.dataset.arm; btn.textContent = label; fn(); return; }
+  btn.dataset.arm = '1'; btn.textContent = 'Click to Confirm'; setTimeout(()=>{ delete btn.dataset.arm; btn.textContent = label; }, 3000); }
+
+/* ================= MODEL ================= */
+function compute(){
+  const pct = S.mode === 'pct';
+  const itemLbs = {};
+  const items = S.items.map(it => { const q = num(it.qty), w = num(it.w), lbs = q*w; if(it.stream) itemLbs[it.stream] = (itemLbs[it.stream]||0) + lbs;
+    const st = S.streams.find(s => s.id === it.stream); return {name: it.name || 'Unnamed item', qty:q, w, lbs, stream: st, type: st ? st.type : null}; })
+    .filter(it => it.qty > 0 || it.lbs > 0);
+  let streams;
+  if(pct){
+    const p = S.streams.map(s => num(s.pct)), ptot = p.reduce((a,b)=>a+b,0), T = num(S.totalLbs);
+    streams = S.streams.map((s,i) => ({...s, total: T && ptot ? T*p[i]/ptot : 0, raw: p[i], items: itemLbs[s.id]||0}));
+  } else {
+    streams = S.streams.map(s => ({...s, total: num(s.lbs) + (itemLbs[s.id]||0), raw: num(s.lbs) + (itemLbs[s.id]||0), items: itemLbs[s.id]||0}));
+  }
+  const vals = streams.map(s => s.raw), sh = shares(vals);
+  streams.forEach((s,i) => s.share = sh[i]);
+  const entered = vals.reduce((a,b)=>a+b,0);
+  const totalLbs = pct ? num(S.totalLbs) : entered;
+  const hasW = totalLbs > 0;
+  const catVals = TYPE_ORDER.map(t => streams.filter(s=>s.type===t).reduce((a,s)=>a+s.raw,0));
+  const catSh = shares(catVals);
+  const cats = TYPE_ORDER.map((t,i) => ({type:t, ...TYPES[t], raw:catVals[i], share:catSh[i], lbs: totalLbs*(entered?catVals[i]/entered:0), streams: streams.filter(s=>s.type===t && s.raw>0)}));
+  const lfShare = cats.find(c=>c.type==='landfill').share;
+  const rate = entered ? Math.round((100-lfShare)*10)/10 : 0;
+  const divLbs = cats.filter(c=>c.type!=='landfill').reduce((a,c)=>a+c.lbs,0);
+  const pieces = items.reduce((a,i)=>a+i.qty,0);
+  const itemsTotal = items.reduce((a,i)=>a+i.lbs,0);
+  return {pct, items, streams, entered, totalLbs, hasW, cats, rate, divLbs, pieces, itemsTotal};
+}
+
+/* ================= CHARTS ================= */
+const NS = 'http://www.w3.org/2000/svg';
+function donut(slices, opts={}){
+  const size=220, cx=110, cy=110, R=104, r=opts.hole ?? 60;
+  const svg = document.createElementNS(NS,'svg'); svg.setAttribute('viewBox',`0 0 ${size} ${size}`); svg.setAttribute('role','img');
+  svg.setAttribute('aria-label', slices.map(s=>`${s.label} ${s.share}%`).join(', '));
+  const live = slices.filter(s=>s.share>0);
+  const tot = live.reduce((a,s)=>a+s.share,0);
+  if(!tot){ const c = document.createElementNS(NS,'circle'); c.setAttribute('cx',cx); c.setAttribute('cy',cy); c.setAttribute('r',(R+r)/2); c.setAttribute('fill','none'); c.setAttribute('stroke','#ECECE9'); c.setAttribute('stroke-width',R-r); svg.appendChild(c); return svg; }
+  let a0 = -Math.PI/2;
+  live.forEach(s => {
+    const a1 = a0 + s.share/tot*Math.PI*2;
+    let path;
+    if(live.length === 1){
+      path = `M${cx},${cy-R} A${R},${R} 0 1 1 ${cx-0.01},${cy-R} Z M${cx},${cy-r} A${r},${r} 0 1 0 ${cx+0.01},${cy-r} Z`;
+    } else {
+      const lg = (a1-a0) > Math.PI ? 1 : 0, P = (rad,a) => `${cx+rad*Math.cos(a)},${cy+rad*Math.sin(a)}`;
+      path = `M${P(R,a0)} A${R},${R} 0 ${lg} 1 ${P(R,a1)} L${P(r,a1)} A${r},${r} 0 ${lg} 0 ${P(r,a0)} Z`;
+    }
+    const p = document.createElementNS(NS,'path'); p.setAttribute('d',path); p.setAttribute('fill',s.color); p.setAttribute('fill-rule','evenodd');
+    p.setAttribute('stroke','#fff'); p.setAttribute('stroke-width','2.5'); p.setAttribute('stroke-linejoin','round');
+    const t = document.createElementNS(NS,'title'); t.textContent = `${s.label}: ${s.share.toFixed(1)}%`; p.appendChild(t); svg.appendChild(p);
+    if(s.share >= 6){
+      const m = (a0+a1)/2, lr = (R+r)/2, tx = document.createElementNS(NS,'text');
+      tx.setAttribute('x', cx+lr*Math.cos(m)); tx.setAttribute('y', cy+lr*Math.sin(m)+4.5); tx.setAttribute('text-anchor','middle');
+      tx.setAttribute('fill','#fff'); tx.setAttribute('font-size','12.5'); tx.setAttribute('font-weight','800'); tx.setAttribute('font-family','Open Sans, Arial, sans-serif');
+      tx.textContent = Math.round(s.share)+'%'; svg.appendChild(tx);
+    }
+    a0 = a1;
+  });
+  return svg;
+}
+function donutBox(slices, big, small){
+  const d = el('div','donut'); d.appendChild(donut(slices));
+  const c = el('div','center'); c.appendChild(el('b',null,big)); c.appendChild(el('span',null,small)); d.appendChild(c); return d;
+}
+/* group items by name into top 5 + Other */
+function topN(items, key, n=5){
+  const m = new Map(); items.forEach(i => m.set(i.name, (m.get(i.name)||0) + i[key]));
+  const arr = [...m.entries()].filter(([,v])=>v>0).sort((a,b)=>b[1]-a[1]);
+  const top = arr.slice(0,n), rest = arr.slice(n).reduce((a,[,v])=>a+v,0);
+  const out = top.map(([name,v],i) => ({label:name, v, color:CAT_COLORS[i]}));
+  if(rest>0) out.push({label:'Other', v:rest, color:OTHER});
+  const sh = shares(out.map(o=>o.v)); out.forEach((o,i)=>o.share=sh[i]); return out;
+}
+
+/* ================= PAGES ================= */
+let pageCount = 0;
+function newPage(){
+  const pg = el('article','page');
+  pg.innerHTML = `<header class="p-hdr"><div class="p-logo">move solutions<sup>®</sup></div><div class="p-tag">A Total Office Solutions “Anywhere” Company</div>
+    <div class="p-pill">SCHEDULE • PURGE • TECH • MOVE • DECOMMISSION</div></header><div class="p-rule"></div><section class="p-body"></section>
+    <footer class="p-ftr"><span>1-800-MovePlan • A Total Office Solutions, LLP Company • movesolutions.com</span><span class="pn"></span></footer><div class="p-ftr-rule"></div>`;
+  $('pages').appendChild(pg); pageCount++; return pg.querySelector('.p-body');
+}
+function titleRow(body, eyebrow, title, withMeta){
+  const tr = el('div','p-titlerow'), l = el('div');
+  l.appendChild(el('p','p-eyebrow',eyebrow)); l.appendChild(el('h2','p-title',title));
+  if(withMeta){
+    const meta = el('p','p-meta');
+    const line = pairs => { let n=0; pairs.forEach(([k,v]) => { if(!v) return; if(n++) meta.appendChild(document.createTextNode('   |   ')); meta.appendChild(el('b',null,k+' ')); meta.appendChild(document.createTextNode(v)); }); return n; };
+    if(line([['Prepared for',S.client],['Site',S.address]]) && (S.dates||S.preparedBy)) meta.appendChild(el('br'));
+    line([['Project dates',S.dates],['Prepared by',S.preparedBy]]);
+    l.appendChild(meta);
+  } else if(S.client || S.project){
+    l.appendChild(el('p','p-meta',[S.client,S.project].filter(Boolean).join('  |  ')));
+  }
+  tr.appendChild(l);
+  const fin = S.status === 'final', b = el('div','p-badge'+(fin?' final':''), fin ? 'Final Results' : 'Estimated'); tr.appendChild(b);
+  body.appendChild(tr);
+}
+
+function pageSummary(M){
+  const body = newPage();
+  titleRow(body, 'Sustainability Diversion Report', S.project || 'Project Name', true);
+  if(M.entered){ const h = el('p','p-headline'), em = el('em',null,fmt(M.rate,1)+'%');
+    const txt = el('span'); h.append(el('span','big',fmt(M.rate,1)+'%'), txt);
+    const fin = S.status==='final';
+    txt.append(fin ? 'of your project material' : 'of your project material', M.hasW ? `, ${tons(M.divLbs)} US tons,` : '', fin ? ' stayed out of the landfill through reuse, donation and recycling.' : ' is projected to stay out of the landfill through reuse, donation and recycling.');
+    body.appendChild(h); }
+  const k = [];
+  if(M.hasW){ k.push(['Total Material', tons(M.totalLbs), 'US tons ('+fmt(M.totalLbs)+' lbs)']); k.push(['Tons Diverted', tons(M.divLbs), 'US tons kept out of landfill']); }
+  if(M.pieces) k.push(['Pieces Placed', fmt(M.pieces), 'reused, relocated or donated']);
+  if(num(S.co2)) k.push(['CO2e Avoided', fmt(num(S.co2),2), 'metric tons']);
+  const kp = el('div','p-kpis'); kp.style.setProperty('--n', k.length);
+  k.forEach(([a,b,c]) => { const d = el('div','kpi'); d.append(el('div','k',a), el('div','v',b), el('div','s',c)); kp.appendChild(d); });
+  body.appendChild(kp);
+
+  const sp = el('div','p-split');
+  const live = M.cats.filter(c=>c.share>0);
+  sp.appendChild(donutBox(M.cats.map(c=>({label:c.label,color:c.color,share:c.share})), M.entered ? fmt(M.rate,1)+'%' : '0%', 'diverted from landfill'));
+  const right = el('div'); right.appendChild(el('h3','sh','Where It Went'));
+  const cats = el('div','cats');
+  live.forEach(c => { const b = el('div','cat'); b.style.setProperty('--c', c.color);
+    const t = el('div','t'); t.append(el('b',null,c.label), el('span',null,c.share.toFixed(1)+'%')); b.appendChild(t);
+    if(M.hasW) b.appendChild(el('div','w', `${fmt(c.lbs)} lbs  |  ${tons(c.lbs)} US tons`));
+    const ul = el('ul'); c.streams.forEach(s => ul.appendChild(el('li',null, s.recipient || s.name))); b.appendChild(ul);
+    cats.appendChild(b); });
+  right.appendChild(cats); sp.appendChild(right); body.appendChild(sp);
+
+  const blk = el('div','block'); blk.appendChild(el('h3','sh', (S.status==='final'?'Material':'Estimated Material') + ' Disposition'));
+  const t = el('table','p-tbl'), hr = el('tr');
+  [['Disposition stream','l'],['Type','l'], ...(M.hasW?[['Lbs'],['US tons']]:[]), ['Share']].forEach(([x,c]) => hr.appendChild(el('th',c||'',x)));
+  t.appendChild(hr);
+  M.streams.filter(s=>s.share>0).forEach(s => { const tr = el('tr');
+    const td = el('td','l'); td.appendChild(el('span',null,s.name||'Untitled')); if(s.desc) td.appendChild(el('small',null,s.desc)); tr.appendChild(td);
+    const tt = el('td','l'), tg = el('span','tag',TYPES[s.type].label); tg.style.background = TYPES[s.type].color; tt.appendChild(tg); tr.appendChild(tt);
+    if(M.hasW){ tr.appendChild(el('td',null,fmt(s.total))); tr.appendChild(el('td',null,tons(s.total))); }
+    tr.appendChild(el('td',null,s.share.toFixed(1)+'%')); t.appendChild(tr); });
+  const tot = el('tr','tot'); tot.appendChild(el('td','l','Total material')); tot.appendChild(el('td'));
+  if(M.hasW){ tot.appendChild(el('td',null,fmt(M.totalLbs))); tot.appendChild(el('td',null,tons(M.totalLbs))); }
+  tot.appendChild(el('td',null, M.entered?'100.0%':'0.0%')); t.appendChild(tot);
+  blk.appendChild(t);
+  if(M.entered){ const p = el('p','p-proj'); p.appendChild(el('b',null,(S.status==='final'?'Landfill diversion: ':'Projected landfill diversion: ')+fmt(M.rate,1)+'%'));
+    if(M.hasW) p.append(` (${fmt(M.divLbs)} lbs diverted of ${fmt(M.totalLbs)} lbs total)`); blk.appendChild(p); }
+  body.appendChild(blk);
+}
+
+function pageInventory(M){
+  if(!M.items.length) return;
+  let body = newPage();
+  titleRow(body, 'Inventory and Weight Assumptions', `${fmt(M.pieces)} Pieces | ${fmt(M.itemsTotal)} lbs`, false);
+  const byQty = topN(M.items,'qty'), byLbs = topN(M.items,'lbs');
+  const blk = el('div','block charts2');
+  [[byQty,'Pieces by item', fmt(M.pieces), 'pieces'],[byLbs,'Weight by item', fmt(M.itemsTotal/2000,1), 'US tons']].forEach(([data,ttl,big,sm]) => {
+    const box = el('div','chartbox'); box.appendChild(el('h3','sh',ttl));
+    const row = el('div','row'); row.appendChild(donutBox(data.map(d=>({label:d.label,color:d.color,share:d.share})), big, sm));
+    const lg = el('ul','legend'); data.forEach(d => { const li = el('li'); const sw = el('span','sw'); sw.style.background = d.color; li.append(sw, el('span',null,d.label), el('span',null,d.share.toFixed(0)+'%')); lg.appendChild(li); });
+    row.appendChild(lg); box.appendChild(row); blk.appendChild(box); });
+  body.appendChild(blk);
+
+  // weight by destination type bars
+  const dest = TYPE_ORDER.map(t => ({t, v: M.items.filter(i=>i.type===t).reduce((a,i)=>a+i.lbs,0)})).filter(d=>d.v>0);
+  const unassigned = M.items.filter(i=>!i.type).reduce((a,i)=>a+i.lbs,0);
+  if(dest.length){
+    const b2 = el('div','block'); b2.appendChild(el('h3','sh','Item weight by destination'));
+    const bars = el('div','bars'), mx = Math.max(...dest.map(d=>d.v), unassigned);
+    const addBar = (label,v,color) => { const r = el('div','bar'); const trk = el('div','trk'), f = el('div','fill'); f.style.width = (v/mx*100)+'%'; f.style.background = color; trk.appendChild(f);
+      r.append(el('span',null,label), trk, el('span',null,fmt(v)+' lbs')); bars.appendChild(r); };
+    dest.forEach(d => addBar(TYPES[d.t].label, d.v, TYPES[d.t].color));
+    if(unassigned) addBar('Not assigned', unassigned, OTHER);
+    b2.appendChild(bars); body.appendChild(b2);
+  }
+  if(S.highlight && S.highlight.trim()){ const n = el('p','note'); n.style.marginTop = '.16in'; n.textContent = S.highlight; body.appendChild(n); }
+
+  // table, paginated by measuring
+  const mkTable = () => { const wrap = el('div','block'); wrap.appendChild(el('h3','sh','Known transfers and weight assumptions'));
+    const t = el('table','p-tbl'), hr = el('tr'); [['Item','l'],['Went to','l'],['Qty'],['Lbs each'],['Est. lbs']].forEach(([x,c])=>hr.appendChild(el('th',c||'',x))); t.appendChild(hr);
+    wrap.appendChild(t); body.appendChild(wrap); return t; };
+  let t = mkTable();
+  const rows = M.items.map(i => { const tr = el('tr'); tr.appendChild(el('td','l',i.name));
+    const d = el('td','l'); if(i.stream){ const sw = el('span','sw'); sw.style.background = TYPES[i.type].color; d.append(sw, i.stream.name||''); } else d.textContent = 'Not assigned'; tr.appendChild(d);
+    tr.appendChild(el('td',null,fmt(i.qty))); tr.appendChild(el('td',null,fmt(i.w))); tr.appendChild(el('td',null,fmt(i.lbs))); return tr; });
+  const total = el('tr','tot'); total.appendChild(el('td','l','Total')); total.appendChild(el('td')); total.appendChild(el('td',null,fmt(M.pieces))); total.appendChild(el('td')); total.appendChild(el('td',null,fmt(M.itemsTotal)));
+  [...rows, total].forEach(tr => {
+    t.appendChild(tr);
+    if(body.scrollHeight > body.clientHeight + 1){
+      t.removeChild(tr);
+      if(t.rows.length <= 1) t.parentNode.remove();
+      body = newPage(); titleRow(body, 'Inventory and Weight Assumptions', 'Continued', false);
+      t = mkTable(); t.appendChild(tr);
+    }
+  });
+}
+
+function pageRecipients(M){
+  const recips = M.streams.filter(s => s.raw>0 && (s.recipient||'').trim());
+  const promise = (S.promise||'').split('\n').map(x=>x.trim()).filter(Boolean);
+  const basis = (S.basis||'').split('\n').map(x=>x.trim()).filter(Boolean);
+  if(!recips.length && !promise.length && !basis.length) return;
+  const body = newPage();
+  titleRow(body, 'Partners and Commitments', 'Where Your Material Went', false);
+  if(recips.length){
+    const b = el('div','block'); b.appendChild(el('h3','sh','Recipients and partners'));
+    const g = el('div','recips');
+    recips.forEach(s => { const c = el('div','recip'); c.style.setProperty('--c', TYPES[s.type].color);
+      const tp = el('div','tp'), h = el('div'); h.appendChild(el('h4',null,s.recipient)); if(s.location) h.appendChild(el('div','loc',s.location));
+      const tg = el('span','tag',TYPES[s.type].label); tg.style.background = TYPES[s.type].color; tp.append(h,tg); c.appendChild(tp);
+      if(s.desc) c.appendChild(el('p',null,s.desc));
+      if(M.hasW) c.appendChild(el('div','lbs', `${fmt(s.total)} lbs  |  ${tons(s.total)} US tons  |  ${s.share.toFixed(1)}%`));
+      g.appendChild(c); });
+    b.appendChild(g); body.appendChild(b);
+  }
+  if(promise.length){
+    const b = el('div','block promise'); b.appendChild(el('h3',null,'Our Commitment to the Planet'));
+    const ul = el('ul'); promise.forEach(p => { const li = el('li'), i = p.indexOf(':');
+      if(i>0 && i<60){ li.append(el('b',null,p.slice(0,i+1)), p.slice(i+1)); } else li.textContent = p; ul.appendChild(li); });
+    b.appendChild(ul); body.appendChild(b);
+  }
+  if(basis.length){
+    const b = el('div','block basis'); b.appendChild(el('h3','sh','Reporting basis and limitations'));
+    const ul = el('ul'); basis.forEach(x => ul.appendChild(el('li',null,x))); b.appendChild(ul); body.appendChild(b);
+  }
+}
+
+/* ================= RENDER ================= */
+function render(){
+  save();
+  const cn = (S.client || '').trim().replace(/[\\/:*?"<>|]/g,'');
+  document.title = cn ? 'ESG Report - ' + cn : 'ESG Report';
+  const M = compute();
+  // stream card calc lines + sum bar
+  S.streams.forEach((s,i) => { const m = M.streams[i], cl = CALC.get(s.id); if(!cl) return;
+    cl.textContent = M.pct ? (M.hasW ? `= ${fmt(m.total)} lbs (${tons(m.total)} tons)` : '') : (m.items ? `${fmt(m.items)} lbs from items + bulk = ${fmt(m.total)} lbs total` : (m.total ? `${fmt(m.total)} lbs (${tons(m.total)} tons)` : '')); });
+  const sb = $('sumbar'); sb.innerHTML = '';
+  if(M.pct){
+    const rem = Math.round((100-M.entered)*10)/10, ok = Math.abs(rem) < .05;
+    sb.className = 'sumbar ' + (ok?'good':'bad');
+    sb.appendChild(el('span',null, ok ? 'Total: 100%' : `Total: ${fmt(M.entered,1)}% (${rem>0? rem+'% left' : Math.abs(rem)+'% over'})`));
+    const lf = S.streams.findIndex(s=>s.type==='landfill');
+    if(!ok && rem>0 && lf>-1){ const b = el('button','btn small','Put rest in Landfill'); b.type='button';
+      b.onclick = () => { S.streams[lf].pct = String(Math.round((num(S.streams[lf].pct)+rem)*10)/10); buildStreams(); render(); }; sb.appendChild(b); }
+    sb.appendChild(el('span',null, ok ? 'Balanced' : 'Report scales to 100%'));
+  } else {
+    sb.className = 'sumbar'; sb.appendChild(el('span',null,`Total: ${fmt(M.totalLbs)} lbs (${tons(M.totalLbs)} tons)`)); sb.appendChild(el('span',null,'Shares add to 100%'));
+  }
+  const unassigned = S.items.filter(i=>!i.stream && num(i.qty)*num(i.w)>0).length;
+  $('itemsum').innerHTML = ''; $('itemsum').className = 'sumbar' + (unassigned?' bad':'');
+  $('itemsum').append(el('span',null,`${fmt(M.pieces)} pieces | ${fmt(M.itemsTotal)} lbs`), el('span',null, unassigned ? `${unassigned} not assigned to a stream` : (M.pct ? 'Charts only in % mode' : 'Rolled into streams')));
+
+  // pages
+  $('pages').innerHTML = ''; pageCount = 0;
+  pageSummary(M); pageInventory(M); pageRecipients(M);
+  const over = [], all = document.querySelectorAll('#pages .page');
+  all.forEach((pg,i) => {
+    pg.querySelector('.pn').textContent = `Page ${i+1} of ${all.length}`;
+    const b = pg.querySelector('.p-body'); if(b.scrollHeight > b.clientHeight + 1){ pg.classList.add('over'); over.push(i+1); }
+  });
+  const w = $('warn'); w.classList.toggle('on', over.length>0);
+  w.textContent = over.length ? `Report page ${over.join(', ')} is too full and will cut off. Shorten the details text or remove a stream.` : '';
+  fit();
+}
+
+function fit(){
+  const stage = $('stage'), sc = $('scaler'), pages = $('pages'), pg = pages.querySelector('.page'); if(!pg) return;
+  const avail = stage.clientWidth - (window.innerWidth <= 900 ? 32 : 56);
+  const s = Math.min(1, avail / pg.offsetWidth);
+  sc.style.transform = `scale(${s})`; sc.style.width = pg.offsetWidth+'px'; sc.style.height = (pages.offsetHeight*s)+'px';
+}
+window.addEventListener('resize', fit);
+window.addEventListener('beforeprint', () => { $('scaler').style.transform = 'none'; });
+window.addEventListener('afterprint', fit);
+
+function initAll(){ bindFields(); buildStreams(); buildItems(); syncView(); render(); }
+initAll();
+if(document.fonts) document.fonts.ready.then(render);
+</script>
+</body>
+</html>
